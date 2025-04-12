@@ -1,0 +1,54 @@
+@startuml
+!theme minty
+class Jugador { 
+- nombre: String
+- correo: String
+- contraseña: String
+- deporteFavorito: Deporte
+- nivelJuego: NivelJuego 
+}
+
+class Partido {
+- deporte: Deporte
+- cantidadJugadores: Int
+- duracionMin: Int
+- ubicacion: Ubicacion
+- horario: Timestamp
+- nivelJuego: NivelJuego 
+- estadoPartido: EstadoPartido
+- iniciar()
+- cancelar()
+- cambiarEstadoPartido( algo )
+}
+
+enum Nivel {
+PRINCIPIANTE
+INTERMEDIO
+AVANZADO
+}
+
+class NivelJuego {
+- nivelMin: Nivel
+- nivelMax: Nivel
+- todos: Boolean 
+}
+
+interface EstadoPartido
+
+class Deporte {
+- nombre: String
+}
+
+class Emparejador {}
+
+class Comentarios {}
+
+class Estadistica {}
+
+
+class Notificador {}
+
+class ServicioCorreo {}
+
+class Ubicacion {}
+@enduml
