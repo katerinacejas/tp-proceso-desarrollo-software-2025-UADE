@@ -1,5 +1,4 @@
 @startuml
-!theme minty
 class Jugador { 
 - nombre: String
 - correo: String
@@ -10,7 +9,6 @@ class Jugador {
 
 class Partido {
 - deporte: Deporte
-- cantidadJugadores: Int
 - duracionMin: Int
 - ubicacion: Ubicacion
 - horario: Timestamp
@@ -27,21 +25,24 @@ INTERMEDIO
 AVANZADO
 }
 
-class NivelJuego {
-- nivelMin: Nivel
-- nivelMax: Nivel
-- todos: Boolean 
-}
+'class NivelJuego {
+'- nivelMin: Nivel
+'- nivelMax: Nivel
+'- todos: Boolean 
+'}
 
 interface EstadoPartido
 
 class Deporte {
 - nombre: String
+- cantidadJugadores: Int
 }
 
-class Emparejador {}
+class Emparejador {
+- estrategia: Estrategia
+}
 
-class Comentarios {}
+class Reseña {}
 
 class Estadistica {}
 
