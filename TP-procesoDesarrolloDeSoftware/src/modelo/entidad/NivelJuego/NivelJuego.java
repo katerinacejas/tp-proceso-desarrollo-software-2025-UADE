@@ -1,4 +1,4 @@
-package modelo.entidad.jugador;
+package modelo.entidad.NivelJuego;
 
 public enum NivelJuego {
     PRINCIPIANTE,

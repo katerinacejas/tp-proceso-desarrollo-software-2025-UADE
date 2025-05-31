@@ -1,14 +1,13 @@
 package modelo.strategy.notificacion;
 
-import modelo.entidad.jugador.Jugador;
 import modelo.entidad.notificacion.Notificacion;
 
-import java.util.Set;
+import java.util.List;
 
 public class NotificacionPush implements IServicioNotificacion{
 
     @Override
-    public void notificar(Notificacion notificacion, Set<Jugador> jugadores) {
+    public void notificar(List<Notificacion> notificaciones) {
 
     }
 }

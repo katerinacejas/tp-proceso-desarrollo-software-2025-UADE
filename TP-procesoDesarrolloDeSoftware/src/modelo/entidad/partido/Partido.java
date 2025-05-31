@@ -1,23 +1,22 @@
 package modelo.entidad.partido;
 
-import modelo.entidad.Deporte;
-import modelo.entidad.jugador.NivelJuego;
+import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
-import modelo.entidad.jugador.Ubicacion;
+import modelo.entidad.ubicacion.Geolocalizacion;
 import modelo.entidad.emparejamiento.Emparejador;
-import modelo.entidad.notificacion.Notificador;
+import modelo.observer.IObservers;
 import modelo.state.IEstadoPartido;
 import modelo.strategy.emparejamiento.IEmparejador;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 public class Partido {
     private Deporte deporte;
     private int duracionMin;
-    private Ubicacion lugarEncuentro;
+    private Geolocalizacion geolocalizacion;
     private Timestamp horarioEncuentro;
-    private NivelJuego nivelJuego;
     private Set<Jugador> participantes;
     private Jugador organizador;
     private Set<Resenia> reseñas;
@@ -25,7 +24,7 @@ public class Partido {
 
     private IEstadoPartido estado;
     private Emparejador emparejador;
-    private Notificador notificador;
+    private List<IObservers> observadores;
 
 
     /*
@@ -95,7 +94,29 @@ public class Partido {
         return this.participantes.contains(jugador);
     }
 
+    /*  ESTE METODO AHORA YA NO VA MAS EN PARTIDO PORQUE EXISTE LA CLASE PARTICIPACION_JUGADOR_PARTIDO
+
     public NivelJuego getNivelJuego() {
         return this.nivelJuego;
+    }
+    */
+
+    public Set<Jugador> obtenerListadoJugadores() {
+        return this.participantes;
+    }
+
+    /*
+        METODOS PARA NOTIFICAR OBSERVADOR
+     */
+    public void notificarObservadores() {
+
+    }
+
+    public void addObservador(IObservers observador){
+        this.observadores.add(observador);
+    }
+
+    public void eliminarObservador(IObservers observador){
+        this.observadores.remove(observador);
     }
 }
