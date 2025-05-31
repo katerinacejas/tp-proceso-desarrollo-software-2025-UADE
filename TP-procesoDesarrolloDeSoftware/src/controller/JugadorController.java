@@ -1,9 +1,10 @@
-package controlador;
+package controller;
 
 import modelo.entidad.jugador.Jugador;
 import vista.VistaPrincipal;
 
-public class JugadorControlador {
+public class JugadorController {
     private Jugador jugador;
-    private VistaPrincipal vistaPrincipal;
+
+
 }
