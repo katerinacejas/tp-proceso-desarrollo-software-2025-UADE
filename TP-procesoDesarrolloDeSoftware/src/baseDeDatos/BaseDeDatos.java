@@ -5,11 +5,13 @@ import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
 import modelo.entidad.partido.Resenia;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class BaseDeDatos {
-    private Set<Jugador> jugadores;
+    private List <Jugador> jugadores;
     private Set<Partido> partidos;
     private Set<Deporte> deportes;
     private Set<Resenia> resenias;
@@ -17,7 +19,7 @@ public class BaseDeDatos {
     private static BaseDeDatos instancia; //para singleton
 
     private BaseDeDatos() {
-        jugadores = new HashSet<>();
+        jugadores = new ArrayList<>();
         partidos = new HashSet<>();
         deportes = new HashSet<>();
         resenias = new HashSet<>();
@@ -28,5 +30,13 @@ public class BaseDeDatos {
             instancia = new BaseDeDatos();
         }
         return instancia;
+    }
+
+    public void insertarJugador(Jugador jugador){
+        this.jugadores.add(jugador);
+    }
+
+    public Jugador getJugadorById(int id) {
+        return jugadores.get(id);
     }
 }
