@@ -4,30 +4,19 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class PartidoDTO {
-    private int id;
-    private String deporte;
+    private DeporteDTO deporte;
     private int duracionMin;
     private String geolocalizacion;
     private Timestamp horarioEncuentro;
-    private List<Integer> participantes;
-    private int organizador;
-    private List<Integer> resenias;
-    private int cantidadMaxima;
+    private List<JugadorDTO> participantes;
+    private JugadorDTO organizador;
+    private List<ReseniaDTO> resenias;
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDeporte() {
+    public DeporteDTO getDeporte() {
         return deporte;
     }
 
-    public void setDeporte(String deporte) {
+    public void setDeporte(DeporteDTO deporte) {
         this.deporte = deporte;
     }
 
@@ -55,35 +44,27 @@ public class PartidoDTO {
         this.horarioEncuentro = horarioEncuentro;
     }
 
-    public List<Integer> getParticipantes() {
+    public List<JugadorDTO> getParticipantes() {
         return participantes;
     }
 
-    public void setParticipantes(List<Integer> participantes) {
+    public void setParticipantes(List<JugadorDTO> participantes) {
         this.participantes = participantes;
     }
 
-    public int getOrganizador() {
+    public JugadorDTO getOrganizador() {
         return organizador;
     }
 
-    public void setOrganizador(int organizador) {
+    public void setOrganizador(JugadorDTO organizador) {
         this.organizador = organizador;
     }
 
-    public List<Integer> getResenias() {
+    public List<ReseniaDTO> getResenias() {
         return resenias;
     }
 
-    public void setResenias(List<Integer> resenias) {
+    public void setResenias(List<ReseniaDTO> resenias) {
         this.resenias = resenias;
-    }
-
-    public int getCantidadMaxima() {
-        return cantidadMaxima;
-    }
-
-    public void setCantidadMaxima(int cantidadMaxima) {
-        this.cantidadMaxima = cantidadMaxima;
     }
 }

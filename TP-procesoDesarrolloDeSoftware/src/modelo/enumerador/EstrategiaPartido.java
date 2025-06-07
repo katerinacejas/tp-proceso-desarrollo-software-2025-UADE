@@ -1,4 +1,4 @@
-package modelo.enumerador.enum;
+package modelo.enumerador;
 
 public enum EstrategiaPartido {
     NIVEL,

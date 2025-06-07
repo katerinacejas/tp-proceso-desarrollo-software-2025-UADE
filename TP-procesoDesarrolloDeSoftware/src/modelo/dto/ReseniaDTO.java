@@ -1,17 +1,9 @@
 package modelo.dto;
 
 public class ReseniaDTO {
-    private int id;
+    
     private int puntuacion;
     private String comentario;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getPuntuacion() {
         return puntuacion;
