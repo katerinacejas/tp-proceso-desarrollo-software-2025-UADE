@@ -1,8 +1,11 @@
 package controller;
 
+import baseDeDatos.BaseDeDatos;
 import modelo.dto.JugadorDTO;
 
 public class JugadorController {
+    private BaseDeDatos baseDeDatos;
+
     public boolean createJugador(JugadorDTO jugadorDTO) {
         //TODO
         return true;

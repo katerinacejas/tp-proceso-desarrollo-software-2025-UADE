@@ -26,6 +26,4 @@ public class BaseDeDatos {
         }
         return instancia;
     }
-
-
 }

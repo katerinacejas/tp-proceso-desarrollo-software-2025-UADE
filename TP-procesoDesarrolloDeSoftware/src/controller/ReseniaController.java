@@ -1,8 +1,11 @@
 package controller;
 
+import baseDeDatos.BaseDeDatos;
 import modelo.dto.ReseniaDTO;
 
 public class ReseniaController {
+    private BaseDeDatos baseDeDatos;
+
     public boolean createResenia(ReseniaDTO reseniaDTO) {
         //TODO
         return true;

@@ -1,8 +1,11 @@
 package controller;
 
+import baseDeDatos.BaseDeDatos;
 import modelo.dto.PartidoDTO;
 
 public class PartidoController {
+    private BaseDeDatos baseDeDatos;
+
     public boolean createPartido(PartidoDTO partidoDTO) {
         //TODO
         return true;
