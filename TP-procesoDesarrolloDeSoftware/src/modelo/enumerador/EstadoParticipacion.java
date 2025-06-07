@@ -1,4 +1,4 @@
-package modelo.entidad.participacionJugadorPartido;
+package modelo.enumerador;
 
 public enum EstadoParticipacion {
     PENDIENTE,
