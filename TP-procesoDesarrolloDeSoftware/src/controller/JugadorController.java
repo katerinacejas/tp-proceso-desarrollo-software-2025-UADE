@@ -1,10 +1,13 @@
 package controller;
 
-import baseDeDatos.BaseDeDatos;
 import modelo.dto.JugadorDTO;
+import modelo.dto.LoginDTO;
+import modelo.dao.JugadorDAO;
+
 
 public class JugadorController {
-    private BaseDeDatos baseDeDatos;
+
+    private JugadorDAO jugadorDAO;
 
     public boolean createJugador(JugadorDTO jugadorDTO) {
         //TODO
@@ -23,6 +26,11 @@ public class JugadorController {
     }
 
     public boolean deleteJugador(JugadorDTO jugadorDTO) {
+        //TODO
+        return true;
+    }
+
+    public boolean authJugador(LoginDTO loginDTO){
         //TODO
         return true;
     }

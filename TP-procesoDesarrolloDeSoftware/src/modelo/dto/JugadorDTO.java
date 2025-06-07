@@ -3,21 +3,12 @@ package modelo.dto;
 import java.util.List;
 
 public class JugadorDTO {
-    private int dni;
     private String nombreUsuario;
     private String email;
     private String contrasenia;
-    private List<String> deportesFavoritos;
+    private List<DeporteDTO> deportesFavoritos;
     private String celular;
     private String geolocalizacion;
-
-    public int getDni() {
-        return dni;
-    }
-
-    public void setDni(int dni) {
-        this.dni = dni;
-    }
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -43,11 +34,11 @@ public class JugadorDTO {
         this.contrasenia = contrasenia;
     }
 
-    public List<String> getDeportesFavoritos() {
+    public List<DeporteDTO> getDeportesFavoritos() {
         return deportesFavoritos;
     }
 
-    public void setDeportesFavoritos(List<String> deportesFavoritos) {
+    public void setDeportesFavoritos(List<DeporteDTO> deportesFavoritos) {
         this.deportesFavoritos = deportesFavoritos;
     }
 

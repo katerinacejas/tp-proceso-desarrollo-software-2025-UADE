@@ -1,10 +1,10 @@
 package controller;
 
-import baseDeDatos.BaseDeDatos;
+import modelo.dao.ReseniaDAO;
 import modelo.dto.ReseniaDTO;
 
 public class ReseniaController {
-    private BaseDeDatos baseDeDatos;
+    private ReseniaDAO reseniaDAO;
 
     public boolean createResenia(ReseniaDTO reseniaDTO) {
         //TODO
