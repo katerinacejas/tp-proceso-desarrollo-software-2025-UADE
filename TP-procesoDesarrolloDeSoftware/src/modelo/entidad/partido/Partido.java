@@ -20,7 +20,6 @@ public class Partido {
     private Set<Jugador> participantes;
     private Jugador organizador;
     private Set<Resenia> reseñas;
-    private int cantidadMaxima;
 
     private IEstadoPartido estado;
     private Emparejador emparejador;

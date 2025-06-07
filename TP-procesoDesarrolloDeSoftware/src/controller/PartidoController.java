@@ -1,10 +1,10 @@
 package controller;
 
-import baseDeDatos.BaseDeDatos;
 import modelo.dto.PartidoDTO;
+import modelo.dao.PartidoDAO;
 
 public class PartidoController {
-    private BaseDeDatos baseDeDatos;
+    private PartidoDAO partidoDAO;
 
     public boolean createPartido(PartidoDTO partidoDTO) {
         //TODO
