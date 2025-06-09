@@ -35,7 +35,7 @@ public class Partido {
 
     private int cantidadMaxima;
 
-    private List<ParticipacionJugadorPartido> participacionJugadores;
+    private ParticipacionJugadorPartido participacionJugadorPartido;
 
 
     /*
@@ -92,7 +92,7 @@ public class Partido {
 
         // Inicialización de componentes
         this.emparejador = new Emparejador(emparejador);
-        this.participacionJugadores =
+        this.participacionJugadorPartido = new ParticipacionJugadorPartido();
 
         // Estado inicial
         this.estado = new EstadoPartidoNecesitaJugadores();
@@ -114,8 +114,6 @@ public class Partido {
 
         boolean agregado = this.participantes.add(jugador);
         if (agregado) {
-            // Agregar participación del jugador
-            agregarParticipacionJugador(jugador);
             // Verificar si ahora tenemos suficientes jugadores para armar
             if (tieneTodosLosJugadores()) {
                 this.armar(); // Cambio automático de estado
@@ -147,33 +145,7 @@ public class Partido {
         return eliminado;
     }
 
-    /*   METODOS PARA GESTIONAR PARTICIPACIONES DE JUGADORES */
-    public boolean agregarParticipacionJugador(Jugador jugador) {
-        if (jugador == null) {
-            throw new IllegalArgumentException("El jugador no puede ser null");
-        }
-        if (yaFueEmparejado(jugador)) {
-            return false; // Ya está en el partido
-        }
-        ParticipacionJugadorPartido participacion = new ParticipacionJugadorPartido(jugador);
-        this.participacionJugadores.add(participacion);
-        return true;
-    }
 
-    public boolean eliminarParticipacionJugador(Jugador jugador) {
-        if (jugador == null) {
-            throw new IllegalArgumentException("El jugador no puede ser null");
-        }
-        ParticipacionJugadorPartido participacion = this.participacionJugadores.stream()
-                .filter(p -> p.getJugador().equals(jugador))
-                .findFirst()
-                .orElse(null);
-        if (participacion != null) {
-            this.participacionJugadores.remove(participacion);
-            return true;
-        }
-        return false;
-    }
 
     /*
         METODOS PARA EL ESTADO DEL PARTIDO
