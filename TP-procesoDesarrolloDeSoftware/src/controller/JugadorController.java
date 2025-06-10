@@ -19,7 +19,7 @@ public class JugadorController {
         return jugadorDTO;
     }
 
-    public boolean updateJugador(JugadorDTO jugadorDTO) {
+    public boolean updateJugador(int id, JugadorDTO jugadorDTO) {
         //TODO
         return true;
     }

@@ -19,8 +19,9 @@ public class DeporteController {
         return deporteDTO;
     }
 
-    public boolean updateDeporte(DeporteDTO deporteDTO) {
-        //TODO
+    public boolean updateDeporte(int id, DeporteDTO deporteDTO) {
+        Deporte nuevoDeporte = convertToEntity(deporteDTO);
+        deporte.updateDeporte(id, nuevoDeporte);
         return true;
     }
 

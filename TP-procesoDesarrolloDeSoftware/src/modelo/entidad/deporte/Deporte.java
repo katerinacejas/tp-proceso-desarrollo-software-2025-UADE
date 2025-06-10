@@ -17,11 +17,15 @@ public class Deporte {
         return deporteDAO.getDeporteById(id);
     }
 
+    public void updateDeporte(int id, Deporte deporte) {
+        DeporteDAO deporteDAO = new DeporteDAO();
+        deporteDAO.updateDeporte(id, deporte);
+    }
 
     // setters y getters
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public void setNombre(String nombre) {
@@ -29,11 +33,12 @@ public class Deporte {
     }
 
     public int getCantJugadores() {
-        return cantJugadores;
+        return this.cantJugadores;
     }
 
     public void setCantJugadores(int cantJugadores) {
         this.cantJugadores = cantJugadores;
     }
+
 
 }
