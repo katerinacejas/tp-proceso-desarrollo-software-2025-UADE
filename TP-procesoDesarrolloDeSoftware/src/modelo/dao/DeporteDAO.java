@@ -13,4 +13,8 @@ public class DeporteDAO {
     public Deporte getDeporteById(int id) {
         return baseDeDatos.getDeporteById(id);
     }
+
+    public void updateDeporte(int id, Deporte deporte) {
+        baseDeDatos.updateDeporte(id, deporte);
+    }
 }
