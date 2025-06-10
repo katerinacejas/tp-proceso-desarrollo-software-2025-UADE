@@ -30,6 +30,6 @@ public class PartidoConfirmado implements IEstadoPartido {
 
     @Override
     public void finalizar(Partido partido) {
-
+        throw new IllegalStateException("No se puede pasar a ese estado desde: " + this.getClass().getSimpleName());
     }
 }
