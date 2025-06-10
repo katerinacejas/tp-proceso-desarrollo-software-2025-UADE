@@ -32,7 +32,7 @@ public class BaseDeDatos {
         return instancia;
     }
 
-    public void insertarJugador(Jugador jugador){
+    public void insertJugador(Jugador jugador){
         this.jugadores.add(jugador);
     }
 
