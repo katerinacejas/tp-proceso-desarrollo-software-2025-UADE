@@ -12,17 +12,17 @@ import java.util.Set;
 
 public class BaseDeDatos {
     private List <Jugador> jugadores;
-    private Set<Partido> partidos;
-    private Set<Deporte> deportes;
-    private Set<Resenia> resenias;
+    private List<Partido> partidos;
+    private List<Deporte> deportes;
+    private List<Resenia> resenias;
 
     private static BaseDeDatos instancia; //para singleton
 
     private BaseDeDatos() {
         jugadores = new ArrayList<>();
-        partidos = new HashSet<>();
-        deportes = new HashSet<>();
-        resenias = new HashSet<>();
+        partidos = new ArrayList<>();
+        deportes = new ArrayList<>();
+        resenias = new ArrayList<>();
     }
 
     public static BaseDeDatos getInstancia() {
@@ -37,6 +37,15 @@ public class BaseDeDatos {
     }
 
     public Jugador getJugadorById(int id) {
-        return jugadores.get(id);
+        return this.jugadores.get(id);
+    }
+
+
+    public void insertDeporte(Deporte deporte) {
+        this.deportes.add(deporte);
+    }
+
+    public Deporte getDeporteById(int id) {
+        return this.deportes.get(id);
     }
 }
