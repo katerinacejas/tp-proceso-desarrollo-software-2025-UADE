@@ -3,8 +3,8 @@ package modelo.entidad.partido;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.participacionJugadorPartido.ParticipacionJugadorPartido;
-import modelo.entidad.ubicacion.Geolocalizacion;
 import modelo.entidad.emparejamiento.Emparejador;
+import modelo.entidad.ubicacion.ZonaGeografica;
 import modelo.observer.IObservers;
 import modelo.state.*;
 import modelo.strategy.emparejamiento.IEmparejador;
@@ -23,7 +23,7 @@ public class Partido {
     private String id;
     private Deporte deporte;
     private int duracionMin;
-    private Geolocalizacion geolocalizacion;
+    private ZonaGeografica zonaGeografica;
     private Timestamp horarioEncuentro;
     private Set<Jugador> participantes;
     private Jugador organizador;

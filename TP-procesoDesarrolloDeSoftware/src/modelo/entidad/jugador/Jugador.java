@@ -1,8 +1,6 @@
 package modelo.entidad.jugador;
 
 import modelo.dao.JugadorDAO;
-import modelo.dto.DeporteDTO;
-import modelo.dto.JugadorDTO;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.ubicacion.Geolocalizacion;
 
@@ -18,18 +16,12 @@ public class Jugador {
     private Geolocalizacion geolocalizacion;
 
 
-    public void createJugador(JugadorDTO jugadorDTO) {
-        this.nombreUsuario = jugadorDTO.getNombreUsuario();
-        this.email = jugadorDTO.getEmail();
-        this.contrasenia = jugadorDTO.getContrasenia();
-        //this.deportesFavoritos = jugadorDTO.getDeportesFavoritos(); [CONSULTAR porque ahora JugadorDTO conoce a los DeporteDTO]
-        this.celular = jugadorDTO.getCelular();
-        //this.geolocalizacion = jugadorDTO.getGeolocalizacion();
+    public void createJugador(Jugador jugador) {
         JugadorDAO jugadorDAO = new JugadorDAO();
-        jugadorDAO.createJugador(this);
+        jugadorDAO.createJugador(jugador);
     }
 
-    public JugadorDTO getJugadorById(int id) {
+    public Jugador getJugadorById(int id) {
         JugadorDAO jugadorDAO = new JugadorDAO();
         return jugadorDAO.getJugadorById(id);
     }
@@ -50,13 +42,12 @@ public class Jugador {
         this.email = email;
     }
 
-    public void setDeportesFavoritos(List<DeporteDTO> deportesFavoritos) {
-       // CREO QUE CUANDO SETEAMOS DEPORTES HAY QUE PASARLE DEPORTES O BIEN HACER ALGO CON LOS DEPORTEDTO
+    public void setDeportesFavoritos(List<Deporte> deportesFavoritos) {
+        this.deportesFavoritos = deportesFavoritos;
     }
 
     public void setGeolocalizacion(Geolocalizacion geolocalizacion) {
         this.geolocalizacion = geolocalizacion;
-        //ACA SE LE VA A PASAR LAS COORDENADAS Y LUEGO SE VA A SETEAR LA GEOLOCALIZACION
     }
 
     public String getNombreUsuario() {

@@ -12,19 +12,20 @@ import java.util.Set;
 
 public class BaseDeDatos {
     private List <Jugador> jugadores;
-    private Set<Partido> partidos;
-    private Set<Deporte> deportes;
-    private Set<Resenia> resenias;
+    private List<Partido> partidos;
+    private List<Deporte> deportes;
+    private List<Resenia> resenias;
 
     private static BaseDeDatos instancia; //para singleton
 
     private BaseDeDatos() {
         jugadores = new ArrayList<>();
-        partidos = new HashSet<>();
-        deportes = new HashSet<>();
-        resenias = new HashSet<>();
+        partidos = new ArrayList<>();
+        deportes = new ArrayList<>();
+        resenias = new ArrayList<>();
     }
 
+    //singleton
     public static BaseDeDatos getInstancia() {
         if(instancia == null) {
             instancia = new BaseDeDatos();
@@ -32,11 +33,40 @@ public class BaseDeDatos {
         return instancia;
     }
 
-    public void insertarJugador(Jugador jugador){
+    /*
+        metodos para JUGADOR
+     */
+    public void insertJugador(Jugador jugador){
         this.jugadores.add(jugador);
     }
 
     public Jugador getJugadorById(int id) {
-        return jugadores.get(id);
+        return this.jugadores.get(id - 1);
+    }
+
+
+    /*
+        metodos para DEPORTE
+     */
+    public void insertDeporte(Deporte deporte) {
+        this.deportes.add(deporte);
+    }
+
+    public Deporte getDeporteById(int id) {
+        if (id >= 0 && id < this.deportes.size()) {
+            return this.deportes.get(id - 1);
+        }
+        else {
+            throw new IllegalArgumentException("No existe el deporte con ese id: " + id);
+        }
+    }
+
+    public void updateDeporte(int id, Deporte deporte) {
+        if (id >= 0 && id < this.deportes.size()) {
+            this.deportes.set(id, deporte);
+        }
+        else {
+            throw new IllegalArgumentException("No existe el deporte con ese id: " + id);
+        }
     }
 }
