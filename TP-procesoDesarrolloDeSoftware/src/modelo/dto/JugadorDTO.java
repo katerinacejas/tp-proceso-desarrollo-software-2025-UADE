@@ -8,7 +8,7 @@ public class JugadorDTO {
     private String contrasenia;
     private List<DeporteDTO> deportesFavoritos;
     private String celular;
-    private String geolocalizacion;
+    private String geolocalizacion; //Podría ser un list de double's
 
     public String getNombreUsuario() {
         return nombreUsuario;

@@ -4,22 +4,19 @@ import modelo.dto.JugadorDTO;
 import modelo.dto.LoginDTO;
 import modelo.entidad.jugador.Jugador;
 
-
 public class JugadorController {
 
     private Jugador jugador;
 
     public boolean createJugador(JugadorDTO jugadorDTO) {
-        jugador = new Jugador();
-        jugador.createJugador(jugadorDTO);
+        Jugador nuevoJugador = convertToEntity(jugadorDTO);
+        jugador.createJugador(nuevoJugador);
         return true;
-        //Jugador jugador = convertirAJugador(jugadorDTO); //de esta forma convierto a un JugadorDTO en jugador.
-        //JugadorDAO.createJugador(jugador); // me conectaría directamente con el DAO sin necesidad de pasar por jugador. Sería como ir al servicio.
     }
 
     public JugadorDTO getJugadorById(int id) {
-        //Creo que acá se deberia crear el DTO.
-        return jugador.getJugadorById(id);
+        JugadorDTO jugadorDTO = convertToDTO(jugador.getJugadorById(id));
+        return jugadorDTO;
     }
 
     public boolean updateJugador(JugadorDTO jugadorDTO) {
@@ -36,14 +33,26 @@ public class JugadorController {
         return true;
     }
 
-     /*private Jugador convertirAJugador(JugadorDTO jugadorDTO) {
+     private Jugador convertToEntity(JugadorDTO jugadorDTO) {
         Jugador jugador = new Jugador();
         jugador.setNombreUsuario(jugadorDTO.getNombreUsuario());
         jugador.setContrasenia(jugadorDTO.getContrasenia());
         jugador.setCelular(jugadorDTO.getCelular());
         jugador.setEmail(jugadorDTO.getEmail());
-        jugador.setDeportesFavoritos(jugadorDTO.getDeportesFavoritos());
-        jugador.setGeolocalizacion(jugadorDTO.getGeolocalizacion());
+        //jugador.setDeportesFavoritos(jugadorDTO.getDeportesFavoritos()); Pasar de DTO a Deporte ¿necesita invocacion del Controller de Deporte?
+        //jugador.setGeolocalizacion(jugadorDTO.getGeolocalizacion()); Pasar de String a Geolocalizacion
         return jugador;
-    }*/
+    }
+
+    private JugadorDTO convertToDTO(Jugador jugador){
+        JugadorDTO jugadorDTO = new JugadorDTO();
+        jugadorDTO.setNombreUsuario(jugador.getNombreUsuario());
+        jugadorDTO.setContrasenia(jugador.getContrasenia());
+        jugadorDTO.setCelular(jugador.getCelular());
+        jugadorDTO.setEmail(jugador.getEmail());
+        //jugadorDTO.setDeportesFavoritos(jugador.getDeportesFavoritos()); Pasar de Deporte a DeporteDTO ¿necesita invocacion del Controller de Deporte?
+        //jugadorDTO.setGeolocalizacion(jugador.getGeolocalizacion()); Pasar de Geolocalizacion a String
+        return jugadorDTO;
+        
+    }
 }
