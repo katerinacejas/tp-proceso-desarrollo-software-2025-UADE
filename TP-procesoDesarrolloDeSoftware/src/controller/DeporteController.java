@@ -25,8 +25,8 @@ public class DeporteController {
         return true;
     }
 
-    public boolean deleteDeporte(DeporteDTO deporteDTO) {
-        //TODO
+    public boolean deleteDeporte(int id) {
+        deporte.deleteDeporte(id);
         return true;
     }
 

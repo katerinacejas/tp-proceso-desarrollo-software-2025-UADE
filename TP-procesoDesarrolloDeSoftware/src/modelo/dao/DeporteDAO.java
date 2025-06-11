@@ -17,4 +17,8 @@ public class DeporteDAO {
     public void updateDeporte(int id, Deporte deporte) {
         baseDeDatos.updateDeporte(id, deporte);
     }
+
+    public void deleteDeporte(int id) {
+        baseDeDatos.deleteDeporte(id);
+    }
 }

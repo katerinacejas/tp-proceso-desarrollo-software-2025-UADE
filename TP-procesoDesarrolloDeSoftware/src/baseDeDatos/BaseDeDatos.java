@@ -6,9 +6,7 @@ import modelo.entidad.partido.Partido;
 import modelo.entidad.partido.Resenia;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class BaseDeDatos {
     private List <Jugador> jugadores;
@@ -41,7 +39,12 @@ public class BaseDeDatos {
     }
 
     public Jugador getJugadorById(int id) {
-        return this.jugadores.get(id - 1);
+        if (id >= 0 && id < this.deportes.size()) {
+            return this.jugadores.get(id - 1);
+        }
+        else {
+            throw new IllegalArgumentException("No existe el jugador con ese id: " + id);
+        }
     }
 
 
@@ -64,6 +67,15 @@ public class BaseDeDatos {
     public void updateDeporte(int id, Deporte deporte) {
         if (id >= 0 && id < this.deportes.size()) {
             this.deportes.set(id, deporte);
+        }
+        else {
+            throw new IllegalArgumentException("No existe el deporte con ese id: " + id);
+        }
+    }
+
+    public void deleteDeporte(int id) {
+        if (id >= 0 && id < this.deportes.size()) {
+
         }
         else {
             throw new IllegalArgumentException("No existe el deporte con ese id: " + id);

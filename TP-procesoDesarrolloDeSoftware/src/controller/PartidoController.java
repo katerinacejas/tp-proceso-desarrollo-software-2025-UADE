@@ -17,12 +17,12 @@ public class PartidoController {
         return partidoDTO;
     }
 
-    public boolean updatePartido(PartidoDTO partidoDTO) {
+    public boolean updatePartido(int id, PartidoDTO partidoDTO) {
         //TODO
         return true;
     }
 
-    public boolean deletePartido(PartidoDTO partidoDTO) {
+    public boolean deletePartido(int id) {
         //TODO
         return true;
     }

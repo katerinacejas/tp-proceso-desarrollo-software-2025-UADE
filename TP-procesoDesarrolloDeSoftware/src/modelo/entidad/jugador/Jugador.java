@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Jugador {
 
+    private String id;
     private String nombreUsuario;
     private String email;
     private String contrasenia;
@@ -54,7 +55,7 @@ public class Jugador {
         return nombreUsuario;
     }
 
-      public String getEmail() {
+    public String getEmail() {
         return email;
     }
 

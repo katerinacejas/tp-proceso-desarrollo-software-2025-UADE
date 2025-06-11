@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.UUID;
 
 
 
@@ -28,12 +27,11 @@ public class Partido {
     private Set<Jugador> participantes;
     private Jugador organizador;
     private Set<Resenia> reseñas;
+    private int cantidadMaxima;
 
     private IEstadoPartido estado;
     private Emparejador emparejador;
     private List<IObservers> observadores;
-
-    private int cantidadMaxima;
 
     private List<ParticipacionJugadorPartido> participacionJugadores;
 
@@ -46,7 +44,7 @@ public class Partido {
                    Jugador organizador,
                    int cantidadMaxima,
                    int duracionMin,
-                   Geolocalizacion geolocalizacion,
+                   ZonaGeografica zonaGeografica,
                    Timestamp horarioEncuentro,
                    Emparejador emparejador) {
 
@@ -63,8 +61,8 @@ public class Partido {
         if (duracionMin <= 0) {
             throw new IllegalArgumentException("La duración debe ser positiva");
         }
-        if (geolocalizacion == null) {
-            throw new IllegalArgumentException("La geolocalización no puede ser null");
+        if (zonaGeografica == null) {
+            throw new IllegalArgumentException("La zonaGeografica no puede ser null");
         }
         if (horarioEncuentro == null) {
             throw new IllegalArgumentException("El horario no puede ser null");
@@ -74,12 +72,11 @@ public class Partido {
         }
 
         // Inicialización de atributos
-        this.id = java.util.UUID.randomUUID().toString();
         this.deporte = deporte;
         this.organizador = organizador;
         this.cantidadMaxima = cantidadMaxima;
         this.duracionMin = duracionMin;
-        this.geolocalizacion = geolocalizacion;
+        this.zonaGeografica = zonaGeografica;
         this.horarioEncuentro = horarioEncuentro;
 
         // Inicialización de colecciones

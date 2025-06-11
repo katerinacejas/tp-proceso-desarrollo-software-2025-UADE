@@ -3,6 +3,7 @@ package modelo.entidad.deporte;
 import modelo.dao.DeporteDAO;
 
 public class Deporte {
+    private String id;
     private String nombre;
     private int cantJugadores;
 
@@ -22,7 +23,20 @@ public class Deporte {
         deporteDAO.updateDeporte(id, deporte);
     }
 
+    public void deleteDeporte(int id) {
+        DeporteDAO deporteDAO = new DeporteDAO();
+        deporteDAO.deleteDeporte(id);
+    }
+
     // setters y getters
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId(){
+        return this.id;
+    }
 
     public String getNombre() {
         return this.nombre;
@@ -39,6 +53,4 @@ public class Deporte {
     public void setCantJugadores(int cantJugadores) {
         this.cantJugadores = cantJugadores;
     }
-
-
 }
