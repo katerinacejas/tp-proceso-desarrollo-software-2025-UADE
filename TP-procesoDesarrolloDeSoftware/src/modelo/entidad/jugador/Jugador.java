@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Jugador {
 
-    private int id;
+    private String id;
     private String nombreUsuario;
     private String email;
     private String contrasenia;

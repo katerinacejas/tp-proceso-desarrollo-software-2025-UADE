@@ -3,7 +3,7 @@ package modelo.entidad.deporte;
 import modelo.dao.DeporteDAO;
 
 public class Deporte {
-    private int id;
+    private String id;
     private String nombre;
     private int cantJugadores;
 
@@ -30,11 +30,11 @@ public class Deporte {
 
     // setters y getters
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getId(){
+    public String getId(){
         return this.id;
     }
 
