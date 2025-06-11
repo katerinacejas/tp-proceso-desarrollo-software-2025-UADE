@@ -32,13 +32,14 @@ public class BaseDeDatos {
         return instancia;
     }
 
+    // este metodo se usa para el insert de cada entidad
     public String generadorIdRandom() {
         return UUID.randomUUID().toString();
     }
 
     /*
         metodos para JUGADOR
-     */
+    */
     public void insertJugador(Jugador jugador){
         jugador.setId(this.generadorIdRandom());
         this.jugadores.add(jugador);
@@ -53,10 +54,18 @@ public class BaseDeDatos {
         throw new IllegalArgumentException("No existe el jugador con ese id: " + id);
     }
 
+    public void updateJugador(Jugador jugadorActualizado) {
+        //TODO
+    }
+
+    public void deleteJugador(String id) {
+        //TODO
+    }
+
 
     /*
         metodos para DEPORTE
-     */
+    */
     public void insertDeporte(Deporte deporte) {
         deporte.setId(this.generadorIdRandom());
         this.deportes.add(deporte);
@@ -92,5 +101,46 @@ public class BaseDeDatos {
             indice ++;
         }
         throw new IllegalArgumentException("No existe el deporte con ese id: " + id);
+    }
+
+
+    /*
+        metodos para RESENIA
+    */
+    public void insertResenia(Resenia resenia) {
+        resenia.setId(this.generadorIdRandom());
+        this.resenias.add(resenia);
+    }
+
+    public Resenia getReseniaById(String id) {
+        for (Resenia resenia : resenias) {
+            if (resenia.getId().equals(id)) {
+                return resenia;
+            }
+        }
+        throw new IllegalArgumentException("No existe la resenia con ese id: " + id);
+    }
+
+    public void updateResenia(Resenia reseniaActualizada) {
+        int indice = 0;
+        for (Resenia resenia : resenias) {
+            if (resenia.getId().equals(reseniaActualizada.getId())) {
+                this.resenias.set(indice, reseniaActualizada);
+                return;
+            }
+            indice ++;
+        }
+    }
+
+    public void deleteResenia(String id) {
+        int indice = 0;
+        for (Resenia resenia : resenias) {
+            if (resenia.getId().equals(id)) {
+                this.resenias.remove(indice);
+                return;
+            }
+            indice ++;
+        }
+        throw new IllegalArgumentException("No existe la resenia con ese id: " + id);
     }
 }

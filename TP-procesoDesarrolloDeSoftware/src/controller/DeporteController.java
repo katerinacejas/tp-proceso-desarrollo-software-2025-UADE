@@ -8,17 +8,17 @@ public class DeporteController {
     private Deporte deporte;
 
     public void createDeporte(DeporteDTO deporteDTO) {
-        Deporte nuevoDeporte = convertToEntitySinId(deporteDTO);
+        Deporte nuevoDeporte = this.convertToEntitySinId(deporteDTO);
         deporte.createDeporte(nuevoDeporte);
     }
 
     public DeporteDTO getDeporteById(String id) {
-        DeporteDTO deporteDTO = convertToDTO(deporte.getDeporteById(id));
+        DeporteDTO deporteDTO = this.convertToDTO(deporte.getDeporteById(id));
         return deporteDTO;
     }
 
     public void updateDeporte(DeporteDTO deporteDTO) {
-        Deporte nuevoDeporte = convertToEntitySinId(deporteDTO);
+        Deporte nuevoDeporte = this.convertToEntitySinId(deporteDTO);
         nuevoDeporte.setId(deporteDTO.getId());
         deporte.updateDeporte(nuevoDeporte);
     }

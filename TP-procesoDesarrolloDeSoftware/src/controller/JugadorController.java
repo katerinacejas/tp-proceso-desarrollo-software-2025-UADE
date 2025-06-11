@@ -9,12 +9,12 @@ public class JugadorController {
     private Jugador jugador;
 
     public void createJugador(JugadorDTO jugadorDTO) {
-        Jugador nuevoJugador = convertToEntitySinId(jugadorDTO);
+        Jugador nuevoJugador = this.convertToEntitySinId(jugadorDTO);
         jugador.createJugador(nuevoJugador);
     }
 
     public JugadorDTO getJugadorById(String id) {
-        JugadorDTO jugadorDTO = convertToDTO(jugador.getJugadorById(id));
+        JugadorDTO jugadorDTO = this.convertToDTO(jugador.getJugadorById(id));
         return jugadorDTO;
     }
 
