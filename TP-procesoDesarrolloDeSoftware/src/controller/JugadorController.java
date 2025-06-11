@@ -8,24 +8,22 @@ public class JugadorController {
 
     private Jugador jugador;
 
-    public boolean createJugador(JugadorDTO jugadorDTO) {
-        Jugador nuevoJugador = convertToEntity(jugadorDTO);
+    public void createJugador(JugadorDTO jugadorDTO) {
+        Jugador nuevoJugador = this.convertToEntitySinId(jugadorDTO);
         jugador.createJugador(nuevoJugador);
-        return true;
     }
 
-    public JugadorDTO getJugadorById(int id) {
-        JugadorDTO jugadorDTO = convertToDTO(jugador.getJugadorById(id));
+    public JugadorDTO getJugadorById(String id) {
+        JugadorDTO jugadorDTO = this.convertToDTO(jugador.getJugadorById(id));
         return jugadorDTO;
     }
 
-    public boolean updateJugador(int id, JugadorDTO jugadorDTO) {
-        //TODO
-        return true;
+    public void updateJugador(JugadorDTO jugadorDTO) {
+        //TODO: fijate como lo hice en Deporte Controller (esta terminado todo el circuito)
     }
 
-    public boolean deleteJugador(int id) {
-        return true;
+    public void deleteJugador(String id) {
+        //TODO: fijate como lo hice en Deporte Controller (esta terminado todo el circuito)
     }
 
     public boolean authJugador(LoginDTO loginDTO){
@@ -33,7 +31,7 @@ public class JugadorController {
         return true;
     }
 
-     private Jugador convertToEntity(JugadorDTO jugadorDTO) {
+     private Jugador convertToEntitySinId(JugadorDTO jugadorDTO) {
         Jugador jugador = new Jugador();
         jugador.setNombreUsuario(jugadorDTO.getNombreUsuario());
         jugador.setContrasenia(jugadorDTO.getContrasenia());
@@ -50,9 +48,9 @@ public class JugadorController {
         jugadorDTO.setContrasenia(jugador.getContrasenia());
         jugadorDTO.setCelular(jugador.getCelular());
         jugadorDTO.setEmail(jugador.getEmail());
+        jugadorDTO.setId(jugador.getId());
         //jugadorDTO.setDeportesFavoritos(jugador.getDeportesFavoritos()); Pasar de Deporte a DeporteDTO ¿necesita invocacion del Controller de Deporte?
         //jugadorDTO.setGeolocalizacion(jugador.getGeolocalizacion()); Pasar de Geolocalizacion a String
         return jugadorDTO;
-        
     }
 }

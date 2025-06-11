@@ -13,20 +13,21 @@ public class Deporte {
         deporteDAO.createDeporte(deporte);
     }
 
-    public Deporte getDeporteById(int id){
+    public Deporte getDeporteById(String id){
         DeporteDAO deporteDAO = new DeporteDAO();
         return deporteDAO.getDeporteById(id);
     }
 
-    public void updateDeporte(int id, Deporte deporte) {
+    public void updateDeporte(Deporte deporte) {
         DeporteDAO deporteDAO = new DeporteDAO();
-        deporteDAO.updateDeporte(id, deporte);
+        deporteDAO.updateDeporte(deporte);
     }
 
-    public void deleteDeporte(int id) {
+    public void deleteDeporte(String id) {
         DeporteDAO deporteDAO = new DeporteDAO();
         deporteDAO.deleteDeporte(id);
     }
+
 
     // setters y getters
 

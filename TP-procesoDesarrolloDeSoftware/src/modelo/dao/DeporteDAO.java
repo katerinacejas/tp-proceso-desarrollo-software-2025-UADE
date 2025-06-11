@@ -10,15 +10,15 @@ public class DeporteDAO {
         baseDeDatos.insertDeporte(deporte);
     }
 
-    public Deporte getDeporteById(int id) {
+    public Deporte getDeporteById(String id) {
         return baseDeDatos.getDeporteById(id);
     }
 
-    public void updateDeporte(int id, Deporte deporte) {
-        baseDeDatos.updateDeporte(id, deporte);
+    public void updateDeporte(Deporte deporte) {
+        baseDeDatos.updateDeporte(deporte);
     }
 
-    public void deleteDeporte(int id) {
+    public void deleteDeporte(String id) {
         baseDeDatos.deleteDeporte(id);
     }
 }

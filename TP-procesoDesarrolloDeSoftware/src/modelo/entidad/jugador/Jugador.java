@@ -22,7 +22,7 @@ public class Jugador {
         jugadorDAO.createJugador(jugador);
     }
 
-    public Jugador getJugadorById(int id) {
+    public Jugador getJugadorById(String id) {
         JugadorDAO jugadorDAO = new JugadorDAO();
         return jugadorDAO.getJugadorById(id);
     }
@@ -73,6 +73,14 @@ public class Jugador {
 
     public Geolocalizacion getGeolocalizacion() {
         return geolocalizacion;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return this.id;
     }
 
 
