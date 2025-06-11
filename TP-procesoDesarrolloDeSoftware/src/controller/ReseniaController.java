@@ -17,12 +17,12 @@ public class ReseniaController {
         return reseniaDTO;
     }
 
-    public boolean updateResenia(ReseniaDTO reseniaDTO) {
+    public boolean updateResenia(int id, ReseniaDTO reseniaDTO) {
         //TODO
         return true;
     }
 
-    public boolean deleteResenia(ReseniaDTO reseniaDTO) {
+    public boolean deleteResenia(int id) {
         //TODO
         return true;
     }

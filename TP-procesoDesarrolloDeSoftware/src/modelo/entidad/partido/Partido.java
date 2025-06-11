@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Partido {
+    private int id;
     private Deporte deporte;
     private int duracionMin;
     private ZonaGeografica zonaGeografica;
