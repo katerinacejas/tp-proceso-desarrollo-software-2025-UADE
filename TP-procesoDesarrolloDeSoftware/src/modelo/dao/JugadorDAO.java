@@ -11,7 +11,7 @@ public class JugadorDAO {
         baseDeDatos.insertJugador(jugador);
     }
 
-    public Jugador getJugadorById(int id) {
+    public Jugador getJugadorById(String id) {
         return baseDeDatos.getJugadorById(id);
     }
 }

@@ -22,7 +22,7 @@ public class Jugador {
         jugadorDAO.createJugador(jugador);
     }
 
-    public Jugador getJugadorById(int id) {
+    public Jugador getJugadorById(String id) {
         JugadorDAO jugadorDAO = new JugadorDAO();
         return jugadorDAO.getJugadorById(id);
     }

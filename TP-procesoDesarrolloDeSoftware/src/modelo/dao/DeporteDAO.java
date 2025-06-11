@@ -14,7 +14,7 @@ public class DeporteDAO {
         return baseDeDatos.getDeporteById(id);
     }
 
-    public void updateDeporte( Deporte deporte) {
+    public void updateDeporte(Deporte deporte) {
         baseDeDatos.updateDeporte(deporte);
     }
 
