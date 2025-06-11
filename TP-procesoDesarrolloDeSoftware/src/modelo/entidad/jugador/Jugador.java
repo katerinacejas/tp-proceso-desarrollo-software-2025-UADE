@@ -75,5 +75,13 @@ public class Jugador {
         return geolocalizacion;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
 
 }

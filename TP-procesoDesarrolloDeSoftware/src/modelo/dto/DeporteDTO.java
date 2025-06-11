@@ -1,7 +1,7 @@
 package modelo.dto;
 
 public class DeporteDTO {
-
+    private String id;
     private String nombre;
     private int cantJugadores;
     
@@ -16,6 +16,12 @@ public class DeporteDTO {
     }
     public void setCantJugadores(int cantJugadores) {
         this.cantJugadores = cantJugadores;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getId() {
+        return this.id;
     }
 
 

@@ -1,36 +1,33 @@
 package controller;
 
 import modelo.dto.DeporteDTO;
-import modelo.dao.DeporteDAO;
 import modelo.entidad.deporte.Deporte;
 
 public class DeporteController {
 
     private Deporte deporte;
 
-    public boolean createDeporte(DeporteDTO deporteDTO) {
-        Deporte nuevoDeporte = convertToEntity(deporteDTO);
+    public void createDeporte(DeporteDTO deporteDTO) {
+        Deporte nuevoDeporte = convertToEntitySinId(deporteDTO);
         deporte.createDeporte(nuevoDeporte);
-        return true;
     }
 
-    public DeporteDTO getDeporteById(int id) {
+    public DeporteDTO getDeporteById(String id) {
         DeporteDTO deporteDTO = convertToDTO(deporte.getDeporteById(id));
         return deporteDTO;
     }
 
-    public boolean updateDeporte(int id, DeporteDTO deporteDTO) {
-        Deporte nuevoDeporte = convertToEntity(deporteDTO);
-        deporte.updateDeporte(id, nuevoDeporte);
-        return true;
+    public void updateDeporte(DeporteDTO deporteDTO) {
+        Deporte nuevoDeporte = convertToEntitySinId(deporteDTO);
+        nuevoDeporte.setId(deporteDTO.getId());
+        deporte.updateDeporte(nuevoDeporte);
     }
 
-    public boolean deleteDeporte(int id) {
+    public void deleteDeporte(String id) {
         deporte.deleteDeporte(id);
-        return true;
     }
 
-    private Deporte convertToEntity(DeporteDTO deporteDTO) {
+    private Deporte convertToEntitySinId(DeporteDTO deporteDTO) {
         Deporte deporte = new Deporte();
         deporte.setNombre(deporteDTO.getNombre());
         deporte.setCantJugadores(deporteDTO.getCantJugadores());
@@ -41,6 +38,7 @@ public class DeporteController {
         DeporteDTO deporteDTO = new DeporteDTO();
         deporteDTO.setCantJugadores(deporte.getCantJugadores());
         deporteDTO.setNombre(deporteDTO.getNombre());
+        deporteDTO.setId(deporte.getId());
         return deporteDTO;
     }
 }

@@ -3,6 +3,7 @@ package modelo.dto;
 import java.util.List;
 
 public class JugadorDTO {
+    private String id;
     private String nombreUsuario;
     private String email;
     private String contrasenia;
@@ -56,5 +57,12 @@ public class JugadorDTO {
 
     public void setGeolocalizacion(String geolocalizacion) {
         this.geolocalizacion = geolocalizacion;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getId() {
+        return this.id;
     }
 }
