@@ -7,9 +7,10 @@ public class JugadorDTO {
     private String nombreUsuario;
     private String email;
     private String contrasenia;
-    private List<DeporteDTO> deportesFavoritos;
+    private List<String> deportesFavoritos;
     private String celular;
-    private String geolocalizacion; //Podría ser un list de double's
+    private double latitud;
+    private double longitud;
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -35,11 +36,11 @@ public class JugadorDTO {
         this.contrasenia = contrasenia;
     }
 
-    public List<DeporteDTO> getDeportesFavoritos() {
+    public List<String> getDeportesFavoritos() {
         return deportesFavoritos;
     }
 
-    public void setDeportesFavoritos(List<DeporteDTO> deportesFavoritos) {
+    public void setDeportesFavoritos(List<String> deportesFavoritos) {
         this.deportesFavoritos = deportesFavoritos;
     }
 
@@ -50,19 +51,27 @@ public class JugadorDTO {
     public void setCelular(String celular) {
         this.celular = celular;
     }
-
-    public String getGeolocalizacion() {
-        return geolocalizacion;
-    }
-
-    public void setGeolocalizacion(String geolocalizacion) {
-        this.geolocalizacion = geolocalizacion;
-    }
-
+    
     public void setId(String id) {
         this.id = id;
     }
     public String getId() {
         return this.id;
+    }
+
+      public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 }
