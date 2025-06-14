@@ -6,6 +6,7 @@ import controller.PartidoController;
 import controller.ReseniaController;
 import modelo.dto.DeporteDTO;
 import modelo.dto.JugadorDTO;
+import modelo.dto.LoginDTO;
 import modelo.enumerador.NivelJuego;
 
 import java.util.Arrays;
@@ -26,10 +27,10 @@ public class VistaPrincipal {
         reseniaController = new ReseniaController();
         partidoController = new PartidoController();
         input = new Scanner(System.in);
-        input.nextLine(); // limpia el buffer
+        this.crearDeportesPreCargados();
     }
 
-    public void crearDeportesPreCargados() {
+    private void crearDeportesPreCargados() {
         DeporteDTO futbolDTO = new DeporteDTO();
         futbolDTO.setNombre("futbol");
         futbolDTO.setCantJugadores(22);
@@ -57,31 +58,34 @@ public class VistaPrincipal {
     }
 
     public void iniciar() {
-        int opcionMenu = 0;
-        int salir = 9;
-
-        while(opcionMenu != salir) {
-            System.out.println("Bienvenido/a, elija una opcion ingresando el numero:" +
-                    "\n 1: Registrarse" +
-                    "\n 2: Iniciar sesion" +
-                    "\n 3: Crear partido" +
-                    "\n 9: Salir");
-
-            opcionMenu = input.nextInt();
-            input.nextLine(); // limpia el salto de línea
-            switch (opcionMenu) {
-                case 1:
-                    this.registrarse();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-            }
+        int opcionMenu;
+        System.out.println("¡Bienvenido/a a nuestra app para partidos!, Elija una opcion ingresando el numero:" +
+                "\n 1: Registrarse" +
+                "\n 2: Iniciar sesion" +
+                "\n 3: Salir");
+        opcionMenu = input.nextInt();
+        input.nextLine(); // limpia el salto de línea
+        boolean sesionIniciada = false;
+        switch (opcionMenu) {
+            case 1:
+                sesionIniciada = this.registrarse();
+                break;
+            case 2:
+                sesionIniciada = this.iniciarSesion();
+                break;
+            case 3:
+                return;
         }
+        if(sesionIniciada) {
+            this.menuSesionIniciada();
+        }
+        else {
+            this.iniciar();
+        }
+
     }
 
-    public void registrarse() {
+    private boolean registrarse() {
         JugadorDTO jugadorDTO = new JugadorDTO();
         System.out.println("Formulario de registro de jugador: ");
 
@@ -150,6 +154,72 @@ public class VistaPrincipal {
         jugadorDTO.setLatitud(latitud);
 
         jugadorController.createJugador(jugadorDTO);
-        System.out.println(jugadorDTO.getId());
+        System.out.println("--------¡Jugador Creado! Sesion iniciada :) --------");
+        return true;
+    }
+
+    private boolean iniciarSesion() {
+        LoginDTO loginDTO = new LoginDTO();
+        System.out.println("Formulario de inicio de sesion de jugador: ");
+
+        System.out.println("Ingrese su email: ");
+        String email = input.nextLine();
+        loginDTO.setEmail(email);
+
+        System.out.println("Ingrese su contraseña: ");
+        String contrasenia = input.nextLine();
+        loginDTO.setContrasenia(contrasenia);
+
+        if(jugadorController.authJugador(loginDTO)){
+            System.out.println("¡Sesion iniciada correctamente!");
+            return true;
+        }
+        System.out.println("Email y contraseña incorrecta. Se redigirá al menu principal");
+        return false;
+    }
+
+    private void menuSesionIniciada() {
+        int opcionMenu;
+        System.out.println("¡Bienvenido/a a nuestra app para partidos!, Elija una opcion ingresando el numero:" +
+                "\n 1: Registrarse" +
+                "\n 2: Iniciar sesion" +
+                "\n 3: Salir");
+        opcionMenu = input.nextInt();
+        input.nextLine(); // limpia el salto de línea
+        boolean sesionIniciada = false;
+        switch (opcionMenu) {
+            case 1:
+                sesionIniciada = this.registrarse();
+                break;
+            case 2:
+                sesionIniciada = this.iniciarSesion();
+                break;
+            case 3:
+                return;
+        }
+        if(sesionIniciada) {
+            this.menuSesionIniciada();
+        }
+        else {
+            this.iniciar();
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

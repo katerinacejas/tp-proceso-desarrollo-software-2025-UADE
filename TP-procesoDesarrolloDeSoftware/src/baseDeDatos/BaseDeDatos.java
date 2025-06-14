@@ -41,6 +41,11 @@ public class BaseDeDatos {
         metodos para JUGADOR
     */
     public void insertJugador(Jugador jugador){
+        for (Jugador j : jugadores) {
+            if (j.getEmail().equals(jugador.getEmail())) {
+                throw new IllegalArgumentException("Ya existe un jugador con ese email, no se puede registrar. Por favor iniciar sesion");
+            }
+        }
         jugador.setId(this.generadorIdRandom());
         this.jugadores.add(jugador);
     }
@@ -83,7 +88,7 @@ public class BaseDeDatos {
         metodos para DEPORTE
     */
     public Deporte insertDeporte(Deporte deporte) {
-        deporte.setId(this.generadorIdRandom());
+        deporte.setId(deporte.getNombre());
         this.deportes.add(deporte);
         return deporte;
     }
