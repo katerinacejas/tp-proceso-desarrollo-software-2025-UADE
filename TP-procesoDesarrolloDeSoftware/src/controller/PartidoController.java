@@ -1,10 +1,15 @@
 package controller;
 
 import modelo.dto.PartidoDTO;
-import modelo.dao.PartidoDAO;
+import modelo.entidad.partido.Partido;
 
 public class PartidoController {
-    private PartidoDAO partidoDAO;
+
+    private Partido partido;
+
+    public PartidoController(){
+        partido = new Partido();
+    }
 
     public boolean createPartido(PartidoDTO partidoDTO) {
         //TODO

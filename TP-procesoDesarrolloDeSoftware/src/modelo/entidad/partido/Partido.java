@@ -36,65 +36,6 @@ public class Partido {
     private List<ParticipacionJugadorPartido> participacionJugadores;
 
 
-    /*
-        CONSTRUCTOR
-     */
-
-    public Partido(Deporte deporte,
-                   Jugador organizador,
-                   int cantidadMaxima,
-                   int duracionMin,
-                   ZonaGeografica zonaGeografica,
-                   Timestamp horarioEncuentro,
-                   Emparejador emparejador) {
-
-        // Validaciones
-        if (deporte == null) {
-            throw new IllegalArgumentException("El deporte no puede ser null");
-        }
-        if (organizador == null) {
-            throw new IllegalArgumentException("El organizador no puede ser null");
-        }
-        if (cantidadMaxima <= 0) {
-            throw new IllegalArgumentException("La cantidad máxima debe ser positiva");
-        }
-        if (duracionMin <= 0) {
-            throw new IllegalArgumentException("La duración debe ser positiva");
-        }
-        if (zonaGeografica == null) {
-            throw new IllegalArgumentException("La zonaGeografica no puede ser null");
-        }
-        if (horarioEncuentro == null) {
-            throw new IllegalArgumentException("El horario no puede ser null");
-        }
-        if (horarioEncuentro.before(new Timestamp(System.currentTimeMillis()))) {
-            throw new IllegalArgumentException("El horario no puede ser en el pasado");
-        }
-
-        // Inicialización de atributos
-        this.deporte = deporte;
-        this.organizador = organizador;
-        this.cantidadMaxima = cantidadMaxima;
-        this.duracionMin = duracionMin;
-        this.zonaGeografica = zonaGeografica;
-        this.horarioEncuentro = horarioEncuentro;
-
-        // Inicialización de colecciones
-        this.participantes = new HashSet<>();
-        this.reseñas = new HashSet<>();
-        this.observadores = new ArrayList<>();
-
-        // Agregar organizador automáticamente
-        this.participantes.add(organizador);
-
-        // Inicialización de componentes
-        this.emparejador = new Emparejador(emparejador);
-        this.participacionJugadores =
-
-        // Estado inicial
-        this.estado = new EstadoPartidoNecesitaJugadores();
-    }
-
 
     /* METODOS PARA GESTIONAR JUGADORES */
 
@@ -264,4 +205,63 @@ public class Partido {
     public void eliminarObservador(IObservers observador){
         this.observadores.remove(observador);
     }
+
+     /*
+        CONSTRUCTOR
+     */
+
+   /* public Partido(Deporte deporte,
+                   Jugador organizador,
+                   int cantidadMaxima,
+                   int duracionMin,
+                   ZonaGeografica zonaGeografica,
+                   Timestamp horarioEncuentro,
+                   Emparejador emparejador) {
+
+        // Validaciones
+        if (deporte == null) {
+            throw new IllegalArgumentException("El deporte no puede ser null");
+        }
+        if (organizador == null) {
+            throw new IllegalArgumentException("El organizador no puede ser null");
+        }
+        if (cantidadMaxima <= 0) {
+            throw new IllegalArgumentException("La cantidad máxima debe ser positiva");
+        }
+        if (duracionMin <= 0) {
+            throw new IllegalArgumentException("La duración debe ser positiva");
+        }
+        if (zonaGeografica == null) {
+            throw new IllegalArgumentException("La zonaGeografica no puede ser null");
+        }
+        if (horarioEncuentro == null) {
+            throw new IllegalArgumentException("El horario no puede ser null");
+        }
+        if (horarioEncuentro.before(new Timestamp(System.currentTimeMillis()))) {
+            throw new IllegalArgumentException("El horario no puede ser en el pasado");
+        }
+
+        // Inicialización de atributos
+        this.deporte = deporte;
+        this.organizador = organizador;
+        this.cantidadMaxima = cantidadMaxima;
+        this.duracionMin = duracionMin;
+        this.zonaGeografica = zonaGeografica;
+        this.horarioEncuentro = horarioEncuentro;
+
+        // Inicialización de colecciones
+        this.participantes = new HashSet<>();
+        this.reseñas = new HashSet<>();
+        this.observadores = new ArrayList<>();
+
+        // Agregar organizador automáticamente
+        this.participantes.add(organizador);
+
+        // Inicialización de componentes
+        this.emparejador = new Emparejador(emparejador);
+        this.participacionJugadores =
+
+        // Estado inicial
+        this.estado = new EstadoPartidoNecesitaJugadores();
+    } */
 }
