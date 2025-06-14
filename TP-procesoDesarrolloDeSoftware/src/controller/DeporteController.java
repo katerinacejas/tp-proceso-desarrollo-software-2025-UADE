@@ -5,11 +5,12 @@ import modelo.entidad.deporte.Deporte;
 
 public class DeporteController {
 
-    private Deporte deporte;
+    private Deporte deporte = new Deporte();;
 
     public void createDeporte(DeporteDTO deporteDTO) {
         Deporte nuevoDeporte = this.convertToEntitySinId(deporteDTO);
         deporte.createDeporte(nuevoDeporte);
+        deporteDTO.setId(nuevoDeporte.getId());
     }
 
     public DeporteDTO getDeporteById(String id) {

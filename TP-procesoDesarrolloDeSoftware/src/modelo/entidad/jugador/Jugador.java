@@ -27,6 +27,22 @@ public class Jugador {
         return jugadorDAO.getJugadorById(id);
     }
 
+    public void updateJugador(Jugador jugadorActualizado) {
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        jugadorDAO.updateJugador(jugadorActualizado);
+
+    }
+
+    public void deleteJugador(String id) {
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        jugadorDAO.deleteJugador(id);
+    }
+
+    public boolean authJugador(String email, String contrasenia) {
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        return jugadorDAO.authJugador(email, contrasenia);
+    }
+
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
     }
@@ -83,5 +99,5 @@ public class Jugador {
         return this.id;
     }
 
-
+   
 }

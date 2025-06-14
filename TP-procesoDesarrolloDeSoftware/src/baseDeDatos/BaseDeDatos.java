@@ -55,13 +55,29 @@ public class BaseDeDatos {
     }
 
     public void updateJugador(Jugador jugadorActualizado) {
-        //TODO
+        for (int i = 0; i < jugadores.size(); i++) {
+            if (jugadores.get(i).getId().equals(jugadorActualizado.getId())) {
+                jugadores.set(i, jugadorActualizado);
+            }
+        }
     }
 
     public void deleteJugador(String id) {
-        //TODO
+         for (int i = 0; i < jugadores.size(); i++) {
+            if (jugadores.get(i).getId().equals(id)) {
+                jugadores.remove(i);
+            }
+        }
     }
 
+    public boolean authJugador(String email, String contrasenia) {
+        for (Jugador jugador : jugadores) {
+            if (jugador.getEmail().equals(email)) {
+                return jugador.getContrasenia().equals(contrasenia);
+            }
+        }
+        return false;
+    }
 
     /*
         metodos para DEPORTE
@@ -143,4 +159,5 @@ public class BaseDeDatos {
         }
         throw new IllegalArgumentException("No existe la resenia con ese id: " + id);
     }
+
 }

@@ -14,4 +14,16 @@ public class JugadorDAO {
     public Jugador getJugadorById(String id) {
         return baseDeDatos.getJugadorById(id);
     }
+
+    public void updateJugador(Jugador jugadorActualizado) {
+        baseDeDatos.updateJugador(jugadorActualizado);
+    }
+
+    public void deleteJugador(String id) {
+        baseDeDatos.deleteJugador(id);
+    }
+
+    public boolean authJugador(String email, String contrasenia) {
+        return baseDeDatos.authJugador(email, contrasenia);
+    }
 }
