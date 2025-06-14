@@ -10,8 +10,13 @@ import modelo.entidad.deporte.Deporte;
 
 public class JugadorController {
 
-    private Jugador jugador = new Jugador();
-    private Deporte deporte = new Deporte();
+    private Jugador jugador;
+    private Deporte deporte;
+
+    public JugadorController(){
+        jugador = new Jugador();
+        deporte = new Deporte();
+    }
 
     public void createJugador(JugadorDTO jugadorDTO) {
         Jugador nuevoJugador = this.convertToEntitySinId(jugadorDTO);
