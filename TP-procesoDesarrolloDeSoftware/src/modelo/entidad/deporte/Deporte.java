@@ -8,9 +8,9 @@ public class Deporte {
     private int cantJugadores;
 
     // metodos de que se llaman en el controller
-    public void createDeporte(Deporte deporte) {
+    public Deporte createDeporte(Deporte deporte) {
         DeporteDAO deporteDAO = new DeporteDAO();
-        deporteDAO.createDeporte(deporte);
+        return deporteDAO.createDeporte(deporte);
     }
 
     public Deporte getDeporteById(String id){

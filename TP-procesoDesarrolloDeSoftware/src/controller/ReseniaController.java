@@ -4,11 +4,17 @@ import modelo.dto.ReseniaDTO;
 import modelo.entidad.partido.Resenia;
 
 public class ReseniaController {
+
     private Resenia resenia;
 
-    public void createResenia(ReseniaDTO reseniaDTO) {
-        Resenia nuevaResenia = this.convertToEntitySinId(reseniaDTO);
-        resenia.createResenia(nuevaResenia);
+    public ReseniaController() {
+        resenia = new Resenia();
+    }
+
+    public ReseniaDTO createResenia(ReseniaDTO reseniaDTO) {
+        Resenia nuevaResenia = this.convertToEntityCreate(reseniaDTO);
+        nuevaResenia = resenia.createResenia(nuevaResenia);
+        return this.convertToDTO(nuevaResenia);
     }
 
     public ReseniaDTO getReseniaById(String id) {
@@ -17,8 +23,7 @@ public class ReseniaController {
     }
 
     public void updateResenia(ReseniaDTO reseniaDTO) {
-        Resenia nuevaResenia = this.convertToEntitySinId(reseniaDTO);
-        nuevaResenia.setId(reseniaDTO.getId());
+        Resenia nuevaResenia = this.convertToEntity(reseniaDTO);
         resenia.updateResenia(nuevaResenia);
     }
 
@@ -26,8 +31,16 @@ public class ReseniaController {
         resenia.deleteResenia(id);
     }
 
-    private Resenia convertToEntitySinId(ReseniaDTO reseniaDTO) {
+    private Resenia convertToEntityCreate(ReseniaDTO reseniaDTO) {
         Resenia resenia = new Resenia();
+        resenia.setComentario(reseniaDTO.getComentario());
+        resenia.setPuntuacion(reseniaDTO.getPuntuacion());
+        return resenia;
+    }
+
+    private Resenia convertToEntity(ReseniaDTO reseniaDTO) {
+        Resenia resenia = new Resenia();
+        resenia.setId(reseniaDTO.getId());
         resenia.setComentario(reseniaDTO.getComentario());
         resenia.setPuntuacion(reseniaDTO.getPuntuacion());
         return resenia;
