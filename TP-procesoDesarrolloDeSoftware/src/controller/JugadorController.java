@@ -44,8 +44,13 @@ public class JugadorController {
         jugador.deleteJugador(id);
     }
 
-    public boolean authJugador(LoginDTO loginDTO){
-        return jugador.authJugador(loginDTO.getEmail(), loginDTO.getContrasenia());
+    public JugadorDTO authJugador(LoginDTO loginDTO){
+        Jugador jugadorSesionIniciada = jugador.authJugador(loginDTO.getEmail(), loginDTO.getContrasenia());
+        if (jugadorSesionIniciada != null){
+            JugadorDTO jugadorSesionIniciadaDTO = this.convertToDTO(jugadorSesionIniciada);
+            return jugadorSesionIniciadaDTO;
+        }
+        return null;
     }
 
     private Jugador convertToEntitySinId(JugadorDTO jugadorDTO) {

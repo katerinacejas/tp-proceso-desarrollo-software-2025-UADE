@@ -23,7 +23,7 @@ public class JugadorDAO {
         baseDeDatos.deleteJugador(id);
     }
 
-    public boolean authJugador(String email, String contrasenia) {
+    public Jugador authJugador(String email, String contrasenia) {
         return baseDeDatos.authJugador(email, contrasenia);
     }
 }

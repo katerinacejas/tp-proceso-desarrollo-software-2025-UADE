@@ -75,13 +75,13 @@ public class BaseDeDatos {
         }
     }
 
-    public boolean authJugador(String email, String contrasenia) {
+    public Jugador authJugador(String email, String contrasenia) {
         for (Jugador jugador : jugadores) {
-            if (jugador.getEmail().equals(email)) {
-                return jugador.getContrasenia().equals(contrasenia);
+            if (jugador.getEmail().equals(email) && jugador.getContrasenia().equals(contrasenia)) {
+                return this.getJugadorById(jugador.getId());
             }
         }
-        return false;
+        return null;
     }
 
     /*
