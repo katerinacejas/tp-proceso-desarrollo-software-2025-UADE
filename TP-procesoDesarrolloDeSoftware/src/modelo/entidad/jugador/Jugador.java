@@ -3,8 +3,10 @@ package modelo.entidad.jugador;
 import modelo.dao.JugadorDAO;
 import modelo.dto.DeporteDTO;
 import modelo.dto.JugadorDTO;
+import modelo.entidad.NivelJuego.NivelJugadorDeporte;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.ubicacion.Geolocalizacion;
+import modelo.enumerador.NivelJuego;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class Jugador {
     private List<Deporte> deportesFavoritos;
     private String celular;
     private Geolocalizacion geolocalizacion;
+    private List<NivelJugadorDeporte> niveles;
 
 
     public void createJugador(JugadorDTO jugadorDTO) {
@@ -32,6 +35,14 @@ public class Jugador {
     public JugadorDTO getJugadorById(int id) {
         JugadorDAO jugadorDAO = new JugadorDAO();
         return jugadorDAO.getJugadorById(id);
+    }
+
+    public NivelJuego getNivel(Deporte deporte) {
+        return niveles.stream()
+            .filter(n -> n.getDeporte().equals(deporte))
+            .findFirst()
+            .map(NivelJugadorDeporte::getNivelJuego)
+            .orElse(null);
     }
 
     public void setNombreUsuario(String nombreUsuario) {

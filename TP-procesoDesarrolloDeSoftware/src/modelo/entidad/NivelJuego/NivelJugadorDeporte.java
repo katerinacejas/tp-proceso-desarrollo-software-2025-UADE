@@ -8,4 +8,12 @@ public class NivelJugadorDeporte {
     private NivelJuego nivelJuego;
     private Jugador jugador;
     private Deporte deporte;
+
+    public NivelJuego getNivelJuego(){
+        return nivelJuego;
+    }
+
+    public Deporte getDeporte(){
+        return deporte;
+    }
 }
