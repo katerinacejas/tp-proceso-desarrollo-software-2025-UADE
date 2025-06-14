@@ -6,8 +6,8 @@ import modelo.entidad.partido.Resenia;
 public class ReseniaDAO {
     private BaseDeDatos baseDeDatos = BaseDeDatos.getInstancia();
 
-    public Resenia createResenia(Resenia resenia) {
-        return baseDeDatos.insertResenia(resenia);
+    public void createResenia(Resenia resenia) {
+        baseDeDatos.insertResenia(resenia);
     }
 
     public Resenia getReseniaById(String id) {

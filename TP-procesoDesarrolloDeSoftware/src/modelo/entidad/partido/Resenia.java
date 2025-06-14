@@ -8,9 +8,9 @@ public class Resenia {
     private String comentario;
 
     // metodos de que se llaman en el controller
-    public Resenia createResenia(Resenia resenia) {
+    public void createResenia(Resenia resenia) {
         ReseniaDAO reseniaDAO = new ReseniaDAO();
-        return reseniaDAO.createResenia(resenia);
+        reseniaDAO.createResenia(resenia);
     }
 
     public Resenia getReseniaById(String id){
