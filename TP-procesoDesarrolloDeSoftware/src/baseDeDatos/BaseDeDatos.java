@@ -66,9 +66,10 @@ public class BaseDeDatos {
     /*
         metodos para DEPORTE
     */
-    public void insertDeporte(Deporte deporte) {
+    public Deporte insertDeporte(Deporte deporte) {
         deporte.setId(this.generadorIdRandom());
         this.deportes.add(deporte);
+        return deporte;
     }
 
     public Deporte getDeporteById(String id) {
@@ -107,9 +108,10 @@ public class BaseDeDatos {
     /*
         metodos para RESENIA
     */
-    public void insertResenia(Resenia resenia) {
+    public Resenia insertResenia(Resenia resenia) {
         resenia.setId(this.generadorIdRandom());
         this.resenias.add(resenia);
+        return resenia;
     }
 
     public Resenia getReseniaById(String id) {

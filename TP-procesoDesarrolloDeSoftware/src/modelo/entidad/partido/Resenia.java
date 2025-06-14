@@ -1,6 +1,5 @@
 package modelo.entidad.partido;
 
-
 import modelo.dao.ReseniaDAO;
 
 public class Resenia {
@@ -9,9 +8,9 @@ public class Resenia {
     private String comentario;
 
     // metodos de que se llaman en el controller
-    public void createResenia(Resenia resenia) {
+    public Resenia createResenia(Resenia resenia) {
         ReseniaDAO reseniaDAO = new ReseniaDAO();
-        reseniaDAO.createResenia(resenia);
+        return reseniaDAO.createResenia(resenia);
     }
 
     public Resenia getReseniaById(String id){

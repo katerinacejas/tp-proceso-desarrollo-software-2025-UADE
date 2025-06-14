@@ -6,8 +6,8 @@ import modelo.entidad.deporte.Deporte;
 public class DeporteDAO {
     private BaseDeDatos baseDeDatos = BaseDeDatos.getInstancia();
 
-    public void createDeporte(Deporte deporte) {
-        baseDeDatos.insertDeporte(deporte);
+    public Deporte createDeporte(Deporte deporte) {
+        return baseDeDatos.insertDeporte(deporte);
     }
 
     public Deporte getDeporteById(String id) {
