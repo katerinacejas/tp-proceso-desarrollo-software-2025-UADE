@@ -11,9 +11,11 @@ public class PartidoController {
         partido = new Partido();
     }
 
-    public boolean createPartido(PartidoDTO partidoDTO) {
-        //TODO
-        return true;
+    public void createPartido(PartidoDTO partidoDTO) {
+        Partido nuevoPartido = convertToEntity(partidoDTO);
+        nuevoPartido.necesitarJugadores();
+        //partido.createPartido(partidoDTO);
+        //partidoDTO.setId(nuevoPartido.getId());
     }
 
     public PartidoDTO getPartidoById(int id) {
@@ -30,5 +32,17 @@ public class PartidoController {
     public boolean deletePartido(int id) {
         //TODO
         return true;
+    }
+
+    private Partido convertToEntity(PartidoDTO partidoDTO) {
+        Partido partido = new Partido();
+        //partido.setDeporte(partidoDTO.getDeporte());
+        partido.setDuracionMin(partidoDTO.getDuracionMin());
+        //partido.setZonaGeografica(partidoDTO.getZonaGeografica());
+        //partido.setHorarioEncuentro(partidoDTO.getHorarioEncuentro());
+        //partido.setOrganizador(partidoDTO.getOrganizador());
+        //partido.cambiarEstrategiaEmparejamiento(partidoDTO.getEstrategiaPartido());;
+        return partido;
+
     }
 }

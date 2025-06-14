@@ -1,23 +1,44 @@
 package modelo.dto;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
+
+import modelo.enumerador.NivelJuego;
+import modelo.enumerador.EstrategiaPartido;
 
 public class PartidoDTO {
     private String id;
-    private DeporteDTO deporte;
+    private String deporte;
     private int duracionMin;
     private String zonaGeografica;
-    private Timestamp horarioEncuentro;
-    private List<JugadorDTO> participantes;
-    private JugadorDTO organizador;
-    private List<ReseniaDTO> resenias;
+    private LocalDateTime horarioEncuentro;
+    private List<String> participantes;
+    private String organizador;
+    private List<String> resenias;
+    private EstrategiaPartido estrategiaPartido;
+    private NivelJuego nivelJuego;
 
-    public DeporteDTO getDeporte() {
+    public NivelJuego getNivelJuego() {
+        return nivelJuego;
+    }
+
+    public void setNivelJuego(NivelJuego nivelJuego) {
+        this.nivelJuego = nivelJuego;
+    }
+
+    public EstrategiaPartido getEstrategiaPartido() {
+        return estrategiaPartido;
+    }
+
+    public void setEstrategiaPartido(EstrategiaPartido estrategiaPartido) {
+        this.estrategiaPartido = estrategiaPartido;
+    }
+
+    public String getDeporte() {
         return this.deporte;
     }
 
-    public void setDeporte(DeporteDTO deporte) {
+    public void setDeporte(String deporte) {
         this.deporte = deporte;
     }
 
@@ -37,35 +58,35 @@ public class PartidoDTO {
         this.zonaGeografica = zonaGeografica;
     }
 
-    public Timestamp getHorarioEncuentro() {
+    public LocalDateTime getHorarioEncuentro() {
         return this.horarioEncuentro;
     }
 
-    public void setHorarioEncuentro(Timestamp horarioEncuentro) {
+    public void setHorarioEncuentro(LocalDateTime horarioEncuentro) {
         this.horarioEncuentro = horarioEncuentro;
     }
 
-    public List<JugadorDTO> getParticipantes() {
+    public List<String> getParticipantes() {
         return this.participantes;
     }
 
-    public void setParticipantes(List<JugadorDTO> participantes) {
+    public void setParticipantes(List<String> participantes) {
         this.participantes = participantes;
     }
 
-    public JugadorDTO getOrganizador() {
+    public String getOrganizador() {
         return this.organizador;
     }
 
-    public void setOrganizador(JugadorDTO organizador) {
+    public void setOrganizador(String organizador) {
         this.organizador = organizador;
     }
 
-    public List<ReseniaDTO> getResenias() {
+    public List<String> getResenias() {
         return this.resenias;
     }
 
-    public void setResenias(List<ReseniaDTO> resenias) {
+    public void setResenias(List<String> resenias) {
         this.resenias = resenias;
     }
 

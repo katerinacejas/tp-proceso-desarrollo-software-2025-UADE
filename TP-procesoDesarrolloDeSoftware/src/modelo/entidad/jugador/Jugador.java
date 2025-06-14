@@ -1,6 +1,7 @@
 package modelo.entidad.jugador;
 
 import modelo.dao.JugadorDAO;
+import modelo.entidad.NivelJuego.NivelJugadorDeporte;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.ubicacion.Geolocalizacion;
 
@@ -15,7 +16,16 @@ public class Jugador {
     private List<Deporte> deportesFavoritos;
     private String celular;
     private Geolocalizacion geolocalizacion;
+    private List<NivelJugadorDeporte> nivelPorDeporte;
 
+
+    public List<NivelJugadorDeporte> getNivelPorDeporte() {
+        return nivelPorDeporte;
+    }
+
+    public void setNivelPorDeporte(List<NivelJugadorDeporte> nivelPorDeporte) {
+        this.nivelPorDeporte = nivelPorDeporte;
+    }
 
     public void createJugador(Jugador jugador) {
         JugadorDAO jugadorDAO = new JugadorDAO();

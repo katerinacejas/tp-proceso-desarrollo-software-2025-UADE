@@ -1,6 +1,9 @@
 package modelo.dto;
 
 import java.util.List;
+import java.util.Map;
+
+import modelo.enumerador.NivelJuego;
 
 public class JugadorDTO {
     private String id;
@@ -8,6 +11,7 @@ public class JugadorDTO {
     private String email;
     private String contrasenia;
     private List<String> deportesFavoritos;
+    private Map<String, NivelJuego> nivelPorDeporte;
     private String celular;
     private double latitud;
     private double longitud;
@@ -73,5 +77,13 @@ public class JugadorDTO {
 
     public void setLongitud(double longitud) {
         this.longitud = longitud;
+    }
+
+    public Map<String, NivelJuego> getNivelPorDeporte() {
+        return nivelPorDeporte;
+    }
+
+    public void setNivelPorDeporte(Map<String, NivelJuego> nivelPorDeporte) {
+        this.nivelPorDeporte = nivelPorDeporte;
     }
 }
