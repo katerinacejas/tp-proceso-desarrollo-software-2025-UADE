@@ -6,4 +6,13 @@ import modelo.enumerador.NivelJuego;
 public class NivelJugadorDeporte {
     private NivelJuego nivelJuego;
     private Deporte deporte;
+
+    public Deporte getDeporte() {
+        return deporte;
+    }
+
+    public NivelJuego getNivel() {
+        return nivelJuego;
+    }
+
 }
