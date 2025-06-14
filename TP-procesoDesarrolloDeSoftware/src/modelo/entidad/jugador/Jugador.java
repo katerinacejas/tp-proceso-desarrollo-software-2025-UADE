@@ -1,8 +1,6 @@
 package modelo.entidad.jugador;
 
 import modelo.dao.JugadorDAO;
-import modelo.dto.DeporteDTO;
-import modelo.dto.JugadorDTO;
 import modelo.entidad.NivelJuego.NivelJugadorDeporte;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.ubicacion.Geolocalizacion;
@@ -12,6 +10,7 @@ import java.util.List;
 
 public class Jugador {
 
+    private String id;
     private String nombreUsuario;
     private String email;
     private String contrasenia;
@@ -21,20 +20,30 @@ public class Jugador {
     private List<NivelJugadorDeporte> niveles;
 
 
-    public void createJugador(JugadorDTO jugadorDTO) {
-        this.nombreUsuario = jugadorDTO.getNombreUsuario();
-        this.email = jugadorDTO.getEmail();
-        this.contrasenia = jugadorDTO.getContrasenia();
-        //this.deportesFavoritos = jugadorDTO.getDeportesFavoritos(); [CONSULTAR porque ahora JugadorDTO conoce a los DeporteDTO]
-        this.celular = jugadorDTO.getCelular();
-        //this.geolocalizacion = jugadorDTO.getGeolocalizacion();
+    public void createJugador(Jugador jugador) {
         JugadorDAO jugadorDAO = new JugadorDAO();
-        jugadorDAO.createJugador(this);
+        jugadorDAO.createJugador(jugador);
     }
 
-    public JugadorDTO getJugadorById(int id) {
+    public Jugador getJugadorById(String id) {
         JugadorDAO jugadorDAO = new JugadorDAO();
         return jugadorDAO.getJugadorById(id);
+    }
+
+    public void updateJugador(Jugador jugadorActualizado) {
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        jugadorDAO.updateJugador(jugadorActualizado);
+
+    }
+
+    public void deleteJugador(String id) {
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        jugadorDAO.deleteJugador(id);
+    }
+
+    public boolean authJugador(String email, String contrasenia) {
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        return jugadorDAO.authJugador(email, contrasenia);
     }
 
     public NivelJuego getNivel(Deporte deporte) {
@@ -61,20 +70,19 @@ public class Jugador {
         this.email = email;
     }
 
-    public void setDeportesFavoritos(List<DeporteDTO> deportesFavoritos) {
-       // CREO QUE CUANDO SETEAMOS DEPORTES HAY QUE PASARLE DEPORTES O BIEN HACER ALGO CON LOS DEPORTEDTO
+    public void setDeportesFavoritos(List<Deporte> deportesFavoritos) {
+        this.deportesFavoritos = deportesFavoritos;
     }
 
     public void setGeolocalizacion(Geolocalizacion geolocalizacion) {
         this.geolocalizacion = geolocalizacion;
-        //ACA SE LE VA A PASAR LAS COORDENADAS Y LUEGO SE VA A SETEAR LA GEOLOCALIZACION
     }
 
     public String getNombreUsuario() {
         return nombreUsuario;
     }
 
-      public String getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -94,5 +102,13 @@ public class Jugador {
         return geolocalizacion;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
+    public String getId() {
+        return this.id;
+    }
+
+   
 }

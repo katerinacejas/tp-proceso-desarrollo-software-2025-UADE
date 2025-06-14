@@ -1,7 +1,7 @@
 package modelo.dto;
 
 public class ReseniaDTO {
-    
+    private String id;
     private int puntuacion;
     private String comentario;
 
@@ -19,5 +19,12 @@ public class ReseniaDTO {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getId() {
+        return this.id;
     }
 }

@@ -4,16 +4,17 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class PartidoDTO {
+    private String id;
     private DeporteDTO deporte;
     private int duracionMin;
-    private String geolocalizacion;
+    private String zonaGeografica;
     private Timestamp horarioEncuentro;
     private List<JugadorDTO> participantes;
     private JugadorDTO organizador;
     private List<ReseniaDTO> resenias;
 
     public DeporteDTO getDeporte() {
-        return deporte;
+        return this.deporte;
     }
 
     public void setDeporte(DeporteDTO deporte) {
@@ -21,23 +22,23 @@ public class PartidoDTO {
     }
 
     public int getDuracionMin() {
-        return duracionMin;
+        return this.duracionMin;
     }
 
     public void setDuracionMin(int duracionMin) {
         this.duracionMin = duracionMin;
     }
 
-    public String getGeolocalizacion() {
-        return geolocalizacion;
+    public String getZonaGeografica() {
+        return this.zonaGeografica;
     }
 
-    public void setGeolocalizacion(String geolocalizacion) {
-        this.geolocalizacion = geolocalizacion;
+    public void setZonaGeografica(String zonaGeografica) {
+        this.zonaGeografica = zonaGeografica;
     }
 
     public Timestamp getHorarioEncuentro() {
-        return horarioEncuentro;
+        return this.horarioEncuentro;
     }
 
     public void setHorarioEncuentro(Timestamp horarioEncuentro) {
@@ -45,7 +46,7 @@ public class PartidoDTO {
     }
 
     public List<JugadorDTO> getParticipantes() {
-        return participantes;
+        return this.participantes;
     }
 
     public void setParticipantes(List<JugadorDTO> participantes) {
@@ -53,7 +54,7 @@ public class PartidoDTO {
     }
 
     public JugadorDTO getOrganizador() {
-        return organizador;
+        return this.organizador;
     }
 
     public void setOrganizador(JugadorDTO organizador) {
@@ -61,10 +62,17 @@ public class PartidoDTO {
     }
 
     public List<ReseniaDTO> getResenias() {
-        return resenias;
+        return this.resenias;
     }
 
     public void setResenias(List<ReseniaDTO> resenias) {
         this.resenias = resenias;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getId() {
+        return this.id;
     }
 }
