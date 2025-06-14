@@ -162,4 +162,30 @@ public class BaseDeDatos {
         throw new IllegalArgumentException("No existe la resenia con ese id: " + id);
     }
 
+    /*
+        metodos para PARTIDO
+    */
+
+    public void insertPartido(Partido partido) {
+        partido.setId(this.generadorIdRandom());
+        this.partidos.add(partido);
+    }
+
+    public Partido getPartidoById(String id) {
+       for (Partido partido : partidos) {
+            if (partido.getId().equals(id)) {
+                return partido;
+            }
+        }
+        throw new IllegalArgumentException("No existe el partido con ese id: " + id);
+    }
+
+    public void deletePartido(String id) {
+         for (int i = 0; i < partidos.size(); i++) {
+            if (partidos.get(i).getId().equals(id)) {
+                partidos.remove(i);
+            }
+        }
+    }
+
 }
