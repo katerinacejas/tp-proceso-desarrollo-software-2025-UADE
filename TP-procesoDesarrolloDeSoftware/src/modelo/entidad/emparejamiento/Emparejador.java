@@ -7,6 +7,10 @@ import modelo.strategy.emparejamiento.IEmparejador;
 public class Emparejador {
     private IEmparejador estrategiaEmparejamiento;
 
+    public Emparejador(IEmparejador estrategiaEmparejamiento) {
+        this.estrategiaEmparejamiento = estrategiaEmparejamiento;
+    }
+
     public boolean puedeEmparejar(Jugador jugador, Partido partido) {
         return estrategiaEmparejamiento.puedeEmparejar(jugador, partido);
     }

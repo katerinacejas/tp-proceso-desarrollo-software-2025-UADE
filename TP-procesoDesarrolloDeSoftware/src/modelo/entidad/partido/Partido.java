@@ -3,6 +3,8 @@ package modelo.entidad.partido;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.participacionJugadorPartido.ParticipacionJugadorPartido;
+import modelo.entidad.ubicacion.Geolocalizacion;
+import modelo.enumerador.NivelJuego;
 import modelo.entidad.emparejamiento.Emparejador;
 import modelo.entidad.ubicacion.ZonaGeografica;
 import modelo.observer.IObservers;
@@ -112,21 +114,30 @@ public class Partido {
         }
         return false;
     }
+    private NivelJuego nivelJuego;
 
     /*
-        METODOS PARA EL ESTADO DEL PARTIDO
-    */
+     * METODOS PARA EL ESTADO DEL PARTIDO
+     */
     public void cambiarEstado(IEstadoPartido estado) {
         this.estado = estado;
     }
 
     public void cancelar() {
         estado.cancelar(this);
-        //TODO: definir si queremos hacer algo mas luego de cancelar.
+        // TODO: definir si queremos hacer algo mas luego de cancelar.
     }
 
     public void necesitarJugadores() {
         estado.necesitarJugadores(this);
+    }
+
+    public Deporte getDeporte() {
+        return deporte;
+    }
+
+    public NivelJuego getNivelJuego() {
+        return nivelJuego;
     }
 
     public void armar() {
@@ -146,8 +157,8 @@ public class Partido {
     }
 
     /*
-        METODOS PARA EL EMPAREJAMIENTO DEL PARTIDO
-    */
+     * METODOS PARA EL EMPAREJAMIENTO DEL PARTIDO
+     */
     public boolean puedeEmparejar(Jugador jugador) {
         if (!tieneTodosLosJugadores() && !yaFueEmparejado(jugador) && emparejador.puedeEmparejar(jugador, this)) {
             this.emparejar(jugador);
@@ -162,12 +173,13 @@ public class Partido {
 
     public void emparejar(Jugador jugador) {
         this.participantes.add(jugador);
-        // TODO: agregar validador de que si el equipo ahora ya esta completo con este emparejamiento nuevo, se cambie el estado a "PARTIDO ARMADO"
+        // TODO: agregar validador de que si el equipo ahora ya esta completo con este
+        // emparejamiento nuevo, se cambie el estado a "PARTIDO ARMADO"
     }
 
     /*
-        METODOS UTILES
-    */
+     * METODOS UTILES
+     */
     public boolean tieneTodosLosJugadores() {
         return this.getCantidadParticipantes() == this.cantidadMaxima;
     }
@@ -180,29 +192,31 @@ public class Partido {
         return this.participantes.contains(jugador);
     }
 
-    /*  ESTE METODO AHORA YA NO VA MAS EN PARTIDO PORQUE EXISTE LA CLASE PARTICIPACION_JUGADOR_PARTIDO
-
-    public NivelJuego getNivelJuego() {
-        return this.nivelJuego;
-    }
-    */
+    /*
+     * ESTE METODO AHORA YA NO VA MAS EN PARTIDO PORQUE EXISTE LA CLASE
+     * PARTICIPACION_JUGADOR_PARTIDO
+     * 
+     * public NivelJuego getNivelJuego() {
+     * return this.nivelJuego;
+     * }
+     */
 
     public Set<Jugador> obtenerListadoJugadores() {
         return this.participantes;
     }
 
     /*
-        METODOS PARA NOTIFICAR OBSERVADOR
+     * METODOS PARA NOTIFICAR OBSERVADOR
      */
     public void notificarObservadores() {
 
     }
 
-    public void addObservador(IObservers observador){
+    public void addObservador(IObservers observador) {
         this.observadores.add(observador);
     }
 
-    public void eliminarObservador(IObservers observador){
+    public void eliminarObservador(IObservers observador) {
         this.observadores.remove(observador);
     }
 
