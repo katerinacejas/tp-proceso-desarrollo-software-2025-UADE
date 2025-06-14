@@ -7,15 +7,17 @@ public class DeporteController {
 
     private Deporte deporte;
 
+
+    public void createDeporte(DeporteDTO deporteDTO) {
+        Deporte nuevoDeporte = this.convertToEntitySinId(deporteDTO);
+        deporte.createDeporte(nuevoDeporte);
+        deporteDTO.setId(nuevoDeporte.getId());
+    }
+  
     public DeporteController() {
         deporte = new Deporte();
     }
-
-    public DeporteDTO createDeporte(DeporteDTO deporteDTO) {
-        Deporte nuevoDeporte = this.convertToEntityCreate(deporteDTO);
-        nuevoDeporte = deporte.createDeporte(nuevoDeporte);
-        return this.convertToDTO(nuevoDeporte);
-    }
+    
 
     public DeporteDTO getDeporteById(String id) {
         DeporteDTO deporteDTO = this.convertToDTO(deporte.getDeporteById(id));

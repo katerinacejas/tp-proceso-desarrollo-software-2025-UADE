@@ -2,7 +2,6 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import baseDeDatos.BaseDeDatos;
 import modelo.dto.JugadorDTO;
 import modelo.dto.LoginDTO;
 import modelo.entidad.jugador.Jugador;
@@ -11,11 +10,13 @@ import modelo.entidad.deporte.Deporte;
 
 public class JugadorController {
 
-    private Jugador jugador;
+    private Jugador jugador = new Jugador();
+    private Deporte deporte = new Deporte();
 
     public void createJugador(JugadorDTO jugadorDTO) {
         Jugador nuevoJugador = this.convertToEntitySinId(jugadorDTO);
         jugador.createJugador(nuevoJugador);
+        jugadorDTO.setId(nuevoJugador.getId());
     }
 
     public JugadorDTO getJugadorById(String id) {
@@ -24,16 +25,17 @@ public class JugadorController {
     }
 
     public void updateJugador(JugadorDTO jugadorDTO) {
-        //TODO: fijate como lo hice en Deporte Controller (esta terminado todo el circuito)
+        Jugador jugadorActualizado = this.convertToEntitySinId(jugadorDTO);
+        jugadorActualizado.setId(jugadorDTO.getId());
+        jugador.updateJugador(jugadorActualizado);
     }
 
     public void deleteJugador(String id) {
-        //TODO: fijate como lo hice en Deporte Controller (esta terminado todo el circuito)
+        jugador.deleteJugador(id);
     }
 
     public boolean authJugador(LoginDTO loginDTO){
-        //TODO
-        return true;
+        return jugador.authJugador(loginDTO.getEmail(), loginDTO.getContrasenia());
     }
 
     private Jugador convertToEntitySinId(JugadorDTO jugadorDTO) {
@@ -61,16 +63,14 @@ public class JugadorController {
     }
     
     private List<Deporte> getDeportesByIds(List<String> idsDeportesFavoritos){
-        /* En validación con el profesor */
         List<Deporte> deportesFavoritos = new ArrayList<Deporte>();
         for (String idDeporte : idsDeportesFavoritos){
-            deportesFavoritos.add(BaseDeDatos.getInstancia().getDeporteById(idDeporte));
+            deportesFavoritos.add(deporte.getDeporteById(idDeporte));
         }
         return deportesFavoritos;
     }
 
     private List<String> setIdsDeportesFavoritos(List<Deporte> deportesFavoritos){
-        /* En validación con el profesor */
         List<String> idsDeportesFavoritos = new ArrayList<String>();
         for (Deporte deporte : deportesFavoritos){
             idsDeportesFavoritos.add(deporte.getId());
