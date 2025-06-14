@@ -1,5 +1,7 @@
 package modelo.entidad.partido;
 
+import modelo.dao.PartidoDAO;
+import modelo.dto.PartidoDTO;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.emparejamiento.Emparejador;
@@ -225,6 +227,10 @@ public class Partido {
         this.nivelJuego = nivelJuego;
     }
 
+    public Set<Jugador> getParticipantes() {
+        return this.participantes;
+   } 
+
 
      /*
         CONSTRUCTOR
@@ -236,5 +242,21 @@ public class Partido {
         this.participantes = new HashSet<>();
         this.reseñas = new HashSet<>();
         this.observadores = new ArrayList<>();
-    } 
+    }
+
+   public void createPartido(Partido partido) {
+    PartidoDAO partidoDAO = new PartidoDAO();
+    partidoDAO.createPartido(partido);
+
+   }
+
+   public Partido getPartidoById(String id) {
+    PartidoDAO partidoDAO = new PartidoDAO();
+    return partidoDAO.getPartidoById(id);
+   }
+
+   public void deletePartido(String id) {
+    PartidoDAO partidoDAO = new PartidoDAO();
+    partidoDAO.deletePartido(id);
+   }
 }
