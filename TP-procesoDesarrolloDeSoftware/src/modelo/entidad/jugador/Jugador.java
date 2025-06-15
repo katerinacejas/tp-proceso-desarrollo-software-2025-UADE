@@ -3,6 +3,7 @@ package modelo.entidad.jugador;
 import modelo.dao.JugadorDAO;
 import modelo.entidad.NivelJuego.NivelJugadorDeporte;
 import modelo.entidad.deporte.Deporte;
+import modelo.entidad.partido.Partido;
 import modelo.entidad.ubicacion.Geolocalizacion;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class Jugador {
         jugadorDAO.deleteJugador(id);
     }
 
-    public boolean authJugador(String email, String contrasenia) {
+    public Jugador authJugador(String email, String contrasenia) {
         JugadorDAO jugadorDAO = new JugadorDAO();
         return jugadorDAO.authJugador(email, contrasenia);
     }
