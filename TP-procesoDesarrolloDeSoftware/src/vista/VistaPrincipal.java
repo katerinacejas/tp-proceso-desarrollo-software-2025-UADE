@@ -8,7 +8,6 @@ import modelo.dto.DeporteDTO;
 import modelo.dto.JugadorDTO;
 import modelo.dto.LoginDTO;
 import modelo.dto.PartidoDTO;
-import modelo.entidad.jugador.Jugador;
 import modelo.enumerador.EstrategiaPartido;
 import modelo.enumerador.NivelJuego;
 
@@ -187,7 +186,8 @@ public class VistaPrincipal {
                 "\n 2: Buscar un partido para unirme" +
                 "\n 3: Confirmar partido armado (en caso de haber creado uno)" +
                 "\n 4: Cancelar partido que cree" +
-                "\n 5: Cerrar sesion");
+                "\n 5: Dejar resenia del partido" +
+                "\n 6: Cerrar sesion");
         opcionMenu = input.nextInt();
         input.nextLine(); // limpia el salto de línea
 
@@ -204,6 +204,9 @@ public class VistaPrincipal {
                     break;
                 case 4:
                     this.cancelarPartidoCreado(jugadorDTO);
+                    break;
+                case 5:
+                    // TODO this.dejarReseniaPartido(jugadorDTO);
                     break;
             }
         }
@@ -281,7 +284,7 @@ public class VistaPrincipal {
     }
 
     public void cancelarPartidoCreado(JugadorDTO jugadorDTO) {
-
+        // TODO
     }
 }
 
