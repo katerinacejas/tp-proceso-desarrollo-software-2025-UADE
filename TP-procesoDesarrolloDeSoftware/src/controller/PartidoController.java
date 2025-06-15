@@ -97,8 +97,10 @@ public class PartidoController {
 
     public List<PartidoDTO> getPartidosAptosParaJugador(JugadorDTO jugadorDTO) {
         // este metodo es para mostrarle al usuario todos los partidos donde puede unirse
-        //TODO
-        return null;
+        Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
+        List<Partido> partidos = partido.getAllPartidosNecesitanJugadores();
+        partidos = partidos.stream().filter(partido -> partido.puedeEmparejar(jugadorEntity)).toList();
+        return partidos.stream().map(partido -> convertToDTO(partido)).toList();
     }
 
     public void unirseAlPartido(PartidoDTO partidoDTO, JugadorDTO jugadorDTO){
@@ -106,7 +108,7 @@ public class PartidoController {
          este metodo no evalua si el jugador PUEDE unirse, porque si la vista le pidio ejecutar este metodo
          al controller, es porque antes le ejecutó el getPartidosAptosParaJugador, y el jugador selecciono uno
          al que ya sabe que puede unirse.
-         Ademas de unirlo, debería evaluar el estado del partido para ver si con esa union ya puede pasar avisarle
+         Ademas de unirlo, debería llamar al partido para evaluar el estado para ver si con esa union ya puede pasar avisarle
          al organizador que ya esta el partido armado para que lo confirme y pase a estado confirmado
          */
         //TODO

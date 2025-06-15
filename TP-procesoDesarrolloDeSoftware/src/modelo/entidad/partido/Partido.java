@@ -113,7 +113,6 @@ public class Partido {
     */
     public boolean puedeEmparejar(Jugador jugador) {
         if (!tieneTodosLosJugadores() && !yaFueEmparejado(jugador) && emparejador.puedeEmparejar(jugador, this)) {
-            this.emparejar(jugador);
             return true;
         }
         return false;
@@ -234,6 +233,10 @@ public class Partido {
         this.participantes.add(jugadorOrganizadorPorDefault);
     }
 
+    public IEstadoPartido getEstado() {
+        return estado;
+    }
+
      /*
         CONSTRUCTOR
      */
@@ -258,5 +261,18 @@ public class Partido {
     public void deletePartido(String id) {
         PartidoDAO partidoDAO = new PartidoDAO();
         partidoDAO.deletePartido(id);
+    }
+
+    public List<Partido> getAllPartidosNecesitanJugadores() {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        return partidoDAO.getAllPartidosNecesitanJugadores();
+    }
+
+    public boolean leFaltanParticipantes() {
+        return this.getCantidadParticipantes() < this.cantJugadoresDelDeporte();
+    }
+
+    public int cantJugadoresDelDeporte() {
+        return this.deporte.getCantJugadores();
     }
 }

@@ -193,4 +193,13 @@ public class BaseDeDatos {
         }
     }
 
+    public List<Partido> getAllPartidosNecesitanJugadores() {
+        List<Partido> partidosNecesitanJugadores = new ArrayList<>();
+        for (Partido partido: partidos) {
+            if(partido.leFaltanParticipantes()) {
+                partidosNecesitanJugadores.add(partido);
+            }
+        }
+        return partidosNecesitanJugadores;
+    }
 }
