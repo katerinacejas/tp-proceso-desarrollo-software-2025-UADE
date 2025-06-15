@@ -63,6 +63,7 @@ public class VistaPrincipal {
 
     public void iniciar() {
         int opcionMenu;
+        System.out.println("\n\n-----------------------------------------------------------------------------------------");
         System.out.println("¡Bienvenido/a a nuestra app para partidos!, Elija una opcion ingresando el numero:" +
                 "\n 1: Registrarse" +
                 "\n 2: Iniciar sesion" +
@@ -153,7 +154,7 @@ public class VistaPrincipal {
         }
 
         jugadorController.createJugador(jugadorDTO);
-        System.out.println("--------¡Jugador Creado! Sesion iniciada :) --------");
+        System.out.println("----------------¡Jugador Creado! Sesion iniciada :) ----------------");
         return jugadorDTO;
     }
 
@@ -172,15 +173,16 @@ public class VistaPrincipal {
         JugadorDTO jugadorDTO = jugadorController.authJugador(loginDTO);
 
         if(jugadorDTO != null){
-            System.out.println("¡Sesion iniciada correctamente!");
+            System.out.println("---------------- ¡Sesion iniciada correctamente! :) ----------------");
             return jugadorDTO;
         }
-        System.out.println("Email y contraseña incorrecta. Se redigirá al menu principal");
+        System.out.println("---------------- Email y contraseña incorrecta :( Se redigirá al menu principal ----------------");
         return null;
     }
 
     private void menuSesionIniciada(JugadorDTO jugadorDTO) {
         int opcionMenu;
+        System.out.println("\n\n-----------------------------------------------------------------------------------------");
         System.out.println("¡Bienvenido/a " + jugadorDTO.getNombreUsuario() +"!, Elija una opcion ingresando el numero:" +
                 "\n 1: Crear partido" +
                 "\n 2: Buscar un partido para unirme" +
@@ -191,7 +193,7 @@ public class VistaPrincipal {
         opcionMenu = input.nextInt();
         input.nextLine(); // limpia el salto de línea
 
-        while(opcionMenu != 5) {
+        while(opcionMenu != 6) {
             switch (opcionMenu) {
                 case 1:
                     this.crearPartido(jugadorDTO);
@@ -209,6 +211,16 @@ public class VistaPrincipal {
                     // TODO this.dejarReseniaPartido(jugadorDTO);
                     break;
             }
+            System.out.println("\n\n-----------------------------------------------------------------------------------------");
+            System.out.println("¡Bienvenido/a " + jugadorDTO.getNombreUsuario() +"!, Elija una opcion ingresando el numero:" +
+                    "\n 1: Crear partido" +
+                    "\n 2: Buscar un partido para unirme" +
+                    "\n 3: Confirmar partido armado (en caso de haber creado uno)" +
+                    "\n 4: Cancelar partido que cree" +
+                    "\n 5: Dejar resenia del partido" +
+                    "\n 6: Cerrar sesion");
+            opcionMenu = input.nextInt();
+            input.nextLine(); // limpia el salto de línea
         }
 
         // se cerró la sesion asi que vamos al metodo inicial del menú
@@ -217,6 +229,7 @@ public class VistaPrincipal {
 
     private void crearPartido(JugadorDTO jugadorDTO) {
         PartidoDTO partidoDTO = new PartidoDTO();
+        System.out.println("\n\n-----------------------------------------------------------------------------------------");
         System.out.println("Formulario para crear un partido");
 
         System.out.println("Ingrese el deporte para el partido:" +
@@ -226,6 +239,7 @@ public class VistaPrincipal {
 
         System.out.println("Ingrese la cantidad de minutos del partido:");
         int duracionMin = input.nextInt();
+        input.nextLine(); // limpia el salto de línea
         partidoDTO.setDuracionMin(duracionMin);
 
         //TODO: ESTO HAY QUE PONER LA ZONA GEOGRAFICA PERO NO ESTA HECHA EN EL CONTROLLER
@@ -250,21 +264,26 @@ public class VistaPrincipal {
         partidoDTO.setNivelJuego(NivelJuego.valueOf(nivelJuego));
 
         partidoController.createPartido(partidoDTO);
-        System.out.println("--------¡Partido Creado! Esperando jugadores para que se unan :) --------");
+        System.out.println("----------------¡Partido Creado! Esperando jugadores para que se unan :) ----------------");
     }
 
     private void buscarPartidoParaUnirme(JugadorDTO jugadorDTO) {
-        System.out.println("Elije el partido al que queres unirte indicando el numero de la opcion: ");
         List<PartidoDTO> partidosDTO = new ArrayList<>();
         partidosDTO = partidoController.getPartidosAptosParaJugador(jugadorDTO);
+        if (partidosDTO.size() == 0){
+            System.out.println("---------------- No hay ningun partido disponible para que te unas :( ----------------");
+            return;
+        }
+        System.out.println("Elije el partido al que queres unirte indicando el numero de la opcion: ");
         for(int i = 1; i<= partidosDTO.size(); i++) {
             // imprime un mensaje del tipo: "1: tenis en Palermo el dia 2025-06-15 15:30"
             System.out.println(i+": "+ partidosDTO.get(i-1).getDeporte() + " en " + partidosDTO.get(i-1).getZonaGeografica() + " el día " + partidosDTO.get(i-1).getHorarioEncuentro());
         }
         int iPartidoElegido = input.nextInt();
+        input.nextLine(); // limpia el salto de línea
         PartidoDTO partidoElegidoDTO = partidosDTO.get(iPartidoElegido-1);
         partidoController.unirseAlPartido(partidoElegidoDTO, jugadorDTO);
-        System.out.println("--------¡Te uniste al partido! :) --------");
+        System.out.println("----------------¡Te uniste al partido! :) ----------------");
     }
 
     private void confirmarPartidoCreado(JugadorDTO jugadorDTO) {
@@ -276,11 +295,11 @@ public class VistaPrincipal {
          */
         PartidoDTO partidoDTO = partidoController.getPartidoQuePuedeConfirmar(jugadorDTO);
         if(partidoDTO == null){
-            System.out.println("No tenes creado ningun partido para poder confirmar.");
+            System.out.println("\"----------------No tenes creado ningun partido para poder confirmar :(  ----------------");
             return;
         }
         partidoController.confirmarPartido(partidoDTO);
-        System.out.println("--------¡Se ha confirmado el partido que creaste para " +partidoDTO.getDeporte() + "! :) --------");
+        System.out.println("----------------¡Se ha confirmado el partido que creaste para " +partidoDTO.getDeporte() + "! :) ----------------");
     }
 
     public void cancelarPartidoCreado(JugadorDTO jugadorDTO) {

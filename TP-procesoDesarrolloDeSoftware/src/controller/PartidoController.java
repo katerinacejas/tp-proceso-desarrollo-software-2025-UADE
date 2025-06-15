@@ -6,11 +6,13 @@ import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
 import modelo.enumerador.EstrategiaPartido;
+import modelo.state.IEstadoPartido;
 import modelo.strategy.emparejamiento.EmparejamientoHistorial;
 import modelo.strategy.emparejamiento.EmparejamientoNivel;
 import modelo.strategy.emparejamiento.EmparejamientoUbicacion;
 import modelo.strategy.emparejamiento.IEmparejador;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,14 +53,14 @@ public class PartidoController {
         Partido partido = new Partido();
         partido.setDeporte(deporte.getDeporteById(partidoDTO.getDeporte()));
         partido.setDuracionMin(partidoDTO.getDuracionMin());
-        //partido.setZonaGeografica(partidoDTO.getZonaGeografica()); //ver después cómo se persiste la zona geográfica
+        // TODO partido.setZonaGeografica(partidoDTO.getZonaGeografica()); //ver después cómo se persiste la zona geográfica
         partido.setHorarioEncuentro(partidoDTO.getHorarioEncuentro());
 
         //desde la vista se setea al organizador como el primer participante del partido por default
         partido.agregarParticipantePorDefault(jugador.getJugadorById(partidoDTO.getParticipantes().iterator().next()));
 
         partido.setOrganizador(jugador.getJugadorById(partidoDTO.getOrganizador()));
-        partido.cambiarEstrategiaEmparejamiento(convertEstrategiaPartidoToEmparejamiento(partidoDTO.getEstrategiaPartido()));
+        partido.cambiarEstrategiaEmparejamiento(partidoDTO.getEstrategiaPartido().crearToEntity());
         partido.setNivelJuego(partidoDTO.getNivelJuego());
         return partido;
     }
@@ -68,7 +70,7 @@ public class PartidoController {
         partidoDTO.setId(partido.getId());
         partidoDTO.setDeporte(partido.getDeporte().getId());
         partidoDTO.setDuracionMin(partido.getDuracionMin());
-       //partidoDTO.setZonaGeografica(partido.getZonaGeografica());
+       // TODO partidoDTO.setZonaGeografica(partido.getZonaGeografica());
         partidoDTO.setHorarioEncuentro(partido.getHorarioEncuentro());
         partidoDTO.setParticipantes(partido.getParticipantes()
                                     .stream().map(jugador -> jugador.getId())
@@ -77,29 +79,21 @@ public class PartidoController {
         partidoDTO.setResenias(partido.getResenias()
                                 .stream().map(resenia -> resenia.getId())
                                 .toList());
-        //partidoDTO.setEstrategiaPartido(); TODO
+        //reemplacé los metodos de convert entity por enum y viceversa por un factory method en enum. enum es su propia fabrica
+        EstrategiaPartido estrategiaEnum = Arrays.stream(EstrategiaPartido.values())
+                                                 .filter(e -> e.coincideConEnum(partido.getEmparejador().getEstrategiaEmparejamiento()))
+                                                 .findFirst()
+                                                 .orElseThrow();
+        partidoDTO.setEstrategiaPartido(estrategiaEnum);
         partidoDTO.setNivelJuego(partido.getNivelJuego());
         return partidoDTO;
     }
 
-    private IEmparejador convertEstrategiaPartidoToEmparejamiento(EstrategiaPartido estrategiaPartido) {
-        switch (estrategiaPartido) {
-            case NIVEL:
-                return new EmparejamientoNivel();
-            case UBICACION:
-                return new EmparejamientoUbicacion();
-            case HISTORIAL:
-                return new EmparejamientoHistorial();
-            default:
-                throw new IllegalArgumentException("Estrategia desconocida: " + estrategiaPartido);
-        }
-    }
-
     public List<PartidoDTO> getPartidosAptosParaJugador(JugadorDTO jugadorDTO) {
-        // este metodo es para mostrarle al usuario todos los partidos donde puede unirse
+        // este metodo es para mostrarle al usuario todos los partidos donde puede unirse,
+        // pero no se une a ninguno, solo los lista para meterlos en un print en la vista y q por consola despues elija a cual unirse
         Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
-        List<Partido> partidos = partido.getAllPartidosNecesitanJugadores();
-        partidos = partidos.stream().filter(partido -> partido.puedeEmparejar(jugadorEntity)).toList();
+        List<Partido> partidos = partido.getPartidosAptosParaJugador(jugadorEntity);
         return partidos.stream().map(partido -> convertToDTO(partido)).toList();
     }
 
@@ -128,6 +122,9 @@ public class PartidoController {
         Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
         jugadorEntity.setId(jugadorDTO.getId());
         Partido partidoEntity = partido.getPartidoQuePuedeConfirmar(jugadorEntity);
+        if(partidoEntity == null){
+            return null;
+        }
         PartidoDTO partidoDTO = convertToDTO(partidoEntity);
         return partidoDTO;
     }

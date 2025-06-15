@@ -1,7 +1,6 @@
 package modelo.entidad.partido;
 
 import modelo.dao.PartidoDAO;
-import modelo.dto.PartidoDTO;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.emparejamiento.Emparejador;
@@ -35,10 +34,12 @@ public class Partido {
         CONSTRUCTOR
     */
     public Partido() {
-        // Inicialización de colecciones
         this.participantes = new HashSet<>();
         this.resenias = new ArrayList<>();
         this.observadores = new ArrayList<>();
+        this.emparejador = new Emparejador();
+        this.organizador = new Jugador();
+        this.estado = new PartidoNecesitamosJugadores();
     }
 
     /*
@@ -132,6 +133,10 @@ public class Partido {
 
     public void eliminarObservador(IObservers observador){
         this.observadores.remove(observador);
+    }
+
+    public Emparejador getEmparejador() {
+        return emparejador;
     }
 
      public String getId() {
@@ -236,6 +241,14 @@ public class Partido {
         partidoDAO.deletePartido(id);
     }
 
+    public int cantJugadoresDelDeporte() {
+        return this.deporte.getCantJugadores();
+    }
+
+    public boolean leFaltanParticipantes() {
+        return this.getCantidadParticipantes() < this.cantJugadoresDelDeporte();
+    }
+
     public List<Partido> getAllPartidosNecesitanJugadores() {
         PartidoDAO partidoDAO = new PartidoDAO();
         List<Partido> partidos = partidoDAO.getAllPartidos();
@@ -248,19 +261,16 @@ public class Partido {
         return partidosNecesitanJugadores;
     }
 
-    public boolean leFaltanParticipantes() {
-        return this.getCantidadParticipantes() < this.cantJugadoresDelDeporte();
-    }
-
-    public int cantJugadoresDelDeporte() {
-        return this.deporte.getCantJugadores();
+    public List<Partido> getPartidosAptosParaJugador(Jugador jugador){
+        List<Partido> partidos = this.getAllPartidosNecesitanJugadores();
+        return partidos.stream().filter(partido -> partido.puedeEmparejar(jugador)).toList();
     }
 
     public Partido getPartidoQuePuedeConfirmar(Jugador jugador) {
         PartidoDAO partidoDAO = new PartidoDAO();
         List<Partido> partidos = partidoDAO.getAllPartidos();
         return partidos.stream()
-                .filter(partido -> partido.getOrganizador() == jugador)
+                .filter(partido -> partido.getOrganizador() == jugador && partido.tieneTodosLosJugadores())
                 .findFirst().orElse(null);
     }
 
