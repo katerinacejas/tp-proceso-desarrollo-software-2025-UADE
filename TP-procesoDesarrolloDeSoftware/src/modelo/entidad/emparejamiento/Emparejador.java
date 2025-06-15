@@ -14,4 +14,8 @@ public class Emparejador {
     public void cambiarEstrategiaEmparejamiento(IEmparejador estrategia) {
         this.estrategiaEmparejamiento = estrategia;
     }
+
+    public IEmparejador getEstrategiaEmparejamiento() {
+        return this.estrategiaEmparejamiento;
+    }
 }
