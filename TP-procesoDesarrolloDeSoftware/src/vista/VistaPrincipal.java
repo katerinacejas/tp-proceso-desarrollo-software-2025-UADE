@@ -257,6 +257,7 @@ public class VistaPrincipal {
         System.out.println("Elije el partido al que queres unirte indicando el numero de la opcion: ");
         List<PartidoDTO> partidosDTO = new ArrayList<>();
         partidosDTO = partidoController.getPartidosAptosParaJugador(jugadorDTO);
+        if (partidosDTO == null)
         for(int i = 1; i<= partidosDTO.size(); i++) {
             // imprime un mensaje del tipo: "1: tenis en Palermo el dia 2025-06-15 15:30"
             System.out.println(i+": "+ partidosDTO.get(i-1).getDeporte() + " en " + partidosDTO.get(i-1).getZonaGeografica() + " el día " + partidosDTO.get(i-1).getHorarioEncuentro());

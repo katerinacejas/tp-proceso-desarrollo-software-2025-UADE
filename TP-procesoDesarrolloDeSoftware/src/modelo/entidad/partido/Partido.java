@@ -236,6 +236,14 @@ public class Partido {
         partidoDAO.deletePartido(id);
     }
 
+    public int cantJugadoresDelDeporte() {
+        return this.deporte.getCantJugadores();
+    }
+
+    public boolean leFaltanParticipantes() {
+        return this.getCantidadParticipantes() < this.cantJugadoresDelDeporte();
+    }
+
     public List<Partido> getAllPartidosNecesitanJugadores() {
         PartidoDAO partidoDAO = new PartidoDAO();
         List<Partido> partidos = partidoDAO.getAllPartidos();
@@ -248,12 +256,9 @@ public class Partido {
         return partidosNecesitanJugadores;
     }
 
-    public boolean leFaltanParticipantes() {
-        return this.getCantidadParticipantes() < this.cantJugadoresDelDeporte();
-    }
-
-    public int cantJugadoresDelDeporte() {
-        return this.deporte.getCantJugadores();
+    public List<Partido> getPartidosAptosParaJugador(Jugador jugador){
+        List<Partido> partidos = this.getAllPartidosNecesitanJugadores();
+        return partidos.stream().filter(partido -> partido.puedeEmparejar(jugador)).toList();
     }
 
     public Partido getPartidoQuePuedeConfirmar(Jugador jugador) {

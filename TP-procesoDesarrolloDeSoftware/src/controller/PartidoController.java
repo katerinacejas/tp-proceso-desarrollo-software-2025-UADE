@@ -98,8 +98,7 @@ public class PartidoController {
     public List<PartidoDTO> getPartidosAptosParaJugador(JugadorDTO jugadorDTO) {
         // este metodo es para mostrarle al usuario todos los partidos donde puede unirse
         Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
-        List<Partido> partidos = partido.getAllPartidosNecesitanJugadores();
-        partidos = partidos.stream().filter(partido -> partido.puedeEmparejar(jugadorEntity)).toList();
+        List<Partido> partidos = partido.getPartidosAptosParaJugador(jugadorEntity);
         return partidos.stream().map(partido -> convertToDTO(partido)).toList();
     }
 
