@@ -1,6 +1,7 @@
 package modelo.dao;
 
 import baseDeDatos.BaseDeDatos;
+import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class PartidoDAO {
         baseDeDatos.deletePartido(id);
     }
 
-    public List<Partido> getAllPartidosNecesitanJugadores() {
-        return baseDeDatos.getAllPartidosNecesitanJugadores();
+    public List<Partido> getAllPartidos() {
+        return baseDeDatos.getAllPartidos();
     }
 }

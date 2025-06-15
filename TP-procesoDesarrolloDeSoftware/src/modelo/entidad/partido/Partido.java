@@ -1,6 +1,7 @@
 package modelo.entidad.partido;
 
 import modelo.dao.PartidoDAO;
+import modelo.dto.PartidoDTO;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.emparejamiento.Emparejador;
@@ -237,7 +238,14 @@ public class Partido {
 
     public List<Partido> getAllPartidosNecesitanJugadores() {
         PartidoDAO partidoDAO = new PartidoDAO();
-        return partidoDAO.getAllPartidosNecesitanJugadores();
+        List<Partido> partidos = partidoDAO.getAllPartidos();
+        List<Partido> partidosNecesitanJugadores = new ArrayList<>();
+        for (Partido partido: partidos) {
+            if(partido.leFaltanParticipantes()) {
+                partidosNecesitanJugadores.add(partido);
+            }
+        }
+        return partidosNecesitanJugadores;
     }
 
     public boolean leFaltanParticipantes() {
@@ -247,6 +255,18 @@ public class Partido {
     public int cantJugadoresDelDeporte() {
         return this.deporte.getCantJugadores();
     }
+
+    public Partido getPartidoQuePuedeConfirmar(Jugador jugador) {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        List<Partido> partidos = partidoDAO.getAllPartidos();
+        return partidos.stream()
+                .filter(partido -> partido.getOrganizador() == jugador)
+                .findFirst().orElse(null);
+    }
+
+
+
+
 
 
 

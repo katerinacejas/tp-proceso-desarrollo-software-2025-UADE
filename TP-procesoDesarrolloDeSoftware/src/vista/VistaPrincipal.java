@@ -8,6 +8,7 @@ import modelo.dto.DeporteDTO;
 import modelo.dto.JugadorDTO;
 import modelo.dto.LoginDTO;
 import modelo.dto.PartidoDTO;
+import modelo.entidad.jugador.Jugador;
 import modelo.enumerador.EstrategiaPartido;
 import modelo.enumerador.NivelJuego;
 
@@ -184,17 +185,25 @@ public class VistaPrincipal {
         System.out.println("¡Bienvenido/a " + jugadorDTO.getNombreUsuario() +"!, Elija una opcion ingresando el numero:" +
                 "\n 1: Crear partido" +
                 "\n 2: Buscar un partido para unirme" +
-                "\n 3: Cerrar Sesion");
+                "\n 3: Confirmar partido armado (en caso de haber creado uno)" +
+                "\n 4: Cancelar partido que cree" +
+                "\n 5: Cerrar sesion");
         opcionMenu = input.nextInt();
         input.nextLine(); // limpia el salto de línea
 
-        while(opcionMenu != 3) {
+        while(opcionMenu != 5) {
             switch (opcionMenu) {
                 case 1:
                     this.crearPartido(jugadorDTO);
                     break;
                 case 2:
                     this.buscarPartidoParaUnirme(jugadorDTO);
+                    break;
+                case 3:
+                    this.confirmarPartidoCreado(jugadorDTO);
+                    break;
+                case 4:
+                    this.cancelarPartidoCreado(jugadorDTO);
                     break;
             }
         }
@@ -253,6 +262,26 @@ public class VistaPrincipal {
         PartidoDTO partidoElegidoDTO = partidosDTO.get(iPartidoElegido-1);
         partidoController.unirseAlPartido(partidoElegidoDTO, jugadorDTO);
         System.out.println("--------¡Te uniste al partido! :) --------");
+    }
+
+    private void confirmarPartidoCreado(JugadorDTO jugadorDTO) {
+        /*
+            ¿EL JUGADOR PUEDE CREAR MAS DE UN PARTIDO? EN ESE CASO, HABRÍA QUE MODIFICAR ESTO
+            PARA QUE LE DEVUELVA UNA LISTA DE PARTIDOS CREADOS QUE AUN NO SE CONFIRMARON
+            Y QUE ELIJA CUAL CONFIRMAR.
+            POR AHORA SOLO CREA UNO Y CONFIRMA UNO
+         */
+        PartidoDTO partidoDTO = partidoController.getPartidoQuePuedeConfirmar(jugadorDTO);
+        if(partidoDTO == null){
+            System.out.println("No tenes creado ningun partido para poder confirmar.");
+            return;
+        }
+        partidoController.confirmarPartido(partidoDTO);
+        System.out.println("--------¡Se ha confirmado el partido que creaste para " +partidoDTO.getDeporte() + "! :) --------");
+    }
+
+    public void cancelarPartidoCreado(JugadorDTO jugadorDTO) {
+
     }
 }
 

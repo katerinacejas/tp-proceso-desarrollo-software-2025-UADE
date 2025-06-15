@@ -7,7 +7,9 @@ import java.util.Map;
 
 import modelo.dto.JugadorDTO;
 import modelo.dto.LoginDTO;
+import modelo.dto.PartidoDTO;
 import modelo.entidad.jugador.Jugador;
+import modelo.entidad.partido.Partido;
 import modelo.entidad.ubicacion.Geolocalizacion;
 import modelo.enumerador.NivelJuego;
 import modelo.entidad.NivelJuego.NivelJugadorDeporte;
@@ -125,5 +127,4 @@ public class JugadorController {
         }
         return mapNivelPorDeporte;
     }
-
 }
