@@ -7,6 +7,7 @@ import controller.ReseniaController;
 import modelo.dto.DeporteDTO;
 import modelo.dto.JugadorDTO;
 import modelo.dto.LoginDTO;
+import modelo.dto.PartidoDTO;
 import modelo.entidad.jugador.Jugador;
 import modelo.enumerador.NivelJuego;
 
@@ -20,6 +21,7 @@ public class VistaPrincipal {
     ReseniaController reseniaController;
     PartidoController partidoController;
     Scanner input;
+    JugadorDTO jugadorDTO;
 
     public VistaPrincipal() {
         jugadorController = new JugadorController();
@@ -65,19 +67,22 @@ public class VistaPrincipal {
                 "\n 3: Salir");
         opcionMenu = input.nextInt();
         input.nextLine(); // limpia el salto de línea
-        JugadorDTO jugador = null;
+
+        // seteo null el jugadorDTO por si entra a este metodo por haber cerrado la sesión o porque el registro o inicio de sesion falló
+        jugadorDTO = null;
+
         switch (opcionMenu) {
             case 1:
-                jugador = this.registrarse();
+                jugadorDTO = this.registrarse();
                 break;
             case 2:
-                jugador = this.iniciarSesion();
+                jugadorDTO = this.iniciarSesion();
                 break;
             case 3:
                 return;
         }
-        if(jugador != null) {
-            this.menuSesionIniciada(jugador);
+        if(jugadorDTO != null) {
+            this.menuSesionIniciada(jugadorDTO);
         }
         else {
             this.iniciar();
@@ -162,11 +167,11 @@ public class VistaPrincipal {
         String contrasenia = input.nextLine();
         loginDTO.setContrasenia(contrasenia);
 
-        JugadorDTO jugador = jugadorController.authJugador(loginDTO);
+        JugadorDTO jugadorDTO = jugadorController.authJugador(loginDTO);
 
-        if(jugador != null){
+        if(jugadorDTO != null){
             System.out.println("¡Sesion iniciada correctamente!");
-            return jugador;
+            return jugadorDTO;
         }
         System.out.println("Email y contraseña incorrecta. Se redigirá al menu principal");
         return null;
@@ -174,9 +179,9 @@ public class VistaPrincipal {
 
     private void menuSesionIniciada(JugadorDTO jugadorDTO) {
         int opcionMenu;
-        System.out.println("¡Bienvenido/a a nuestra app para partidos!, Elija una opcion ingresando el numero:" +
+        System.out.println("¡Bienvenido/a " + jugadorDTO.getNombreUsuario() +"!, Elija una opcion ingresando el numero:" +
                 "\n 1: Crear partido" +
-                "\n 2: " +
+                "\n 2: Buscar un partido para unirme" +
                 "\n 3: Cerrar Sesion");
         opcionMenu = input.nextInt();
         input.nextLine(); // limpia el salto de línea
@@ -184,18 +189,37 @@ public class VistaPrincipal {
         while(opcionMenu != 3) {
             switch (opcionMenu) {
                 case 1:
-                    this.crearPartido();
+                    this.crearPartido(jugadorDTO);
                     break;
                 case 2:
-
+                    this.buscarPartidoParaUnirme(jugadorDTO);
                     break;
             }
         }
 
+        // se cerró la sesion asi que vamos al metodo inicial del menú
         this.iniciar();
     }
 
-    private void crearPartido() {
+    private void crearPartido(JugadorDTO jugadorDTO) {
+        PartidoDTO partidoDTO = new PartidoDTO();
+        System.out.println("Formulario para crear un partido");
+
+        System.out.println("Ingrese el deporte para el partido:" +
+                "\nOpciones validas: futbol, handball, tenis, hockey, voley, rugby: ");
+        String deporte = input.nextLine();
+        partidoDTO.setDeporte(deporte);
+
+        System.out.println("Ingrese la cantidad de minutos del partido:");
+        int duracionMin = input.nextInt();
+        partidoDTO.setDuracionMin(duracionMin);
+
+        System.out.println("Ingrese la zona geografica :");
+        int duracionMin = input.nextInt();
+        partidoDTO.setDuracionMin(duracionMin);
+    }
+
+    private void buscarPartidoParaUnirme(JugadorDTO jugadorDTO) {
 
     }
 }

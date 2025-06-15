@@ -1,6 +1,7 @@
 package modelo.dto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.enumerador.NivelJuego;
@@ -17,6 +18,11 @@ public class PartidoDTO {
     private List<String> resenias;
     private EstrategiaPartido estrategiaPartido;
     private NivelJuego nivelJuego;
+
+    public PartidoDTO() {
+        this.participantes = new ArrayList<>();
+        this.resenias = new ArrayList<>();
+    }
 
     public NivelJuego getNivelJuego() {
         return nivelJuego;

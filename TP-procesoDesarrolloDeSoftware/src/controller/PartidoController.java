@@ -24,7 +24,6 @@ public class PartidoController {
 
     public void createPartido(PartidoDTO partidoDTO) {
         Partido nuevoPartido = convertToEntity(partidoDTO);
-        nuevoPartido.necesitarJugadores();
         partido.createPartido(nuevoPartido);
         partidoDTO.setId(nuevoPartido.getId());
     }

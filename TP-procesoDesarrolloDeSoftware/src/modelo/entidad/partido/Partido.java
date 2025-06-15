@@ -235,28 +235,26 @@ public class Partido {
      /*
         CONSTRUCTOR
      */
-
-   public Partido() {
-
+    public Partido() {
         // Inicialización de colecciones
         this.participantes = new HashSet<>();
         this.reseñas = new HashSet<>();
         this.observadores = new ArrayList<>();
     }
 
-   public void createPartido(Partido partido) {
-    PartidoDAO partidoDAO = new PartidoDAO();
-    partidoDAO.createPartido(partido);
+    public void createPartido(Partido partido) {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        partidoDAO.createPartido(partido);
+        this.necesitarJugadores();
+    }
 
-   }
+    public Partido getPartidoById(String id) {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        return partidoDAO.getPartidoById(id);
+    }
 
-   public Partido getPartidoById(String id) {
-    PartidoDAO partidoDAO = new PartidoDAO();
-    return partidoDAO.getPartidoById(id);
-   }
-
-   public void deletePartido(String id) {
-    PartidoDAO partidoDAO = new PartidoDAO();
-    partidoDAO.deletePartido(id);
-   }
+    public void deletePartido(String id) {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        partidoDAO.deletePartido(id);
+    }
 }
