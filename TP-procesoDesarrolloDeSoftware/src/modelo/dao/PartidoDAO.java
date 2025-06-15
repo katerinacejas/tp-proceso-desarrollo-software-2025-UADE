@@ -17,6 +17,10 @@ public class PartidoDAO {
         return baseDeDatos.getPartidoById(id);
     }
 
+    public void updatePartido(Partido partidoActualizado) {
+        baseDeDatos.updatePartido(partidoActualizado);
+    }
+
     public void deletePartido(String id) {
         baseDeDatos.deletePartido(id);
     }

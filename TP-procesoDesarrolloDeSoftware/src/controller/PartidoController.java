@@ -40,7 +40,7 @@ public class PartidoController {
     public void updatePartido(PartidoDTO partidoDTO) {
         Partido partidoActualizado = this.convertToEntity(partidoDTO);
         partidoActualizado.setId(partidoDTO.getId());
-        //partido.updatePartido(partidoActualizado);
+        partido.updatePartido(partidoActualizado);
     }
 
     public void deletePartido(String id) {
@@ -111,6 +111,9 @@ public class PartidoController {
          Ademas de unirlo, debería llamar al partido para evaluar el estado para ver si con esa union ya puede pasar avisarle
          al organizador que ya esta el partido armado para que lo confirme y pase a estado confirmado
          */
-        //TODO
+        Partido partido = convertToEntity(partidoDTO);
+        Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
+        partido.emparejar(jugadorEntity);
+        // creo que ahí estaría ok. solo falta los observadores y notificaciones en Partido. pero este metodo estaría ok
     }
 }

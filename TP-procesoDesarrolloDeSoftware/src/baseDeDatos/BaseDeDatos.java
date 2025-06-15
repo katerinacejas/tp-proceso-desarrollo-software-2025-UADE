@@ -185,6 +185,14 @@ public class BaseDeDatos {
         throw new IllegalArgumentException("No existe el partido con ese id: " + id);
     }
 
+    public void updatePartido(Partido partidoActualizado) {
+        for (int i = 0; i < partidos.size(); i++) {
+            if (partidos.get(i).getId().equals(partidoActualizado.getId())) {
+                partidos.set(i, partidoActualizado);
+            }
+        }
+    }
+
     public void deletePartido(String id) {
          for (int i = 0; i < partidos.size(); i++) {
             if (partidos.get(i).getId().equals(id)) {

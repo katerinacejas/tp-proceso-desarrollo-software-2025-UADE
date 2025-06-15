@@ -30,50 +30,14 @@ public class Partido {
     private Emparejador emparejador;
     private List<IObservers> observadores;
 
-    /* METODOS PARA GESTIONAR JUGADORES */
-
-    public boolean agregarJugador(Jugador jugador) {
-        if (jugador == null) {
-            throw new IllegalArgumentException("El jugador no puede ser null");
-        }
-        if (tieneTodosLosJugadores()) {
-            throw new IllegalStateException("El partido ya tiene la capacidad máxima");
-        }
-        if (yaFueEmparejado(jugador)) {
-            return false; // Ya está en el partido
-        }
-
-        boolean agregado = this.participantes.add(jugador);
-        if (agregado) {
-            // Verificar si ahora tenemos suficientes jugadores para armar
-            if (tieneTodosLosJugadores()) {
-                this.armar(); // Cambio automático de estado
-            }
-            //notificarObservadores();
-        }
-        return agregado;
-    }
-
-    // Remover jugador
-    public boolean eliminarJugador(Jugador jugador) {
-        if (jugador == null) {
-            throw new IllegalArgumentException("El jugador no puede ser null");
-        }
-
-        // Validar que no sea el organizador
-        if (jugador.equals(this.organizador)) {
-            throw new IllegalStateException("No se puede eliminar al organizador del partido");
-        }
-
-        boolean eliminado = this.participantes.remove(jugador);
-        if (eliminado) {
-            // Si después de remover necesitamos más jugadores, cambiar estado
-            if (!tieneTodosLosJugadores()) {
-                this.necesitarJugadores();
-            }
-            //notificarObservadores();
-        }
-        return eliminado;
+    /*
+        CONSTRUCTOR
+    */
+    public Partido() {
+        // Inicialización de colecciones
+        this.participantes = new HashSet<>();
+        this.resenias = new ArrayList<>();
+        this.observadores = new ArrayList<>();
     }
 
     /*
@@ -124,7 +88,15 @@ public class Partido {
 
     public void emparejar(Jugador jugador) {
         this.participantes.add(jugador);
-        // TODO: agregar validador de que si el equipo ahora ya esta completo con este emparejamiento nuevo, se cambie el estado a "PARTIDO ARMADO"
+        if (tieneTodosLosJugadores()) {
+            this.armar(); // Cambio automático de estado
+        }
+
+        // esto es para actualizar en la base el nuevo jugador en partido
+        this.updatePartido(this);
+
+        notificarObservadores(); //TODO esta parte
+
     }
 
     /*
@@ -150,7 +122,7 @@ public class Partido {
         METODOS PARA NOTIFICAR OBSERVADOR
      */
     public void notificarObservadores() {
-
+        //TODO
     }
 
     public void addObservador(IObservers observador){
@@ -237,15 +209,10 @@ public class Partido {
         return estado;
     }
 
-     /*
-        CONSTRUCTOR
+
+    /*
+        METODOS Q SON LLAMADOS POR EL CONTROLLER
      */
-    public Partido() {
-        // Inicialización de colecciones
-        this.participantes = new HashSet<>();
-        this.resenias = new ArrayList<>();
-        this.observadores = new ArrayList<>();
-    }
 
     public void createPartido(Partido partido) {
         PartidoDAO partidoDAO = new PartidoDAO();
@@ -256,6 +223,11 @@ public class Partido {
     public Partido getPartidoById(String id) {
         PartidoDAO partidoDAO = new PartidoDAO();
         return partidoDAO.getPartidoById(id);
+    }
+
+    public void updatePartido(Partido partidoActualizado){
+        PartidoDAO partidoDAO = new PartidoDAO();
+        partidoDAO.updatePartido(partidoActualizado);
     }
 
     public void deletePartido(String id) {
@@ -274,5 +246,29 @@ public class Partido {
 
     public int cantJugadoresDelDeporte() {
         return this.deporte.getCantJugadores();
+    }
+
+
+
+    // Remover jugador
+    public boolean eliminarJugador(Jugador jugador) {
+        if (jugador == null) {
+            throw new IllegalArgumentException("El jugador no puede ser null");
+        }
+
+        // Validar que no sea el organizador
+        if (jugador.equals(this.organizador)) {
+            throw new IllegalStateException("No se puede eliminar al organizador del partido");
+        }
+
+        boolean eliminado = this.participantes.remove(jugador);
+        if (eliminado) {
+            // Si después de remover necesitamos más jugadores, cambiar estado
+            if (!tieneTodosLosJugadores()) {
+                this.necesitarJugadores();
+            }
+            //notificarObservadores();
+        }
+        return eliminado;
     }
 }
