@@ -1,7 +1,6 @@
 package modelo.entidad.partido;
 
 import modelo.dao.PartidoDAO;
-import modelo.dto.PartidoDTO;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.emparejamiento.Emparejador;
@@ -26,7 +25,7 @@ public class Partido {
     private Set<Jugador> participantes;
     private Jugador organizador;
     private NivelJuego nivelJuego;
-    private Set<Resenia> reseñas;
+    private List<Resenia> resenias;
     private IEstadoPartido estado;
     private Emparejador emparejador;
     private List<IObservers> observadores;
@@ -211,12 +210,12 @@ public class Partido {
         this.organizador = organizador;
     }
 
-    public Set<Resenia> getReseñas() {
-        return reseñas;
+    public List<Resenia> getResenias() {
+        return resenias;
     }
 
-    public void setReseñas(Set<Resenia> reseñas) {
-        this.reseñas = reseñas;
+    public void setResenias(List<Resenia> resenias) {
+        this.resenias = resenias;
     }
 
     public NivelJuego getNivelJuego() {
@@ -229,8 +228,11 @@ public class Partido {
 
     public Set<Jugador> getParticipantes() {
         return this.participantes;
-   } 
+   }
 
+    public void agregarParticipantePorDefault(Jugador jugadorOrganizadorPorDefault) {
+        this.participantes.add(jugadorOrganizadorPorDefault);
+    }
 
      /*
         CONSTRUCTOR
@@ -238,7 +240,7 @@ public class Partido {
     public Partido() {
         // Inicialización de colecciones
         this.participantes = new HashSet<>();
-        this.reseñas = new HashSet<>();
+        this.resenias = new ArrayList<>();
         this.observadores = new ArrayList<>();
     }
 

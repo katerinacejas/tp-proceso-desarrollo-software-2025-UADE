@@ -8,12 +8,12 @@ import modelo.dto.DeporteDTO;
 import modelo.dto.JugadorDTO;
 import modelo.dto.LoginDTO;
 import modelo.dto.PartidoDTO;
-import modelo.entidad.jugador.Jugador;
+import modelo.enumerador.EstrategiaPartido;
 import modelo.enumerador.NivelJuego;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class VistaPrincipal {
     JugadorController jugadorController;
@@ -22,6 +22,7 @@ public class VistaPrincipal {
     PartidoController partidoController;
     Scanner input;
     JugadorDTO jugadorDTO;
+    DateTimeFormatter formatoDateTime;
 
     public VistaPrincipal() {
         jugadorController = new JugadorController();
@@ -29,6 +30,7 @@ public class VistaPrincipal {
         reseniaController = new ReseniaController();
         partidoController = new PartidoController();
         input = new Scanner(System.in);
+        formatoDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.crearDeportesPreCargados();
     }
 
@@ -41,7 +43,7 @@ public class VistaPrincipal {
         handballDTO.setCantJugadores(14);
         DeporteDTO tenisDTO = new DeporteDTO();
         tenisDTO.setNombre("tenis");
-        tenisDTO.setCantJugadores(4);
+        tenisDTO.setCantJugadores(2);
         DeporteDTO hockeyDTO = new DeporteDTO();
         hockeyDTO.setNombre("hockey");
         hockeyDTO.setCantJugadores(22);
@@ -214,13 +216,43 @@ public class VistaPrincipal {
         int duracionMin = input.nextInt();
         partidoDTO.setDuracionMin(duracionMin);
 
-        System.out.println("Ingrese la zona geografica :");
-        int duracionMin = input.nextInt();
-        partidoDTO.setDuracionMin(duracionMin);
+        //TODO: ESTO HAY QUE PONER LA ZONA GEOGRAFICA PERO NO ESTA HECHA EN EL CONTROLLER
+        //System.out.println("Ingrese la zona geografica :");
+
+        System.out.println("Ingrese el dia y hora del partido (yyyy-MM-dd hh:mm) :");
+        String horarioEncuentroStr = input.nextLine();
+        LocalDateTime horarioEncuentro = LocalDateTime.parse(horarioEncuentroStr, formatoDateTime);
+        partidoDTO.setHorarioEncuentro(horarioEncuentro);
+
+        partidoDTO.agregarParticipantePorDefault(jugadorDTO.getId());
+        partidoDTO.setOrganizador(jugadorDTO.getId());
+
+        System.out.println("Ingrese la estrategia elegida para emparejar a los participantes: " +
+                "\nOpciones validas: NIVEL, UBICACION, HISTORIAL: ");
+        String estrategiaPartido = input.nextLine().trim().toUpperCase();
+        partidoDTO.setEstrategiaPartido(EstrategiaPartido.valueOf(estrategiaPartido));
+
+        System.out.println("Ingrese el nivel de juego minimo como requisito para el partido " +
+                "\nOpciones validas: PRINCIPIANTE, INTERMEDIO, AVANZADO: ");
+        String nivelJuego = input.nextLine().trim().toUpperCase();
+        partidoDTO.setNivelJuego(NivelJuego.valueOf(nivelJuego));
+
+        partidoController.createPartido(partidoDTO);
+        System.out.println("--------¡Partido Creado! Esperando jugadores para que se unan :) --------");
     }
 
     private void buscarPartidoParaUnirme(JugadorDTO jugadorDTO) {
-
+        System.out.println("Elije el partido al que queres unirte indicando el numero de la opcion: ");
+        List<PartidoDTO> partidosDTO = new ArrayList<>();
+        partidosDTO = partidoController.getPartidosAptosParaJugador(jugadorDTO);
+        for(int i = 1; i<= partidosDTO.size(); i++) {
+            // imprime un mensaje del tipo: "1: tenis en Palermo el dia 2025-06-15 15:30"
+            System.out.println(i+": "+ partidosDTO.get(i-1).getDeporte() + " en " + partidosDTO.get(i-1).getZonaGeografica() + " el día " + partidosDTO.get(i-1).getHorarioEncuentro());
+        }
+        int iPartidoElegido = input.nextInt();
+        PartidoDTO partidoElegidoDTO = partidosDTO.get(iPartidoElegido-1);
+        partidoController.unirseAlPartido(partidoElegidoDTO, jugadorDTO);
+        System.out.println("--------¡Te uniste al partido! :) --------");
     }
 }
 
