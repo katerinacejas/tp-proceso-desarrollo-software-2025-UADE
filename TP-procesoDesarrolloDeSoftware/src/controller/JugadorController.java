@@ -1,11 +1,18 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import modelo.dto.JugadorDTO;
 import modelo.dto.LoginDTO;
+import modelo.dto.PartidoDTO;
 import modelo.entidad.jugador.Jugador;
+import modelo.entidad.partido.Partido;
 import modelo.entidad.ubicacion.Geolocalizacion;
+import modelo.enumerador.NivelJuego;
+import modelo.entidad.NivelJuego.NivelJugadorDeporte;
 import modelo.entidad.deporte.Deporte;
 
 public class JugadorController {
@@ -39,8 +46,13 @@ public class JugadorController {
         jugador.deleteJugador(id);
     }
 
-    public boolean authJugador(LoginDTO loginDTO){
-        return jugador.authJugador(loginDTO.getEmail(), loginDTO.getContrasenia());
+    public JugadorDTO authJugador(LoginDTO loginDTO){
+        Jugador jugadorSesionIniciada = jugador.authJugador(loginDTO.getEmail(), loginDTO.getContrasenia());
+        if (jugadorSesionIniciada != null){
+            JugadorDTO jugadorSesionIniciadaDTO = this.convertToDTO(jugadorSesionIniciada);
+            return jugadorSesionIniciadaDTO;
+        }
+        return null;
     }
 
     private Jugador convertToEntitySinId(JugadorDTO jugadorDTO) {
@@ -51,6 +63,7 @@ public class JugadorController {
         jugador.setEmail(jugadorDTO.getEmail());
         jugador.setDeportesFavoritos(getDeportesByIds(jugadorDTO.getDeportesFavoritos())); 
         jugador.setGeolocalizacion(convertLatLongToGeolocalizacion(jugadorDTO.getLatitud(), jugadorDTO.getLongitud()));
+        jugador.setNivelPorDeporte(convertMapToNivelPorDeporte(jugadorDTO.getNivelPorDeporte()));
         return jugador;
     }
 
@@ -64,9 +77,10 @@ public class JugadorController {
         jugadorDTO.setDeportesFavoritos(setIdsDeportesFavoritos(jugador.getDeportesFavoritos()));
         jugadorDTO.setLatitud(jugador.getGeolocalizacion().getLatitud());
         jugadorDTO.setLongitud(jugador.getGeolocalizacion().getLongitud());
+        jugadorDTO.setNivelPorDeporte(convertNivelPorDeporteToMap(jugador.getNivelPorDeporte()));
         return jugadorDTO;
     }
-    
+
     private List<Deporte> getDeportesByIds(List<String> idsDeportesFavoritos){
         List<Deporte> deportesFavoritos = new ArrayList<Deporte>();
         for (String idDeporte : idsDeportesFavoritos){
@@ -90,4 +104,27 @@ public class JugadorController {
         return geolocalizacionJugador;
     }
 
+    private List<NivelJugadorDeporte> convertMapToNivelPorDeporte(Map<String, NivelJuego> nivelPorDeporte) {
+        List<NivelJugadorDeporte> nivelesJugadorDeporte = new ArrayList<>();
+        for (Map.Entry<String, NivelJuego> entry : nivelPorDeporte.entrySet()) {
+            String deporteId = entry.getKey();
+            NivelJuego nivel = entry.getValue();
+            Deporte deporteKey = deporte.getDeporteById(deporteId);
+            NivelJugadorDeporte nivelJugadorDeporte = new NivelJugadorDeporte();
+            nivelJugadorDeporte.setDeporte(deporteKey);
+            nivelJugadorDeporte.setNivelJuego(nivel);
+            nivelesJugadorDeporte.add(nivelJugadorDeporte);
+        }
+        return nivelesJugadorDeporte;
+    }
+
+    private Map<String, NivelJuego> convertNivelPorDeporteToMap(List<NivelJugadorDeporte> nivelPorDeporte) {
+        Map<String, NivelJuego> mapNivelPorDeporte = new HashMap<>();
+        for (NivelJugadorDeporte nivelJugadorDeporte : nivelPorDeporte) {
+            String deporteId = nivelJugadorDeporte.getDeporte().getId(); 
+            NivelJuego nivel = nivelJugadorDeporte.getNivelJuego();
+            mapNivelPorDeporte.put(deporteId, nivel);
+        }
+        return mapNivelPorDeporte;
+    }
 }

@@ -1,7 +1,10 @@
 package modelo.dto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import modelo.enumerador.NivelJuego;
 import modelo.enumerador.EstrategiaPartido;
@@ -12,11 +15,16 @@ public class PartidoDTO {
     private int duracionMin;
     private String zonaGeografica;
     private LocalDateTime horarioEncuentro;
-    private List<String> participantes;
+    private Set<String> participantes;
     private String organizador;
     private List<String> resenias;
     private EstrategiaPartido estrategiaPartido;
     private NivelJuego nivelJuego;
+
+    public PartidoDTO() {
+        this.participantes = new HashSet<>();
+        this.resenias = new ArrayList<>();
+    }
 
     public NivelJuego getNivelJuego() {
         return nivelJuego;
@@ -66,11 +74,11 @@ public class PartidoDTO {
         this.horarioEncuentro = horarioEncuentro;
     }
 
-    public List<String> getParticipantes() {
+    public Set<String> getParticipantes() {
         return this.participantes;
     }
 
-    public void setParticipantes(List<String> participantes) {
+    public void setParticipantes(Set<String> participantes) {
         this.participantes = participantes;
     }
 
@@ -95,5 +103,9 @@ public class PartidoDTO {
     }
     public String getId() {
         return this.id;
+    }
+
+    public void agregarParticipantePorDefault(String idOrganizadorJugadorDefault) {
+        this.participantes.add(idOrganizadorJugadorDefault);
     }
 }

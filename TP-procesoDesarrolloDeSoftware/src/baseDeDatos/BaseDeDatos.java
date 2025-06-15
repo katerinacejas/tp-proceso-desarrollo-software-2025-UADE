@@ -41,6 +41,11 @@ public class BaseDeDatos {
         metodos para JUGADOR
     */
     public void insertJugador(Jugador jugador){
+        for (Jugador j : jugadores) {
+            if (j.getEmail().equals(jugador.getEmail())) {
+                throw new IllegalArgumentException("Ya existe un jugador con ese email, no se puede registrar. Por favor iniciar sesion");
+            }
+        }
         jugador.setId(this.generadorIdRandom());
         this.jugadores.add(jugador);
     }
@@ -70,20 +75,20 @@ public class BaseDeDatos {
         }
     }
 
-    public boolean authJugador(String email, String contrasenia) {
+    public Jugador authJugador(String email, String contrasenia) {
         for (Jugador jugador : jugadores) {
-            if (jugador.getEmail().equals(email)) {
-                return jugador.getContrasenia().equals(contrasenia);
+            if (jugador.getEmail().equals(email) && jugador.getContrasenia().equals(contrasenia)) {
+                return this.getJugadorById(jugador.getId());
             }
         }
-        return false;
+        return null;
     }
 
     /*
         metodos para DEPORTE
     */
     public Deporte insertDeporte(Deporte deporte) {
-        deporte.setId(this.generadorIdRandom());
+        deporte.setId(deporte.getNombre());
         this.deportes.add(deporte);
         return deporte;
     }
@@ -162,4 +167,41 @@ public class BaseDeDatos {
         throw new IllegalArgumentException("No existe la resenia con ese id: " + id);
     }
 
+    /*
+        metodos para PARTIDO
+    */
+
+    public void insertPartido(Partido partido) {
+        partido.setId(this.generadorIdRandom());
+        this.partidos.add(partido);
+    }
+
+    public Partido getPartidoById(String id) {
+       for (Partido partido : partidos) {
+            if (partido.getId().equals(id)) {
+                return partido;
+            }
+        }
+        throw new IllegalArgumentException("No existe el partido con ese id: " + id);
+    }
+
+    public void updatePartido(Partido partidoActualizado) {
+        for (int i = 0; i < partidos.size(); i++) {
+            if (partidos.get(i).getId().equals(partidoActualizado.getId())) {
+                partidos.set(i, partidoActualizado);
+            }
+        }
+    }
+
+    public void deletePartido(String id) {
+         for (int i = 0; i < partidos.size(); i++) {
+            if (partidos.get(i).getId().equals(id)) {
+                partidos.remove(i);
+            }
+        }
+    }
+
+    public List<Partido> getAllPartidos(){
+        return partidos;
+    }
 }

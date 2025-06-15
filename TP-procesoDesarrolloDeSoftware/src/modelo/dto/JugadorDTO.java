@@ -1,5 +1,7 @@
 package modelo.dto;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +17,11 @@ public class JugadorDTO {
     private String celular;
     private double latitud;
     private double longitud;
+
+    public JugadorDTO(){
+        this.deportesFavoritos = new ArrayList<>();
+        this.nivelPorDeporte = new HashMap<>();
+    }
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -85,5 +92,9 @@ public class JugadorDTO {
 
     public void setNivelPorDeporte(Map<String, NivelJuego> nivelPorDeporte) {
         this.nivelPorDeporte = nivelPorDeporte;
+    }
+
+    public void agregarDeporteFavorito(String deporteFavorito) {
+        this.deportesFavoritos.add(deporteFavorito);
     }
 }
