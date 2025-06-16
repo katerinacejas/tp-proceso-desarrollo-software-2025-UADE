@@ -11,13 +11,13 @@ public class PartidoCancelado extends AbstractEstadoPartido {
     @Override
     public String mensajeEstado() {
         return String.format("Lamentamos informarte que el partido de %s del %s ha sido cancelado.",
-                partido.getDeporte(), partido.getHorarioEncuentro());
+                partido.getDeporte().getNombre(), partido.getHorarioEncuentro());
     }
 
     @Override
     public void cancelar() {
         partido.cambiarEstado(new PartidoCancelado());
-        System.out.println("----------------¡Se ha cancelado el partido que creaste para " +partido.getDeporte() + "! :) ----------------");
+        System.out.println("----------------¡Se ha cancelado el partido que creaste para " +partido.getDeporte().getNombre() + "! :) ----------------");
     }
 
     @Override

@@ -11,7 +11,7 @@ public class PartidoFinalizado extends AbstractEstadoPartido {
     @Override
     public String mensajeEstado() {
         return String.format("El partido de %s ha finalizado. ¡Gracias por participar!",
-                partido.getDeporte());
+                partido.getDeporte().getNombre());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class PartidoFinalizado extends AbstractEstadoPartido {
     @Override
     public void agregarResenia(Resenia resenia) {
         partido.addResenia(resenia);
-        System.out.println("----------------¡Se ha publicado tu reseña sobre el partido de " + partido.getDeporte() + "! :) ----------------");
+        System.out.println("----------------¡Se ha publicado tu reseña sobre el partido de " + partido.getDeporte().getNombre() + "! :) ----------------");
     }
 
     @Override

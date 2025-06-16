@@ -11,13 +11,13 @@ public class PartidoArmado extends AbstractEstadoPartido {
     @Override
     public String mensajeEstado() {
         return String.format("El partido de %s está completo y listo para ser confirmado. Horario: %s",
-                partido.getDeporte(), partido.getHorarioEncuentro());
+                partido.getDeporte().getNombre(), partido.getHorarioEncuentro());
     }
 
     @Override
     public void cancelar() {
         partido.cambiarEstado(new PartidoCancelado());
-        System.out.println("----------------¡Se ha cancelado el partido que creaste para " +partido.getDeporte() + "! :) ----------------");
+        System.out.println("----------------¡Se ha cancelado el partido que creaste para " +partido.getDeporte().getNombre() + "! :) ----------------");
     }
 
     @Override
@@ -29,13 +29,13 @@ public class PartidoArmado extends AbstractEstadoPartido {
     public void eliminar(Jugador jugador) {
         partido.removeJugador(jugador);
         partido.cambiarEstado(new PartidoNecesitamosJugadores());
-        System.out.println("----------------¡Se te eliminó del partido para " +partido.getDeporte() + "! :) ----------------");
+        System.out.println("----------------¡Se te eliminó del partido para " +partido.getDeporte().getNombre() + "! :) ----------------");
     }
 
     @Override
     public void confirmar() {
         partido.cambiarEstado(new PartidoConfirmado());
-        System.out.println("----------------¡Se ha confirmado el partido que creaste para " +partido.getDeporte() + "! :) ----------------");
+        System.out.println("----------------¡Se ha confirmado el partido que creaste para " +partido.getDeporte().getNombre() + "! :) ----------------");
     }
 
     @Override

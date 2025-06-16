@@ -189,11 +189,12 @@ public class VistaPrincipal {
                 "\n 6: Iniciar partido" +
                 "\n 7: Finalizar partido" +
                 "\n 8: Darme de baja de un partido" +
-                "\n 9: Cerrar sesion");
+                "\n 9: Ver mis reseñas publicadas" +
+                "\n 10: Cerrar sesion");
         opcionMenu = input.nextInt();
         input.nextLine(); // limpia el salto de línea
 
-        while(opcionMenu != 9) {
+        while(opcionMenu != 10) {
             switch (opcionMenu) {
                 case 1:
                     this.crearPartido(jugadorDTO);
@@ -230,7 +231,8 @@ public class VistaPrincipal {
                     "\n 6: Iniciar partido" +
                     "\n 7: Finalizar partido" +
                     "\n 8: Darme de baja de un partido" +
-                    "\n 9: Cerrar sesion");
+                    "\n 9: Ver mis reseñas publicadas" +
+                    "\n 10: Cerrar sesion");
             opcionMenu = input.nextInt();
             input.nextLine(); // limpia el salto de línea
         }
@@ -327,12 +329,20 @@ public class VistaPrincipal {
             return;
         }
         System.out.println("Elije el partido que queres cancelar indicando el numero de la opcion: ");
-        for(int i = 1; i<= partidosDTO.size(); i++) {
+        int i = 1;
+        for(i = 1; i<= partidosDTO.size(); i++) {
             // imprime un mensaje del tipo: "1: tenis en Palermo el dia 2025-06-15 15:30"
             System.out.println(i+": "+ partidosDTO.get(i-1).getDeporte() + " en " + partidosDTO.get(i-1).getZonaGeografica() + " el día " + partidosDTO.get(i-1).getHorarioEncuentro());
         }
+        int opcionVolverMenu = i;
+        System.out.println(opcionVolverMenu + ": No cancelar ningun partido. Volver al menú");
         int iPartidoElegido = input.nextInt();
         input.nextLine(); // limpia el salto de línea
+
+        if(iPartidoElegido == opcionVolverMenu) {
+            return;
+        }
+
         PartidoDTO partidoElegidoDTO = partidosDTO.get(iPartidoElegido-1);
         partidoController.cancelarPartido(partidoElegidoDTO);
     }
