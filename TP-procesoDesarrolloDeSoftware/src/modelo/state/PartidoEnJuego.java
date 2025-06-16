@@ -1,35 +1,47 @@
 package modelo.state;
 
+import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
+import modelo.entidad.partido.Resenia;
 
-public class PartidoEnJuego implements IEstadoPartido {
-    @Override
-    public void cancelar(Partido partido) {
-        throw new IllegalStateException("No se puede cancelar un partido en juego.");
+public class PartidoEnJuego extends AbstractEstadoPartido {
+
+    public PartidoEnJuego(Partido partido) {
+        super(partido);
     }
 
     @Override
-    public void necesitarJugadores(Partido partido) {
-        throw new IllegalStateException("No se puede necesitar jugadores en un partido en juego.");
+    public void cancelar() {
+
     }
 
     @Override
-    public void armar(Partido partido) {
-        throw new IllegalStateException("No se puede armar un partido que ya está en juego.");
+    public void emparejar(Jugador jugador) {
+
     }
 
     @Override
-    public void confirmar(Partido partido) {
-        throw new IllegalStateException("No se puede confirmar un partido que ya está en juego.");
+    public void eliminar(Jugador jugador) {
+
     }
 
     @Override
-    public void jugar(Partido partido) {
-        throw new IllegalStateException("El partido ya está en juego.");
+    public void confirmar() {
+
     }
 
     @Override
-    public void finalizar(Partido partido) {
-        partido.cambiarEstado(new PartidoFinalizado());
+    public void jugar() {
+
+    }
+
+    @Override
+    public void finalizar() {
+
+    }
+
+    @Override
+    public void agregarResenia(Resenia resenia) {
+
     }
 }

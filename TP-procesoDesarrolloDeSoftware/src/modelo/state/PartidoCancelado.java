@@ -1,40 +1,47 @@
 package modelo.state;
 
+import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
+import modelo.entidad.partido.Resenia;
 
-public class PartidoCancelado implements IEstadoPartido {
-    @Override
-    public void cancelar(Partido partido) {
-        partido.cambiarEstado(new PartidoCancelado());
-    }
+public class PartidoCancelado extends AbstractEstadoPartido {
 
-
-    //TODO: DEFINIR MEJOR EL ERROR EN LOS METODOS QUE NO SON DE CANCELAR.
-    /// En este caso, no se puede pasar a otro estado desde "PartidoCancelado".
-
-    @Override
-    public void necesitarJugadores(Partido partido) {
-        throw new IllegalStateException("No se puede necesitar jugadores en un partido cancelado.");
+    public PartidoCancelado(Partido partido) {
+        super(partido);
     }
 
     @Override
-    public void armar(Partido partido) {
-        throw new IllegalStateException("No se puede armar un partido cancelado.");
-    }
-
-    @Override
-    public void confirmar(Partido partido) {
-        throw new IllegalStateException("No se puede confirmar un partido cancelado.");
+    public void cancelar() {
 
     }
 
     @Override
-    public void jugar(Partido partido) {
-        throw new IllegalStateException("No se puede jugar un partido cancelado.");
+    public void emparejar(Jugador jugador) {
+
     }
 
     @Override
-    public void finalizar(Partido partido) {
-        throw new IllegalStateException("No se puede finalizar un partido cancelado.");
+    public void eliminar(Jugador jugador) {
+
+    }
+
+    @Override
+    public void confirmar() {
+
+    }
+
+    @Override
+    public void jugar() {
+
+    }
+
+    @Override
+    public void finalizar() {
+
+    }
+
+    @Override
+    public void agregarResenia(Resenia resenia) {
+
     }
 }
