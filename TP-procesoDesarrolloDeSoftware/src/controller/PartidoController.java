@@ -76,7 +76,7 @@ public class PartidoController {
         partidoDTO.setId(partido.getId());
         partidoDTO.setDeporte(partido.getDeporte().getId());
         partidoDTO.setDuracionMin(partido.getDuracionMin());
-       // TODO partidoDTO.setZonaGeografica(partido.getZonaGeografica());
+        partidoDTO.setZonaGeografica(partido.getZonaGeografica().getNombre());
         partidoDTO.setHorarioEncuentro(partido.getHorarioEncuentro());
         partidoDTO.setParticipantes(partido.getParticipantes()
                                     .stream().map(jugador -> jugador.getId())
