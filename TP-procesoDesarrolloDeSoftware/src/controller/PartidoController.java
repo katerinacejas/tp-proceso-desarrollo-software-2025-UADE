@@ -6,11 +6,6 @@ import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
 import modelo.enumerador.EstrategiaPartido;
-import modelo.state.IEstadoPartido;
-import modelo.strategy.emparejamiento.EmparejamientoHistorial;
-import modelo.strategy.emparejamiento.EmparejamientoNivel;
-import modelo.strategy.emparejamiento.EmparejamientoUbicacion;
-import modelo.strategy.emparejamiento.IEmparejador;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,8 +30,7 @@ public class PartidoController {
     }
 
     public PartidoDTO getPartidoById(String id) {
-        PartidoDTO partidoDTO = convertToDTO(partido.getPartidoById(id));
-        return partidoDTO;
+        return convertToDTO(partido.getPartidoById(id));
     }
 
     public void updatePartido(PartidoDTO partidoDTO) {

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import modelo.enumerador.EstadoPartido;
 import modelo.enumerador.NivelJuego;
 import modelo.enumerador.EstrategiaPartido;
 
@@ -17,13 +18,23 @@ public class PartidoDTO {
     private LocalDateTime horarioEncuentro;
     private Set<String> participantes;
     private String organizador;
-    private List<String> resenias;
-    private EstrategiaPartido estrategiaPartido;
     private NivelJuego nivelJuego;
+    private List<String> resenias;
+    private EstadoPartido estado;
+    private EstrategiaPartido estrategiaPartido;
+
 
     public PartidoDTO() {
         this.participantes = new HashSet<>();
         this.resenias = new ArrayList<>();
+    }
+
+    public EstadoPartido getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPartido estado) {
+        this.estado = estado;
     }
 
     public NivelJuego getNivelJuego() {

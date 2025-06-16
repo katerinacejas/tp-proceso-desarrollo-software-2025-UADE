@@ -1,35 +1,47 @@
 package modelo.state;
 
+import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
+import modelo.entidad.partido.Resenia;
 
-public class PartidoConfirmado implements IEstadoPartido {
+public class PartidoConfirmado extends AbstractEstadoPartido {
+
+    public PartidoConfirmado(Partido partido) {
+        super(partido);
+    }
+
     @Override
-    public void cancelar(Partido partido) {
+    public void cancelar() {
 
     }
 
     @Override
-    public void necesitarJugadores(Partido partido) {
+    public void emparejar(Jugador jugador) {
 
     }
 
     @Override
-    public void armar(Partido partido) {
+    public void eliminar(Jugador jugador) {
 
     }
 
     @Override
-    public void confirmar(Partido partido) {
+    public void confirmar() {
 
     }
 
     @Override
-    public void jugar(Partido partido) {
+    public void jugar() {
 
     }
 
     @Override
-    public void finalizar(Partido partido) {
-        throw new IllegalStateException("No se puede pasar a ese estado desde: " + this.getClass().getSimpleName());
+    public void finalizar() {
+
+    }
+
+    @Override
+    public void agregarResenia(Resenia resenia) {
+
     }
 }
