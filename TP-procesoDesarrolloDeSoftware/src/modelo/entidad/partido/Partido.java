@@ -9,6 +9,9 @@ import modelo.enumerador.NivelJuego;
 import modelo.observer.IObservers;
 import modelo.state.*;
 import modelo.strategy.emparejamiento.IEmparejador;
+import modelo.entidad.notificacion.Notificador;
+import modelo.strategy.notificacion.NotificacionEmail;
+import modelo.strategy.notificacion.IServicioNotificacion;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -40,13 +43,23 @@ public class Partido {
         this.emparejador = new Emparejador();
         this.organizador = new Jugador();
         this.estado = new PartidoNecesitamosJugadores();
+
+        IServicioNotificacion estrategiaNotificacion = new NotificacionEmail();
+        Notificador notificador = new Notificador(this, estrategiaNotificacion);
+        this.addObservador(notificador);
     }
 
     /*
         METODOS PARA EL ESTADO DEL PARTIDO
     */
     public void cambiarEstado(IEstadoPartido estado) {
+        IEstadoPartido estadoAnterior = this.estado;
         this.estado = estado;
+
+        // Solo notifica si cambió el estado
+        if (estadoAnterior.getClass() != estado.getClass()) {
+            notificarObservadores();
+        }
     }
 
     public void cancelar() {
@@ -90,6 +103,7 @@ public class Partido {
 
     public void emparejar(Jugador jugador) {
         this.participantes.add(jugador);
+        notificarObservadores();
         if (tieneTodosLosJugadores()) {
             this.armar(); // Cambio automático de estado
         }
@@ -124,7 +138,13 @@ public class Partido {
         METODOS PARA NOTIFICAR OBSERVADOR
      */
     public void notificarObservadores() {
-        //TODO
+        for (IObservers observador : observadores) {
+            try {
+                observador.notificar();
+            } catch (Exception e) {
+                System.err.println("Error al notificar observador: " + e.getMessage());
+            }
+        }
     }
 
     public void addObservador(IObservers observador){
@@ -293,11 +313,11 @@ public class Partido {
 
         boolean eliminado = this.participantes.remove(jugador);
         if (eliminado) {
+            notificarObservadores();
             // Si después de remover necesitamos más jugadores, cambiar estado
             if (!tieneTodosLosJugadores()) {
                 this.necesitarJugadores();
             }
-            //notificarObservadores();
         }
         return eliminado;
     }

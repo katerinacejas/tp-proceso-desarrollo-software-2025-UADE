@@ -31,18 +31,14 @@ public class Notificador implements IObservers {
 @Override
 public void notificar() {
     List<Notificacion> listaNotificaciones = new ArrayList<>();
-
     for (Jugador jugador : partido.obtenerListadoJugadores()) {
         Notificacion notificacion = crearNotificacion(jugador);
         if (notificacion != null) {
             listaNotificaciones.add(notificacion);
+        if (!listaNotificaciones.isEmpty()) {
+            estrategiaNotificacion.notificar(listaNotificaciones);
         }
     }
-
-    if (!listaNotificaciones.isEmpty()) {
-        estrategiaNotificacion.notificar(listaNotificaciones);
-    }
-}
     public Notificacion crearNotificacion(Jugador jugador) {
         if (jugador == null) return null;
 
