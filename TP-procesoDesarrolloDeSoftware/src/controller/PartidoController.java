@@ -164,4 +164,17 @@ public class PartidoController {
         return partidos.stream().map(partido -> convertToDTO(partido)).toList();
     }
 
+    public List<PartidoDTO> getPartidosDondeDarmeDeBaja(JugadorDTO jugadorDTO) {
+        Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
+        List<Partido> partidos = partido.getPartidosDondeDarmeDeBaja(jugadorEntity);
+        if(partidos.isEmpty()){
+            return null;
+        }
+        return partidos.stream().map(partido -> convertToDTO(partido)).toList();
+    }
+
+    public void darmeDeBaja(PartidoDTO partidoElegidoDTO, JugadorDTO jugadorDTO) {
+        partido.getPartidoById(partidoElegidoDTO.getId())
+                .eliminar(jugador.getJugadorById(jugadorDTO.getId()));
+    }
 }

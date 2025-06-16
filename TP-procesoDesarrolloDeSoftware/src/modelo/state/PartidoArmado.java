@@ -23,7 +23,9 @@ public class PartidoArmado extends AbstractEstadoPartido {
 
     @Override
     public void eliminar(Jugador jugador) {
-
+        partido.removeJugador(jugador);
+        partido.cambiarEstado(new PartidoNecesitamosJugadores(partido));
+        System.out.println("----------------¡Se te eliminó del partido para " +partido.getDeporte() + "! :) ----------------");
     }
 
     @Override
