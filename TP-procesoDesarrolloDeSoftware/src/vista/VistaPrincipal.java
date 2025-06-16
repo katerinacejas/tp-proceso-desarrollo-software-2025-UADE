@@ -189,12 +189,11 @@ public class VistaPrincipal {
                 "\n 6: Iniciar partido" +
                 "\n 7: Finalizar partido" +
                 "\n 8: Darme de baja de un partido" +
-                "\n 9: Ver mis reseñas publicadas" +
-                "\n 10: Cerrar sesion");
+                "\n 9: Cerrar sesion");
         opcionMenu = input.nextInt();
         input.nextLine(); // limpia el salto de línea
 
-        while(opcionMenu != 10) {
+        while(opcionMenu != 9) {
             switch (opcionMenu) {
                 case 1:
                     this.crearPartido(jugadorDTO);
@@ -231,8 +230,7 @@ public class VistaPrincipal {
                     "\n 6: Iniciar partido" +
                     "\n 7: Finalizar partido" +
                     "\n 8: Darme de baja de un partido" +
-                    "\n 9: Ver mis reseñas publicadas" +
-                    "\n 10: Cerrar sesion");
+                    "\n 9: Cerrar sesion");
             opcionMenu = input.nextInt();
             input.nextLine(); // limpia el salto de línea
         }
