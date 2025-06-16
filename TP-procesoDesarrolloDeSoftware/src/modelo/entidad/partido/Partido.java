@@ -9,6 +9,10 @@ import modelo.enumerador.NivelJuego;
 import modelo.observer.IObservers;
 import modelo.state.*;
 import modelo.strategy.emparejamiento.IEmparejador;
+import modelo.entidad.notificacion.Notificador;
+import modelo.strategy.notificacion.NotificacionEmail;
+import modelo.strategy.notificacion.IServicioNotificacion;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -39,13 +43,22 @@ public class Partido {
         this.emparejador = new Emparejador();
         this.organizador = new Jugador();
         this.estado = new PartidoNecesitamosJugadores(this);
+        IServicioNotificacion estrategiaNotificacion = new NotificacionEmail();
+        Notificador notificador = new Notificador(this, estrategiaNotificacion);
+        this.addObservador(notificador);
     }
 
     /*
         METODOS PARA EL ESTADO DEL PARTIDO
     */
     public void cambiarEstado(AbstractEstadoPartido estado) {
+        AbstractEstadoPartido estadoAnterior = this.estado;
         this.estado = estado;
+
+        // Solo notifica si cambió el estado
+        if (estadoAnterior.getClass() != estado.getClass()) {
+            notificarObservadores();
+        }
     }
 
     public void cancelar() {
@@ -123,7 +136,9 @@ public class Partido {
         METODOS PARA NOTIFICAR OBSERVADOR
      */
     public void notificarObservadores() {
-        //TODO
+        for (IObservers observador : observadores) {
+            observador.notificar();
+        }
     }
 
     public void addObservador(IObservers observador){
