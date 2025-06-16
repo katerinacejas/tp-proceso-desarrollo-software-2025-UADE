@@ -8,6 +8,8 @@ public class NotificacionPush implements IServicioNotificacion{
 
     @Override
     public void notificar(List<Notificacion> notificaciones) {
-
+        for (Notificacion notificacionPush : notificaciones){
+            System.out.println(notificacionPush.getMensaje());
+        }
     }
 }

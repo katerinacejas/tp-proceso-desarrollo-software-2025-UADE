@@ -3,6 +3,7 @@ package modelo.entidad.partido;
 import modelo.dao.PartidoDAO;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
+import modelo.entidad.notificacion.Notificador;
 import modelo.entidad.emparejamiento.Emparejador;
 import modelo.entidad.ubicacion.ZonaGeografica;
 import modelo.enumerador.NivelJuego;
@@ -123,7 +124,9 @@ public class Partido {
         METODOS PARA NOTIFICAR OBSERVADOR
      */
     public void notificarObservadores() {
-        //TODO
+        for (IObservers observer : observadores){
+            observer.notificar();
+        }
     }
 
     public void addObservador(IObservers observador){

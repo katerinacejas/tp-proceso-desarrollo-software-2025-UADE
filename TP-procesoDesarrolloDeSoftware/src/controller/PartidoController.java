@@ -4,11 +4,11 @@ import modelo.dto.JugadorDTO;
 import modelo.dto.PartidoDTO;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
+import modelo.entidad.notificacion.Notificador;
 import modelo.entidad.partido.Partido;
 import modelo.entidad.ubicacion.ZonaGeografica;
 import modelo.enumerador.EstadoPartido;
 import modelo.enumerador.EstrategiaPartido;
-import modelo.state.PartidoConfirmado;
 
 import java.util.Arrays;
 import java.util.List;
@@ -60,14 +60,14 @@ public class PartidoController {
         partido.setDuracionMin(partidoDTO.getDuracionMin());
         partido.setZonaGeografica(zonaGeografica.getZonaGeograficaByName(partidoDTO.getZonaGeografica()));
         partido.setHorarioEncuentro(partidoDTO.getHorarioEncuentro());
-
         //el organizador como el primer participante del partido por default
         partido.agregarJugador(jugador.getJugadorById(partidoDTO.getParticipantes().iterator().next()));
-
         partido.setOrganizador(jugador.getJugadorById(partidoDTO.getOrganizador()));
         partido.cambiarEstrategiaEmparejamiento(partidoDTO.getEstrategiaPartido().crearToEntity());
         partido.setNivelJuego(partidoDTO.getNivelJuego());
         partido.cambiarEstado(partidoDTO.getEstado().crearToEntity(partido));
+        Notificador observador = new Notificador(partido);
+        partido.addObservador(observador);
         return partido;
     }
 
