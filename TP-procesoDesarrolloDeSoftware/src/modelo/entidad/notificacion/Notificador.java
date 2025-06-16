@@ -13,18 +13,82 @@ public class Notificador implements IObservers {
     private IServicioNotificacion estrategiaNotificacion;
     private Partido partido;
 
-    @Override
-    public void notificar() {
-        // TODO: hay que de alguna forma mandarle la lista a la estrategia pero no guardarla como atributo en el notificador
-
-        partido.obtenerListadoJugadores().forEach(
-                jugador -> crearNotificacion(jugador));
-        List<Notificacion> listaNotificaciones = new ArrayList<>();
-        estrategiaNotificacion.notificar(listaNotificaciones);
+    public Notificador(Partido partido, IServicioNotificacion estrategiaNotificacion) {
+        this.partido = partido;
+        this.estrategiaNotificacion = estrategiaNotificacion;
     }
 
-    public void crearNotificacion(Jugador jugador) {
-        //TODO
+    @Override
+    public void notificar() {
+        List<Notificacion> listaNotificaciones = new ArrayList<>();
+
+        for (Jugador jugador : partido.obtenerListadoJugadores()) {
+            Notificacion notificacion = crearNotificacion(jugador);
+            if (notificacion != null) {
+                listaNotificaciones.add(notificacion);
+            }
+        }
+
+        if (!listaNotificaciones.isEmpty()) {
+            estrategiaNotificacion.notificar(listaNotificaciones);
+        }
+    }
+    public Notificacion crearNotificacion(Jugador jugador) {
+        if (jugador == null) return null;
+
+        Notificacion notificacion = new Notificacion();
+
+        // Destinatario
+        notificacion.setEmailDestinatario(jugador.getEmail());
+        notificacion.setCelularDestinatario(jugador.getCelular());
+
+        // Remitente, dejo el organizador del partido como remitente
+        if (partido.getOrganizador() != null) {
+            notificacion.setEmailRemitente(partido.getOrganizador().getEmail());
+            notificacion.setCelularRemitente(partido.getOrganizador().getCelular());
+        }
+
+        String mensaje = generarMensajeSegunEstado(jugador);
+        notificacion.setMensaje(mensaje);
+
+        return notificacion;
+    }
+
+    private String generarMensajeSegunEstado(Jugador jugador) {
+        String estadoClase = partido.getEstado().getClass().getSimpleName();
+        String deporte = partido.getDeporte().getNombre();
+        String horario = partido.getHorarioEncuentro().toString();
+
+        switch (estadoClase) {
+            case "PartidoArmado":
+                return String.format("¡Hola %s! El partido de %s está completo y listo para ser confirmado. Horario: %s",
+                        jugador.getNombreUsuario(), deporte, horario);
+
+            case "PartidoConfirmado":
+                return String.format("¡Hola %s! El partido de %s ha sido confirmado. ¡Nos vemos el %s!",
+                        jugador.getNombreUsuario(), deporte, horario);
+
+            case "PartidoCancelado":
+                return String.format("Hola %s, lamentamos informarte que el partido de %s del %s ha sido cancelado.",
+                        jugador.getNombreUsuario(), deporte, horario);
+
+            case "PartidoEnJuego":
+                return String.format("¡Hola %s! El partido de %s está por comenzar. ¡Que lo disfrutes!",
+                        jugador.getNombreUsuario(), deporte);
+
+            case "PartidoFinalizado":
+                return String.format("¡Hola %s! El partido de %s ha finalizado. ¡Gracias por participar!",
+                        jugador.getNombreUsuario(), deporte);
+
+            case "PartidoNecesitamosJugadores":
+                return String.format("¡Hola %s! Se ha unido un nuevo jugador al partido de %s. Faltan %d jugadores más.",
+                        jugador.getNombreUsuario(), deporte,
+                        partido.getDeporte().getCantJugadores() - partido.getCantidadParticipantes());
+
+            default:
+                return String.format("¡Hola %s! Hay una actualización en tu partido de %s.",
+                        jugador.getNombreUsuario(), deporte);
+        }
     }
 
     public void cambiarEstrategiaNotificacion(IServicioNotificacion estrategia){
