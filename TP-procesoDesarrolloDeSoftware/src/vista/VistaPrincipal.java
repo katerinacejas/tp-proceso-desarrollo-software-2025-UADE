@@ -41,8 +41,8 @@ public class VistaPrincipal {
         guidoMoraDTO.setCelular("1144102034");
         guidoMoraDTO.setLatitud(-34.574);
         guidoMoraDTO.setLongitud(-58.420);
-        guidoMoraDTO.setDeportesFavoritos(Arrays.asList("tenis", "handball"));
-        guidoMoraDTO.setNivelPorDeporte(Map.of("tenis", NivelJuego.INTERMEDIO, "handball", NivelJuego.AVANZADO));
+        guidoMoraDTO.setDeportesFavoritos(Arrays.asList("tenis", "handball", "voley"));
+        guidoMoraDTO.setNivelPorDeporte(Map.of("tenis", NivelJuego.INTERMEDIO, "handball", NivelJuego.AVANZADO, "voley", NivelJuego.PRINCIPIANTE));
         jugadorController.createJugador(guidoMoraDTO);
 
         JugadorDTO juliRodriguezDTO = new JugadorDTO();
@@ -52,9 +52,33 @@ public class VistaPrincipal {
         juliRodriguezDTO.setCelular("1120303040");
         juliRodriguezDTO.setLatitud(-34.579);
         juliRodriguezDTO.setLongitud(-58.429);
-        juliRodriguezDTO.setDeportesFavoritos(Arrays.asList("tenis", "handball"));
-        juliRodriguezDTO.setNivelPorDeporte(Map.of("tenis", NivelJuego.INTERMEDIO, "handball", NivelJuego.AVANZADO));
+        juliRodriguezDTO.setDeportesFavoritos(Arrays.asList("tenis", "handball", "voley"));
+        juliRodriguezDTO.setNivelPorDeporte(Map.of("tenis", NivelJuego.INTERMEDIO, "handball", NivelJuego.AVANZADO, "voley", NivelJuego.PRINCIPIANTE));
         jugadorController.createJugador(juliRodriguezDTO);
+
+
+        JugadorDTO diegoBariDTO = new JugadorDTO();
+        diegoBariDTO.setNombreUsuario("diegob");
+        diegoBariDTO.setEmail("diegob@gmail.com");
+        diegoBariDTO.setContrasenia("diegob123");
+        diegoBariDTO.setCelular("112233643");
+        diegoBariDTO.setLatitud(-34.579);
+        diegoBariDTO.setLongitud(-58.429);
+        diegoBariDTO.setDeportesFavoritos(Arrays.asList("tenis", "handball", "voley"));
+        diegoBariDTO.setNivelPorDeporte(Map.of("tenis", NivelJuego.INTERMEDIO, "handball", NivelJuego.AVANZADO, "voley", NivelJuego.PRINCIPIANTE));
+        jugadorController.createJugador(diegoBariDTO);
+
+        JugadorDTO florBirdDTO = new JugadorDTO();
+        florBirdDTO.setNombreUsuario("florb");
+        florBirdDTO.setEmail("florb@gmail.com");
+        florBirdDTO.setContrasenia("florb123");
+        florBirdDTO.setCelular("1197483962");
+        florBirdDTO.setLatitud(-34.579);
+        florBirdDTO.setLongitud(-58.429);
+        florBirdDTO.setDeportesFavoritos(Arrays.asList("tenis", "handball", "voley"));
+        florBirdDTO.setNivelPorDeporte(Map.of("tenis", NivelJuego.INTERMEDIO, "handball", NivelJuego.AVANZADO, "voley", NivelJuego.PRINCIPIANTE));
+        jugadorController.createJugador(florBirdDTO);
+
 
         PartidoDTO partidoTenisDTO = new PartidoDTO();
         partidoTenisDTO.setDeporte("tenis");
@@ -64,8 +88,19 @@ public class VistaPrincipal {
         partidoTenisDTO.setOrganizador(guidoMoraDTO.getId());
         partidoTenisDTO.agregarParticipantePorDefault(guidoMoraDTO.getId());
         partidoTenisDTO.setNivelJuego(NivelJuego.AVANZADO);
-        partidoTenisDTO.setEstrategiaPartido(EstrategiaPartido.HISTORIAL);
+        partidoTenisDTO.setEstrategiaPartido(EstrategiaPartido.UBICACION);
         partidoController.createPartido(partidoTenisDTO);
+
+        PartidoDTO partidoVoleyDTO = new PartidoDTO();
+        partidoVoleyDTO.setDeporte("voley");
+        partidoVoleyDTO.setDuracionMin(60);
+        partidoVoleyDTO.setZonaGeografica("Palermo");
+        partidoVoleyDTO.setHorarioEncuentro((LocalDateTime.of(2025, 06, 16, 20, 30)));
+        partidoVoleyDTO.setOrganizador(diegoBariDTO.getId());
+        partidoVoleyDTO.agregarParticipantePorDefault(diegoBariDTO.getId());
+        partidoVoleyDTO.setNivelJuego(NivelJuego.AVANZADO);
+        partidoVoleyDTO.setEstrategiaPartido(EstrategiaPartido.HISTORIAL);
+        partidoController.createPartido(partidoVoleyDTO);
     }
 
     

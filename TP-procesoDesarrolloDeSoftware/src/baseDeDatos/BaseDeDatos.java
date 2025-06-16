@@ -243,7 +243,7 @@ public class BaseDeDatos {
         deportes.add(new Deporte("handball", 14));
         deportes.add(new Deporte("tenis", 2));
         deportes.add(new Deporte("hockey", 22));
-        deportes.add(new Deporte("voley", 12));
+        deportes.add(new Deporte("voley", 4));
         deportes.add(new Deporte("rugby", 30));
     }
 
