@@ -43,7 +43,7 @@ public class BaseDeDatos {
     public void insertJugador(Jugador jugador){
         for (Jugador j : jugadores) {
             if (j.getEmail().equals(jugador.getEmail())) {
-                throw new IllegalArgumentException("Ya existe un jugador con ese email, no se puede registrar. Por favor iniciar sesion");
+                System.out.println("Ya existe un jugador con ese email, no se puede registrar. Por favor iniciar sesion");
             }
         }
         jugador.setId(this.generadorIdRandom());
@@ -56,7 +56,8 @@ public class BaseDeDatos {
                 return jugador;
             }
         }
-        throw new IllegalArgumentException("No existe el jugador con ese id: " + id);
+        System.out.println("No existe el jugador con ese id: " + id);
+        return null;
     }
 
     public void updateJugador(Jugador jugadorActualizado) {
@@ -99,7 +100,8 @@ public class BaseDeDatos {
                 return deporte;
             }
         }
-        throw new IllegalArgumentException("No existe el deporte con ese id: " + id);
+        System.out.println("No existe el deporte con ese id: " + id);
+        return null;
     }
 
     public void updateDeporte(Deporte deporteActualizado) {
@@ -122,7 +124,7 @@ public class BaseDeDatos {
             }
             indice ++;
         }
-        throw new IllegalArgumentException("No existe el deporte con ese id: " + id);
+        System.out.println("No existe el deporte con ese id: " + id);
     }
 
 
@@ -141,7 +143,8 @@ public class BaseDeDatos {
                 return resenia;
             }
         }
-        throw new IllegalArgumentException("No existe la resenia con ese id: " + id);
+        System.out.println("No existe la resenia con ese id: " + id);
+        return null;
     }
 
     public void updateResenia(Resenia reseniaActualizada) {
@@ -164,7 +167,7 @@ public class BaseDeDatos {
             }
             indice ++;
         }
-        throw new IllegalArgumentException("No existe la resenia con ese id: " + id);
+        System.out.println("No existe la resenia con ese id: " + id);
     }
 
     /*
@@ -182,7 +185,8 @@ public class BaseDeDatos {
                 return partido;
             }
         }
-        throw new IllegalArgumentException("No existe el partido con ese id: " + id);
+        System.out.println("No existe el partido con ese id: " + id);
+       return null;
     }
 
     public void updatePartido(Partido partidoActualizado) {
@@ -204,4 +208,5 @@ public class BaseDeDatos {
     public List<Partido> getAllPartidos(){
         return partidos;
     }
+
 }

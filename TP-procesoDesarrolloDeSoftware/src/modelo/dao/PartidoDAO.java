@@ -29,4 +29,5 @@ public class PartidoDAO {
     public List<Partido> getAllPartidos() {
         return baseDeDatos.getAllPartidos();
     }
+
 }

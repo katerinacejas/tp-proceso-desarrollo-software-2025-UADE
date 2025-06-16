@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Partido {
-
     private String id;
     private Deporte deporte;
     private int duracionMin;
@@ -26,7 +25,7 @@ public class Partido {
     private Jugador organizador;
     private NivelJuego nivelJuego;
     private List<Resenia> resenias;
-    private IEstadoPartido estado;
+    private AbstractEstadoPartido estado;
     private Emparejador emparejador;
     private List<IObservers> observadores;
 
@@ -39,67 +38,77 @@ public class Partido {
         this.observadores = new ArrayList<>();
         this.emparejador = new Emparejador();
         this.organizador = new Jugador();
-        this.estado = new PartidoNecesitamosJugadores();
+        this.estado = new PartidoNecesitamosJugadores(this);
     }
 
     /*
         METODOS PARA EL ESTADO DEL PARTIDO
     */
-    public void cambiarEstado(IEstadoPartido estado) {
+    public void cambiarEstado(AbstractEstadoPartido estado) {
         this.estado = estado;
     }
 
     public void cancelar() {
-        estado.cancelar(this);
-        //TODO: definir si queremos hacer algo mas luego de cancelar.
+        this.estado.cancelar();
+        // esto es para actualizar en la base el nuevo jugador en partido
+        this.updatePartido(this);
     }
 
-    public void necesitarJugadores() {
-        estado.necesitarJugadores(this);
+    public void emparejar(Jugador jugador) {
+        this.estado.emparejar(jugador);
+        // esto es para actualizar en la base el nuevo jugador en partido
+        this.updatePartido(this);
     }
 
-    public void armar() {
-        estado.armar(this);
+    public void eliminar(Jugador jugador) {
+        if (jugador == null) {
+            System.out.println("El jugador no puede ser null");
+        }
+
+        // Validar que no sea el organizador
+        if (jugador.equals(this.organizador)) {
+            System.out.println("No se puede eliminar al organizador del partido");
+        }
+
+        boolean eliminado = this.participantes.remove(jugador);
+        if (eliminado) {
+            // Si después de remover necesitamos más jugadores, cambiar estado
+            if (!tieneTodosLosJugadores()) {
+                // pasar a estado necesitamos jugadores
+            }
+            //notificarObservadores();
+        }
     }
 
     public void confirmar() {
-        estado.confirmar(this);
+        this.estado.confirmar();
+        // esto es para actualizar en la base el nuevo jugador en partido
+        this.updatePartido(this);
     }
 
     public void jugar() {
-        estado.jugar(this);
+
     }
 
     public void finalizar() {
-        estado.finalizar(this);
+
+    }
+
+    public void agregarResenia(Resenia resenia) {
+
     }
 
     /*
         METODOS PARA EL EMPAREJAMIENTO DEL PARTIDO
     */
     public boolean puedeEmparejar(Jugador jugador) {
-        if (!tieneTodosLosJugadores() && !yaFueEmparejado(jugador) && emparejador.puedeEmparejar(jugador, this)) {
-            return true;
-        }
-        return false;
+        return !tieneTodosLosJugadores() && !yaFueEmparejado(jugador) && emparejador.puedeEmparejar(jugador, this);
     }
 
     public void cambiarEstrategiaEmparejamiento(IEmparejador estrategia) {
         this.emparejador.cambiarEstrategiaEmparejamiento(estrategia);
     }
 
-    public void emparejar(Jugador jugador) {
-        this.participantes.add(jugador);
-        if (tieneTodosLosJugadores()) {
-            this.armar(); // Cambio automático de estado
-        }
-
-        // esto es para actualizar en la base el nuevo jugador en partido
-        this.updatePartido(this);
-
-        notificarObservadores(); //TODO esta parte
-
-    }
 
     /*
         METODOS UTILES
@@ -135,11 +144,119 @@ public class Partido {
         this.observadores.remove(observador);
     }
 
+    /*
+        METODOS Q SON LLAMADOS POR EL CONTROLLER
+     */
+
+    public void createPartido(Partido partido) {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        partidoDAO.createPartido(partido);
+    }
+
+    public Partido getPartidoById(String id) {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        return partidoDAO.getPartidoById(id);
+    }
+
+    public void updatePartido(Partido partidoActualizado){
+        PartidoDAO partidoDAO = new PartidoDAO();
+        partidoDAO.updatePartido(partidoActualizado);
+    }
+
+    public void deletePartido(String id) {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        partidoDAO.deletePartido(id);
+    }
+
+    public int cantJugadoresDelDeporte() {
+        return this.deporte.getCantJugadores();
+    }
+
+    public boolean leFaltanParticipantes() {
+        return this.getCantidadParticipantes() < this.cantJugadoresDelDeporte();
+    }
+
+    public List<Partido> getAllPartidosNecesitanJugadores() {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        List<Partido> partidos = partidoDAO.getAllPartidos();
+        List<Partido> partidosNecesitanJugadores = new ArrayList<>();
+        for (Partido partido: partidos) {
+            if(partido.leFaltanParticipantes()) {
+                partidosNecesitanJugadores.add(partido);
+            }
+        }
+        return partidosNecesitanJugadores;
+    }
+
+    public List<Partido> getPartidosAptosParaJugador(Jugador jugador){
+        List<Partido> partidos = this.getAllPartidosNecesitanJugadores();
+        return partidos.stream().filter(partido -> partido.puedeEmparejar(jugador)).toList();
+    }
+
+    public List<Partido> getPartidosQuePuedeConfirmar(Jugador jugador) {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        List<Partido> partidos = partidoDAO.getAllPartidos();
+        return partidos.stream()
+                .filter(partido -> partido.getOrganizador() == jugador && partido.tieneTodosLosJugadores())
+                .toList();
+    }
+
+    public List<Partido> getPartidosQuePuedeCancelar(Jugador jugador) {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        List<Partido> partidos = partidoDAO.getAllPartidos();
+        return partidos.stream()
+                .filter(partido -> partido.puedoSerCanceladoPor(jugador))
+                .toList();
+    }
+
+    public boolean puedoSerCanceladoPor(Jugador jugador) {
+        return this.getOrganizador() == jugador && this.estado.puedeSerCancelado();
+    }
+
+    public List<Partido> iniciarPartidosDondeJuega(Jugador jugador) {
+        List<Partido> partidosAIniciar = this.getPartidosDondeParticipa(jugador, PartidoConfirmado.class);
+        if(!partidosAIniciar.isEmpty()) {
+            for(Partido p : partidosAIniciar) {
+                p.jugar();
+            }
+        }
+        return partidosAIniciar;
+    }
+
+    public List<Partido> getPartidosDondeParticipa(Jugador jugador, Class<? extends AbstractEstadoPartido> estadoClase) {
+        PartidoDAO partidoDAO = new PartidoDAO();
+        List<Partido> partidos = partidoDAO.getAllPartidos();
+        if(partidos.isEmpty()){
+            return null;
+        }
+        List<Partido> partidosParticipa = new ArrayList<>();
+        for(Partido p : partidos) {
+            if(p.getParticipantes().contains(jugador) && estadoClase.isInstance(p.getEstado())){
+                partidosParticipa.add(p);
+            }
+        }
+        return partidosParticipa;
+    }
+
+    public List<Partido> finalizarPartidosDondeJuega(Jugador jugador) {
+        List<Partido> partidosAFinalizar = this.getPartidosDondeParticipa(jugador, PartidoEnJuego.class);
+        if(!partidosAFinalizar.isEmpty()) {
+            for(Partido p : partidosAFinalizar) {
+                p.finalizar();
+            }
+        }
+        return partidosAFinalizar;
+    }
+
+    /*
+        GETTERS Y SETTERS
+     */
+
     public Emparejador getEmparejador() {
         return emparejador;
     }
 
-     public String getId() {
+    public String getId() {
         return id;
     }
 
@@ -205,100 +322,14 @@ public class Partido {
 
     public Set<Jugador> getParticipantes() {
         return this.participantes;
-   }
-
-    public void agregarParticipantePorDefault(Jugador jugadorOrganizadorPorDefault) {
-        this.participantes.add(jugadorOrganizadorPorDefault);
     }
 
-    public IEstadoPartido getEstado() {
+    public void agregarJugador(Jugador jugador) {
+        this.participantes.add(jugador);
+    }
+
+    public AbstractEstadoPartido getEstado() {
         return estado;
     }
 
-
-    /*
-        METODOS Q SON LLAMADOS POR EL CONTROLLER
-     */
-
-    public void createPartido(Partido partido) {
-        PartidoDAO partidoDAO = new PartidoDAO();
-        partidoDAO.createPartido(partido);
-        this.necesitarJugadores();
-    }
-
-    public Partido getPartidoById(String id) {
-        PartidoDAO partidoDAO = new PartidoDAO();
-        return partidoDAO.getPartidoById(id);
-    }
-
-    public void updatePartido(Partido partidoActualizado){
-        PartidoDAO partidoDAO = new PartidoDAO();
-        partidoDAO.updatePartido(partidoActualizado);
-    }
-
-    public void deletePartido(String id) {
-        PartidoDAO partidoDAO = new PartidoDAO();
-        partidoDAO.deletePartido(id);
-    }
-
-    public int cantJugadoresDelDeporte() {
-        return this.deporte.getCantJugadores();
-    }
-
-    public boolean leFaltanParticipantes() {
-        return this.getCantidadParticipantes() < this.cantJugadoresDelDeporte();
-    }
-
-    public List<Partido> getAllPartidosNecesitanJugadores() {
-        PartidoDAO partidoDAO = new PartidoDAO();
-        List<Partido> partidos = partidoDAO.getAllPartidos();
-        List<Partido> partidosNecesitanJugadores = new ArrayList<>();
-        for (Partido partido: partidos) {
-            if(partido.leFaltanParticipantes()) {
-                partidosNecesitanJugadores.add(partido);
-            }
-        }
-        return partidosNecesitanJugadores;
-    }
-
-    public List<Partido> getPartidosAptosParaJugador(Jugador jugador){
-        List<Partido> partidos = this.getAllPartidosNecesitanJugadores();
-        return partidos.stream().filter(partido -> partido.puedeEmparejar(jugador)).toList();
-    }
-
-    public Partido getPartidoQuePuedeConfirmar(Jugador jugador) {
-        PartidoDAO partidoDAO = new PartidoDAO();
-        List<Partido> partidos = partidoDAO.getAllPartidos();
-        return partidos.stream()
-                .filter(partido -> partido.getOrganizador() == jugador && partido.tieneTodosLosJugadores())
-                .findFirst().orElse(null);
-    }
-
-
-
-
-
-
-
-    // Remover jugador
-    public boolean eliminarJugador(Jugador jugador) {
-        if (jugador == null) {
-            throw new IllegalArgumentException("El jugador no puede ser null");
-        }
-
-        // Validar que no sea el organizador
-        if (jugador.equals(this.organizador)) {
-            throw new IllegalStateException("No se puede eliminar al organizador del partido");
-        }
-
-        boolean eliminado = this.participantes.remove(jugador);
-        if (eliminado) {
-            // Si después de remover necesitamos más jugadores, cambiar estado
-            if (!tieneTodosLosJugadores()) {
-                this.necesitarJugadores();
-            }
-            //notificarObservadores();
-        }
-        return eliminado;
-    }
 }

@@ -189,11 +189,14 @@ public class VistaPrincipal {
                 "\n 3: Confirmar partido armado (en caso de haber creado uno)" +
                 "\n 4: Cancelar partido que cree" +
                 "\n 5: Dejar resenia del partido" +
-                "\n 6: Cerrar sesion");
+                "\n 6: Iniciar partido" +
+                "\n 7: Finalizar partido" +
+                "\n 8: Darme de baja de un partido" +
+                "\n 9: Cerrar sesion");
         opcionMenu = input.nextInt();
         input.nextLine(); // limpia el salto de línea
 
-        while(opcionMenu != 6) {
+        while(opcionMenu != 9) {
             switch (opcionMenu) {
                 case 1:
                     this.crearPartido(jugadorDTO);
@@ -210,6 +213,15 @@ public class VistaPrincipal {
                 case 5:
                     // TODO this.dejarReseniaPartido(jugadorDTO);
                     break;
+                case 6:
+                    this.iniciarPartido(jugadorDTO);
+                    break;
+                case 7:
+                    this.finalizarPartido(jugadorDTO);
+                    break;
+                case 8:
+                    this.darmeDeBajaDeUnPartido(jugadorDTO);
+                    break;
             }
             System.out.println("\n\n-----------------------------------------------------------------------------------------");
             System.out.println("¡Bienvenido/a " + jugadorDTO.getNombreUsuario() +"!, Elija una opcion ingresando el numero:" +
@@ -218,7 +230,10 @@ public class VistaPrincipal {
                     "\n 3: Confirmar partido armado (en caso de haber creado uno)" +
                     "\n 4: Cancelar partido que cree" +
                     "\n 5: Dejar resenia del partido" +
-                    "\n 6: Cerrar sesion");
+                    "\n 6: Iniciar partido" +
+                    "\n 7: Finalizar partido" +
+                    "\n 8: Darme de baja de un partido" +
+                    "\n : Cerrar sesion");
             opcionMenu = input.nextInt();
             input.nextLine(); // limpia el salto de línea
         }
@@ -283,26 +298,58 @@ public class VistaPrincipal {
         input.nextLine(); // limpia el salto de línea
         PartidoDTO partidoElegidoDTO = partidosDTO.get(iPartidoElegido-1);
         partidoController.unirseAlPartido(partidoElegidoDTO, jugadorDTO);
-        System.out.println("----------------¡Te uniste al partido! :) ----------------");
+
     }
 
     private void confirmarPartidoCreado(JugadorDTO jugadorDTO) {
-        /*
-            ¿EL JUGADOR PUEDE CREAR MAS DE UN PARTIDO? EN ESE CASO, HABRÍA QUE MODIFICAR ESTO
-            PARA QUE LE DEVUELVA UNA LISTA DE PARTIDOS CREADOS QUE AUN NO SE CONFIRMARON
-            Y QUE ELIJA CUAL CONFIRMAR.
-            POR AHORA SOLO CREA UNO Y CONFIRMA UNO
-         */
-        PartidoDTO partidoDTO = partidoController.getPartidoQuePuedeConfirmar(jugadorDTO);
-        if(partidoDTO == null){
-            System.out.println("\"----------------No tenes creado ningun partido para poder confirmar :(  ----------------");
+        List<PartidoDTO> partidosDTO = partidoController.getPartidosQuePuedeConfirmar(jugadorDTO);
+        if(partidosDTO == null){
+            System.out.println("\"---------------- No tenes creado ningun partido para poder confirmar :( ¡Crea uno!----------------");
             return;
         }
-        partidoController.confirmarPartido(partidoDTO);
-        System.out.println("----------------¡Se ha confirmado el partido que creaste para " +partidoDTO.getDeporte() + "! :) ----------------");
+        System.out.println("Elije el partido que queres confirmar indicando el numero de la opcion: ");
+        for(int i = 1; i<= partidosDTO.size(); i++) {
+            // imprime un mensaje del tipo: "1: tenis en Palermo el dia 2025-06-15 15:30"
+            System.out.println(i+": "+ partidosDTO.get(i-1).getDeporte() + " en " + partidosDTO.get(i-1).getZonaGeografica() + " el día " + partidosDTO.get(i-1).getHorarioEncuentro());
+        }
+        int iPartidoElegido = input.nextInt();
+        input.nextLine(); // limpia el salto de línea
+        PartidoDTO partidoElegidoDTO = partidosDTO.get(iPartidoElegido-1);
+        partidoController.confirmarPartido(partidoElegidoDTO);
     }
 
     public void cancelarPartidoCreado(JugadorDTO jugadorDTO) {
+        List<PartidoDTO> partidosDTO = partidoController.getPartidosQuePuedeCancelar(jugadorDTO);
+        if(partidosDTO == null){
+            System.out.println("\"---------------- No tenes creado ningun partido para poder cancelar :( ----------------");
+            return;
+        }
+        System.out.println("Elije el partido que queres cancelar indicando el numero de la opcion: ");
+        for(int i = 1; i<= partidosDTO.size(); i++) {
+            // imprime un mensaje del tipo: "1: tenis en Palermo el dia 2025-06-15 15:30"
+            System.out.println(i+": "+ partidosDTO.get(i-1).getDeporte() + " en " + partidosDTO.get(i-1).getZonaGeografica() + " el día " + partidosDTO.get(i-1).getHorarioEncuentro());
+        }
+        int iPartidoElegido = input.nextInt();
+        input.nextLine(); // limpia el salto de línea
+        PartidoDTO partidoElegidoDTO = partidosDTO.get(iPartidoElegido-1);
+        partidoController.cancelarPartido(partidoElegidoDTO);
+    }
+
+    public void iniciarPartido(JugadorDTO jugadorDTO) {
+        List<PartidoDTO> partidosIniciadosDTO = partidoController.iniciarPartidos(jugadorDTO);
+        if(partidosIniciadosDTO == null) {
+            System.out.println("\"---------------- No se puede iniciar ningun partido porque no estas participando de ningun partido confirmado :( ----------------");
+        }
+    }
+
+    public void finalizarPartido(JugadorDTO jugadorDTO) {
+        List<PartidoDTO> partidosFinalizadosDTO = partidoController.finalizarPartidos(jugadorDTO);
+        if(partidosFinalizadosDTO == null) {
+            System.out.println("\"---------------- No se puede finalizar ningun partido porque no estas participando de ningun partido en juego :( ----------------");
+        }
+    }
+
+    public void darmeDeBajaDeUnPartido(JugadorDTO jugadorDTO){
         // TODO
     }
 }

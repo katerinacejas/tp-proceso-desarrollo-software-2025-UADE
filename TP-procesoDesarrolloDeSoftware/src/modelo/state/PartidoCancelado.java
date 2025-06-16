@@ -1,40 +1,53 @@
 package modelo.state;
 
+import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
+import modelo.entidad.partido.Resenia;
 
-public class PartidoCancelado implements IEstadoPartido {
-    @Override
-    public void cancelar(Partido partido) {
-        partido.cambiarEstado(new PartidoCancelado());
-    }
+public class PartidoCancelado extends AbstractEstadoPartido {
 
-
-    //TODO: DEFINIR MEJOR EL ERROR EN LOS METODOS QUE NO SON DE CANCELAR.
-    /// En este caso, no se puede pasar a otro estado desde "PartidoCancelado".
-
-    @Override
-    public void necesitarJugadores(Partido partido) {
-        throw new IllegalStateException("No se puede necesitar jugadores en un partido cancelado.");
+    public PartidoCancelado(Partido partido) {
+        super(partido);
     }
 
     @Override
-    public void armar(Partido partido) {
-        throw new IllegalStateException("No se puede armar un partido cancelado.");
+    public void cancelar() {
+        partido.cambiarEstado(new PartidoCancelado(partido));
+        System.out.println("----------------¡Se ha cancelado el partido que creaste para " +partido.getDeporte() + "! :) ----------------");
     }
 
     @Override
-    public void confirmar(Partido partido) {
-        throw new IllegalStateException("No se puede confirmar un partido cancelado.");
+    public void emparejar(Jugador jugador) {
+        System.out.println("----------------¡No es posible agregar un jugador a un partido cancelado!.----------------¡");
+    }
+
+    @Override
+    public void eliminar(Jugador jugador) {
 
     }
 
     @Override
-    public void jugar(Partido partido) {
-        throw new IllegalStateException("No se puede jugar un partido cancelado.");
+    public void confirmar() {
+        System.out.println("----------------¡No es posible confirmar un partido cancelado!.----------------¡");
     }
 
     @Override
-    public void finalizar(Partido partido) {
-        throw new IllegalStateException("No se puede finalizar un partido cancelado.");
+    public void jugar() {
+        System.out.println("----------------¡No es posible jugar un partido cancelado!.----------------¡");
+    }
+
+    @Override
+    public void finalizar() {
+        System.out.println("----------------¡No es posible finalizar un partido que ya fue cancelado!.----------------¡");
+    }
+
+    @Override
+    public void agregarResenia(Resenia resenia) {
+
+    }
+
+    @Override
+    public boolean puedeSerCancelado() {
+        return false;
     }
 }
