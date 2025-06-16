@@ -12,12 +12,12 @@ public class PartidoFinalizado extends AbstractEstadoPartido {
 
     @Override
     public void cancelar() {
-
+        System.out.println("----------------¡No es posible cancelar un partido finalizado!.----------------¡");
     }
 
     @Override
     public void emparejar(Jugador jugador) {
-
+        System.out.println("----------------¡No es posible agregar un jugador a un partido finalizado!.----------------¡");
     }
 
     @Override
@@ -27,21 +27,26 @@ public class PartidoFinalizado extends AbstractEstadoPartido {
 
     @Override
     public void confirmar() {
-
+        System.out.println("----------------¡No es posible confirmar un partido finalizado!.----------------¡");
     }
 
     @Override
     public void jugar() {
-
+        System.out.println("----------------¡No es posible jugar un partido finalizado!.----------------¡");
     }
 
     @Override
     public void finalizar() {
-
+        System.out.println("----------------¡No es posible finalizar un partido que ya fue finalizado!.----------------¡");
     }
 
     @Override
     public void agregarResenia(Resenia resenia) {
 
+    }
+
+    @Override
+    public boolean puedeSerCancelado() {
+        return false;
     }
 }

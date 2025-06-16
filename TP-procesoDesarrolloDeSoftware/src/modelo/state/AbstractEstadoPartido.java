@@ -18,4 +18,5 @@ public abstract class AbstractEstadoPartido {
     public abstract void jugar();
     public abstract void finalizar();
     public abstract void agregarResenia(Resenia resenia);
+    public abstract boolean puedeSerCancelado();
 }
