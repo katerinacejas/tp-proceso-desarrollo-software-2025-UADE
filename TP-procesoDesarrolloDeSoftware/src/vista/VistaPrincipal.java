@@ -350,7 +350,20 @@ public class VistaPrincipal {
     }
 
     public void darmeDeBajaDeUnPartido(JugadorDTO jugadorDTO){
-        // TODO
+        List<PartidoDTO> partidosDTO = partidoController.getPartidosDondeDarmeDeBaja(jugadorDTO);
+        if(partidosDTO == null){
+            System.out.println("\"---------------- No estas participando de ningun partido (o eres el organizador), no puedes darte de baja :( ----------------");
+            return;
+        }
+        System.out.println("Elije el partido en el que queres darte de baja, indicando el numero de la opcion: ");
+        for(int i = 1; i<= partidosDTO.size(); i++) {
+            // imprime un mensaje del tipo: "1: tenis en Palermo el dia 2025-06-15 15:30"
+            System.out.println(i+": "+ partidosDTO.get(i-1).getDeporte() + " en " + partidosDTO.get(i-1).getZonaGeografica() + " el día " + partidosDTO.get(i-1).getHorarioEncuentro());
+        }
+        int iPartidoElegido = input.nextInt();
+        input.nextLine(); // limpia el salto de línea
+        PartidoDTO partidoElegidoDTO = partidosDTO.get(iPartidoElegido-1);
+        partidoController.darmeDeBaja(partidoElegidoDTO, jugadorDTO);
     }
 }
 
