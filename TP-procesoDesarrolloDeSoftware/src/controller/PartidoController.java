@@ -5,7 +5,9 @@ import modelo.dto.PartidoDTO;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
+import modelo.enumerador.EstadoPartido;
 import modelo.enumerador.EstrategiaPartido;
+import modelo.state.PartidoConfirmado;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +29,12 @@ public class PartidoController {
         Partido nuevoPartido = convertToEntity(partidoDTO);
         partido.createPartido(nuevoPartido);
         partidoDTO.setId(nuevoPartido.getId());
+        //para setearle el estado al DTO
+        EstadoPartido estadoEnum = Arrays.stream(EstadoPartido.values())
+                .filter(e -> e.coincideConEnum(partido.getEstado()))
+                .findFirst()
+                .orElseThrow();
+        partidoDTO.setEstado(estadoEnum);
     }
 
     public PartidoDTO getPartidoById(String id) {
@@ -50,12 +58,13 @@ public class PartidoController {
         // TODO partido.setZonaGeografica(partidoDTO.getZonaGeografica()); //ver después cómo se persiste la zona geográfica
         partido.setHorarioEncuentro(partidoDTO.getHorarioEncuentro());
 
-        //desde la vista se setea al organizador como el primer participante del partido por default
-        partido.agregarParticipantePorDefault(jugador.getJugadorById(partidoDTO.getParticipantes().iterator().next()));
+        //el organizador como el primer participante del partido por default
+        partido.agregarJugador(jugador.getJugadorById(partidoDTO.getParticipantes().iterator().next()));
 
         partido.setOrganizador(jugador.getJugadorById(partidoDTO.getOrganizador()));
         partido.cambiarEstrategiaEmparejamiento(partidoDTO.getEstrategiaPartido().crearToEntity());
         partido.setNivelJuego(partidoDTO.getNivelJuego());
+        partido.cambiarEstado(partidoDTO.getEstado().crearToEntity(partido));
         return partido;
     }
 
@@ -80,6 +89,12 @@ public class PartidoController {
                                                  .orElseThrow();
         partidoDTO.setEstrategiaPartido(estrategiaEnum);
         partidoDTO.setNivelJuego(partido.getNivelJuego());
+        //para setearle el estado al DTO
+        EstadoPartido estadoEnum = Arrays.stream(EstadoPartido.values())
+                .filter(e -> e.coincideConEnum(partido.getEstado()))
+                .findFirst()
+                .orElseThrow();
+        partidoDTO.setEstado(estadoEnum);
         return partidoDTO;
     }
 
@@ -99,27 +114,54 @@ public class PartidoController {
          Ademas de unirlo, debería llamar al partido para evaluar el estado para ver si con esa union ya puede pasar avisarle
          al organizador que ya esta el partido armado para que lo confirme y pase a estado confirmado
          */
-        Partido partidoEntity = convertToEntity(partidoDTO);
-        partidoEntity.setId(partidoDTO.getId());
+        Partido partidoEntity = partido.getPartidoById(partidoDTO.getId());
         Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
         partidoEntity.emparejar(jugadorEntity);
-        // creo que ahí estaría ok. solo falta los observadores y notificaciones en Partido. pero este metodo estaría ok
+        // solo falta los observadores y notificaciones en Partido. pero este metodo estaría ok
     }
 
     public void confirmarPartido(PartidoDTO partidoDTO) {
-        Partido partidoEntity = convertToEntity(partidoDTO);
-        partidoEntity.setId(partidoDTO.getId());
-        partidoEntity.confirmar();
+        partido.getPartidoById(partidoDTO.getId()).confirmar();
     }
 
-    public PartidoDTO getPartidoQuePuedeConfirmar(JugadorDTO jugadorDTO) {
+    public List<PartidoDTO> getPartidosQuePuedeConfirmar(JugadorDTO jugadorDTO) {
         Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
-        jugadorEntity.setId(jugadorDTO.getId());
-        Partido partidoEntity = partido.getPartidoQuePuedeConfirmar(jugadorEntity);
-        if(partidoEntity == null){
+        List<Partido> partidos = partido.getPartidosQuePuedeConfirmar(jugadorEntity);
+        if(partidos.isEmpty()){
             return null;
         }
-        PartidoDTO partidoDTO = convertToDTO(partidoEntity);
-        return partidoDTO;
+        return partidos.stream().map(partido -> convertToDTO(partido)).toList();
     }
+
+    public List<PartidoDTO> getPartidosQuePuedeCancelar(JugadorDTO jugadorDTO) {
+        Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
+        List<Partido> partidos = partido.getPartidosQuePuedeCancelar(jugadorEntity);
+        if(partidos.isEmpty()){
+            return null;
+        }
+        return partidos.stream().map(partido -> convertToDTO(partido)).toList();
+    }
+
+    public void cancelarPartido(PartidoDTO partidoDTO) {
+        partido.getPartidoById(partidoDTO.getId()).cancelar();
+    }
+
+    public List<PartidoDTO> iniciarPartidos(JugadorDTO jugadorDTO) {
+        Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
+        List<Partido> partidos = partido.iniciarPartidosDondeJuega(jugadorEntity);
+        if(partidos.isEmpty()){
+            return null;
+        }
+        return partidos.stream().map(partido -> convertToDTO(partido)).toList();
+    }
+
+    public List<PartidoDTO> finalizarPartidos(JugadorDTO jugadorDTO) {
+        Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
+        List<Partido> partidos = partido.finalizarPartidosDondeJuega(jugadorEntity);
+        if(partidos.isEmpty()){
+            return null;
+        }
+        return partidos.stream().map(partido -> convertToDTO(partido)).toList();
+    }
+
 }
