@@ -5,6 +5,7 @@ import controller.JugadorController;
 import controller.PartidoController;
 import controller.ReseniaController;
 import modelo.dto.*;
+import modelo.entidad.jugador.Jugador;
 import modelo.enumerador.EstrategiaPartido;
 import modelo.enumerador.NivelJuego;
 
@@ -29,8 +30,45 @@ public class VistaPrincipal {
         input = new Scanner(System.in);
         formatoDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         //this.crearDeportesPreCargados();
+        this.loaderPartidosYJugadores();
     }
 
+    private void loaderPartidosYJugadores() {
+        JugadorDTO guidoMoraDTO = new JugadorDTO();
+        guidoMoraDTO.setNombreUsuario("guidoMora");
+        guidoMoraDTO.setEmail("guidomora@gmail.com");
+        guidoMoraDTO.setContrasenia("guido2020");
+        guidoMoraDTO.setCelular("1144102034");
+        guidoMoraDTO.setLatitud(-34.574);
+        guidoMoraDTO.setLongitud(-58.420);
+        guidoMoraDTO.setDeportesFavoritos(Arrays.asList("tenis", "handball"));
+        guidoMoraDTO.setNivelPorDeporte(Map.of("tenis", NivelJuego.INTERMEDIO, "handball", NivelJuego.AVANZADO));
+        jugadorController.createJugador(guidoMoraDTO);
+
+        JugadorDTO juliRodriguezDTO = new JugadorDTO();
+        juliRodriguezDTO.setNombreUsuario("juliRodriguez");
+        juliRodriguezDTO.setEmail("juliarodriguez@gmail.com");
+        juliRodriguezDTO.setContrasenia("juliR2020");
+        juliRodriguezDTO.setCelular("1120303040");
+        juliRodriguezDTO.setLatitud(-34.579);
+        juliRodriguezDTO.setLongitud(-58.429);
+        juliRodriguezDTO.setDeportesFavoritos(Arrays.asList("tenis", "handball"));
+        juliRodriguezDTO.setNivelPorDeporte(Map.of("tenis", NivelJuego.INTERMEDIO, "handball", NivelJuego.AVANZADO));
+        jugadorController.createJugador(juliRodriguezDTO);
+
+        PartidoDTO partidoTenisDTO = new PartidoDTO();
+        partidoTenisDTO.setDeporte("tenis");
+        partidoTenisDTO.setDuracionMin(60);
+        partidoTenisDTO.setZonaGeografica("Palermo");
+        partidoTenisDTO.setHorarioEncuentro((LocalDateTime.of(2025, 06, 16, 20, 30)));
+        partidoTenisDTO.setOrganizador(guidoMoraDTO.getId());
+        partidoTenisDTO.agregarParticipantePorDefault(guidoMoraDTO.getId());
+        partidoTenisDTO.setNivelJuego(NivelJuego.AVANZADO);
+        partidoTenisDTO.setEstrategiaPartido(EstrategiaPartido.HISTORIAL);
+        partidoController.createPartido(partidoTenisDTO);
+    }
+
+    
     private void crearDeportesPreCargados() {
         DeporteDTO futbolDTO = new DeporteDTO();
         futbolDTO.setNombre("futbol");
