@@ -5,6 +5,7 @@ import modelo.dto.PartidoDTO;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
+import modelo.entidad.ubicacion.ZonaGeografica;
 import modelo.enumerador.EstadoPartido;
 import modelo.enumerador.EstrategiaPartido;
 import modelo.state.PartidoConfirmado;
@@ -18,11 +19,13 @@ public class PartidoController {
     private Partido partido;
     private Deporte deporte;
     private Jugador jugador;
+    private ZonaGeografica zonaGeografica;
 
     public PartidoController(){
         partido = new Partido();
         deporte = new Deporte();
         jugador = new Jugador();
+        zonaGeografica = new ZonaGeografica();
     }
 
     public void createPartido(PartidoDTO partidoDTO) {
@@ -55,7 +58,7 @@ public class PartidoController {
         Partido partido = new Partido();
         partido.setDeporte(deporte.getDeporteById(partidoDTO.getDeporte()));
         partido.setDuracionMin(partidoDTO.getDuracionMin());
-        // TODO partido.setZonaGeografica(partidoDTO.getZonaGeografica()); //ver después cómo se persiste la zona geográfica
+        partido.setZonaGeografica(zonaGeografica.getZonaGeograficaByName(partidoDTO.getZonaGeografica()));
         partido.setHorarioEncuentro(partidoDTO.getHorarioEncuentro());
 
         //el organizador como el primer participante del partido por default
