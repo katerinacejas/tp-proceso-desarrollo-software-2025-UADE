@@ -4,10 +4,7 @@ import controller.DeporteController;
 import controller.JugadorController;
 import controller.PartidoController;
 import controller.ReseniaController;
-import modelo.dto.DeporteDTO;
-import modelo.dto.JugadorDTO;
-import modelo.dto.LoginDTO;
-import modelo.dto.PartidoDTO;
+import modelo.dto.*;
 import modelo.enumerador.EstrategiaPartido;
 import modelo.enumerador.NivelJuego;
 
@@ -31,7 +28,7 @@ public class VistaPrincipal {
         partidoController = new PartidoController();
         input = new Scanner(System.in);
         formatoDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.crearDeportesPreCargados();
+        //this.crearDeportesPreCargados();
     }
 
     private void crearDeportesPreCargados() {
@@ -211,7 +208,7 @@ public class VistaPrincipal {
                     this.cancelarPartidoCreado(jugadorDTO);
                     break;
                 case 5:
-                    // TODO this.dejarReseniaPartido(jugadorDTO);
+                    this.dejarReseniaPartido(jugadorDTO);
                     break;
                 case 6:
                     this.iniciarPartido(jugadorDTO);
@@ -233,7 +230,7 @@ public class VistaPrincipal {
                     "\n 6: Iniciar partido" +
                     "\n 7: Finalizar partido" +
                     "\n 8: Darme de baja de un partido" +
-                    "\n : Cerrar sesion");
+                    "\n 9: Cerrar sesion");
             opcionMenu = input.nextInt();
             input.nextLine(); // limpia el salto de línea
         }
@@ -267,6 +264,11 @@ public class VistaPrincipal {
 
         partidoDTO.agregarParticipantePorDefault(jugadorDTO.getId());
         partidoDTO.setOrganizador(jugadorDTO.getId());
+
+        System.out.println("Ingrese la zona en la que se va a jugar:" +
+                "\n Opciones validas: Palermo, Recoleta, Belgrano, Caballito, Villa Urquiza, Almagro, San Telmo, Flores, Barracas, Puerto Madero");
+        String zona = input.nextLine();
+        partidoDTO.setZonaGeografica(zona);
 
         System.out.println("Ingrese la estrategia elegida para emparejar a los participantes: " +
                 "\nOpciones validas: NIVEL, UBICACION, HISTORIAL: ");
@@ -364,6 +366,37 @@ public class VistaPrincipal {
         input.nextLine(); // limpia el salto de línea
         PartidoDTO partidoElegidoDTO = partidosDTO.get(iPartidoElegido-1);
         partidoController.darmeDeBaja(partidoElegidoDTO, jugadorDTO);
+    }
+
+    private void dejarReseniaPartido(JugadorDTO jugadorDTO) {
+        List<PartidoDTO> partidosDTO = partidoController.getPartidosDondeDejarResenia(jugadorDTO);
+        if(partidosDTO == null){
+            System.out.println("\"---------------- Aun no finalizó ningun partido donde participaste o no te anotaste en ninguno :( ----------------");
+            return;
+        }
+        System.out.println("Elije el partido en el que queres dejar una reseña, indicando el numero de la opcion: ");
+        for(int i = 1; i<= partidosDTO.size(); i++) {
+            // imprime un mensaje del tipo: "1: tenis en Palermo el dia 2025-06-15 15:30"
+            System.out.println(i+": "+ partidosDTO.get(i-1).getDeporte() + " en " + partidosDTO.get(i-1).getZonaGeografica() + " el día " + partidosDTO.get(i-1).getHorarioEncuentro());
+        }
+        int iPartidoElegido = input.nextInt();
+        input.nextLine(); // limpia el salto de línea
+        PartidoDTO partidoElegidoDTO = partidosDTO.get(iPartidoElegido-1);
+
+        System.out.println("Ingrese su comentario sobre el partido:");
+        String comentario = input.nextLine();
+        ReseniaDTO reseniaDTO = new ReseniaDTO();
+        reseniaDTO.setComentario(comentario);
+
+
+        System.out.println("Ingrese la puntuacion sobre el partido: del 1 al 5");
+        int puntuacion = input.nextInt();
+        input.nextLine(); // limpia el salto de línea
+        reseniaDTO.setPuntuacion(puntuacion);
+
+        reseniaController.createResenia(reseniaDTO);
+
+        partidoController.dejarResenia(partidoElegidoDTO, reseniaDTO);
     }
 }
 

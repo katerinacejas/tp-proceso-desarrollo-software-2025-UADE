@@ -7,6 +7,15 @@ public class Deporte {
     private String nombre;
     private int cantJugadores;
 
+    public Deporte() {
+
+    }
+
+    public Deporte(String nombre, int cantJugadores) {
+        this.id = nombre;
+        this.nombre = nombre;
+        this.cantJugadores = cantJugadores;
+    }
     // metodos de que se llaman en el controller
     public Deporte createDeporte(Deporte deporte) {
         DeporteDAO deporteDAO = new DeporteDAO();

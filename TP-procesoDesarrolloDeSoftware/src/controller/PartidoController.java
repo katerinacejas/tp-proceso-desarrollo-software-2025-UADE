@@ -2,13 +2,16 @@ package controller;
 
 import modelo.dto.JugadorDTO;
 import modelo.dto.PartidoDTO;
+import modelo.dto.ReseniaDTO;
 import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
-import modelo.enumerador.EstadoPartido;
+import modelo.entidad.partido.Resenia;
+//import modelo.enumerador.EstadoPartido;
 import modelo.enumerador.EstrategiaPartido;
 import modelo.entidad.notificacion.Notificador;
 import modelo.entidad.ubicacion.ZonaGeografica;
+import modelo.state.PartidoNecesitamosJugadores;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,11 +23,13 @@ public class PartidoController {
     private Deporte deporte;
     private Jugador jugador;
     private ZonaGeografica zonaGeografica;
+    private Resenia resenia;
 
     public PartidoController(){
         partido = new Partido();
         deporte = new Deporte();
         jugador = new Jugador();
+        resenia = new Resenia();
         zonaGeografica = new ZonaGeografica();
     }
 
@@ -32,12 +37,10 @@ public class PartidoController {
         Partido nuevoPartido = convertToEntity(partidoDTO);
         partido.createPartido(nuevoPartido);
         partidoDTO.setId(nuevoPartido.getId());
-        //para setearle el estado al DTO
-        EstadoPartido estadoEnum = Arrays.stream(EstadoPartido.values())
-                .filter(e -> e.coincideConEnum(partido.getEstado()))
-                .findFirst()
-                .orElseThrow();
-        partidoDTO.setEstado(estadoEnum);
+
+        //crear notificador edl partido
+        Notificador notificador = new Notificador(partido);
+        partido.addObservador(notificador);
     }
 
     public PartidoDTO getPartidoById(String id) {
@@ -55,7 +58,7 @@ public class PartidoController {
     }
 
     private Partido convertToEntity(PartidoDTO partidoDTO) {
-        Partido partido = new Partido();
+        Partido partido = new Partido(new PartidoNecesitamosJugadores());
         partido.setDeporte(deporte.getDeporteById(partidoDTO.getDeporte()));
         partido.setDuracionMin(partidoDTO.getDuracionMin());
         partido.setZonaGeografica(zonaGeografica.getZonaGeograficaByName(partidoDTO.getZonaGeografica()));
@@ -67,7 +70,6 @@ public class PartidoController {
         partido.setOrganizador(jugador.getJugadorById(partidoDTO.getOrganizador()));
         partido.cambiarEstrategiaEmparejamiento(partidoDTO.getEstrategiaPartido().crearToEntity());
         partido.setNivelJuego(partidoDTO.getNivelJuego());
-        partido.cambiarEstado(partidoDTO.getEstado().crearToEntity(partido));
         return partido;
     }
 
@@ -93,11 +95,14 @@ public class PartidoController {
         partidoDTO.setEstrategiaPartido(estrategiaEnum);
         partidoDTO.setNivelJuego(partido.getNivelJuego());
         //para setearle el estado al DTO
+        /*
         EstadoPartido estadoEnum = Arrays.stream(EstadoPartido.values())
+
                 .filter(e -> e.coincideConEnum(partido.getEstado()))
                 .findFirst()
                 .orElseThrow();
         partidoDTO.setEstado(estadoEnum);
+         */
         return partidoDTO;
     }
 
@@ -179,5 +184,20 @@ public class PartidoController {
     public void darmeDeBaja(PartidoDTO partidoElegidoDTO, JugadorDTO jugadorDTO) {
         partido.getPartidoById(partidoElegidoDTO.getId())
                 .eliminar(jugador.getJugadorById(jugadorDTO.getId()));
+    }
+
+    public List<PartidoDTO> getPartidosDondeDejarResenia(JugadorDTO jugadorDTO) {
+        Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
+        List<Partido> partidos = partido.getPartidosDondeDejarResenia(jugadorEntity);
+        if(partidos.isEmpty()){
+            return null;
+        }
+        return partidos.stream().map(partido -> convertToDTO(partido)).toList();
+    }
+
+    public void dejarResenia(PartidoDTO partidoElegidoDTO, ReseniaDTO reseniaDTO) {
+        Resenia reseniaEntity = resenia.getReseniaById(reseniaDTO.getId());
+        partido.getPartidoById(partidoElegidoDTO.getId())
+                .agregarResenia(reseniaEntity);
     }
 }

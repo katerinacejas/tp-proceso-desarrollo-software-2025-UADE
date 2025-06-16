@@ -1,17 +1,22 @@
 package modelo.state;
 
 import modelo.entidad.jugador.Jugador;
-import modelo.entidad.partido.Partido;
 import modelo.entidad.partido.Resenia;
 
 public class PartidoNecesitamosJugadores extends AbstractEstadoPartido {
 
-    public PartidoNecesitamosJugadores(Partido partido) {
-        super(partido);
+    public PartidoNecesitamosJugadores() {
+    }
+
+    @Override
+    public String mensajeEstado() {
+        return String.format("¡Hola %s! Se ha unido un nuevo jugador al partido de %s. Faltan %d jugadores más.",
+                partido.getDeporte(),
+                partido.cantidadJugadoresQueFaltan());
     }
 
     public void cancelar() {
-        partido.cambiarEstado(new PartidoCancelado(partido));
+        partido.cambiarEstado(new PartidoCancelado());
         System.out.println("----------------¡Se ha cancelado el partido que creaste para " +partido.getDeporte() + "! :) ----------------");
     }
 
@@ -20,9 +25,8 @@ public class PartidoNecesitamosJugadores extends AbstractEstadoPartido {
         partido.agregarJugador(jugador);
         System.out.println("----------------¡Te uniste al partido! :) ----------------");
         if (partido.tieneTodosLosJugadores()) {
-            partido.cambiarEstado(new PartidoArmado(partido));
+            partido.cambiarEstado(new PartidoArmado());
         }
-        //TODO esta parte notificarObservadores();
     }
 
     @Override
@@ -48,7 +52,7 @@ public class PartidoNecesitamosJugadores extends AbstractEstadoPartido {
 
     @Override
     public void agregarResenia(Resenia resenia) {
-
+        System.out.println("----------------¡No es posible agregar una reseña sobre un partido que no fue finalizado!.----------------¡");
     }
 
     @Override

@@ -1,17 +1,13 @@
-package modelo.enumerador;
+/*package modelo.enumerador;
 
 import modelo.entidad.partido.Partido;
 import modelo.state.*;
 
 public enum EstadoPartido {
-    /*
-        le meti un factory method asi como el de estrategia partido, asi evitamos
-        los choclos de codigo al pedo en convert to entity del controller
-     */
     PARTIDO_CANCELADO {
         @Override
         public AbstractEstadoPartido crearToEntity(Partido partido) {
-            return new PartidoCancelado(partido);
+            return new PartidoCancelado();
         }
 
         @Override
@@ -22,7 +18,7 @@ public enum EstadoPartido {
     PARTIDO_NECESITAMOS_JUGADORES {
         @Override
         public AbstractEstadoPartido crearToEntity(Partido partido) {
-            return new PartidoNecesitamosJugadores(partido);
+            return new PartidoNecesitamosJugadores();
         }
 
         @Override
@@ -33,7 +29,7 @@ public enum EstadoPartido {
     PARTIDO_ARMADO {
         @Override
         public AbstractEstadoPartido crearToEntity(Partido partido) {
-            return new PartidoArmado(partido);
+            return new PartidoArmado();
         }
 
         @Override
@@ -44,7 +40,7 @@ public enum EstadoPartido {
     PARTIDO_CONFIRMADO {
         @Override
         public AbstractEstadoPartido crearToEntity(Partido partido) {
-            return new PartidoConfirmado(partido);
+            return new PartidoConfirmado();
         }
 
         @Override
@@ -55,7 +51,7 @@ public enum EstadoPartido {
     PARTIDO_EN_JUEGO {
         @Override
         public AbstractEstadoPartido crearToEntity(Partido partido) {
-            return new PartidoEnJuego(partido);
+            return new PartidoEnJuego();
         }
 
         @Override
@@ -66,7 +62,7 @@ public enum EstadoPartido {
     PARTIDO_FINALIZADO {
         @Override
         public AbstractEstadoPartido crearToEntity(Partido partido) {
-            return new PartidoFinalizado(partido);
+            return new PartidoFinalizado();
         }
 
         @Override
@@ -79,3 +75,4 @@ public enum EstadoPartido {
     public abstract boolean coincideConEnum(AbstractEstadoPartido estado);
 
 }
+*/

@@ -1,18 +1,22 @@
 package modelo.state;
 
 import modelo.entidad.jugador.Jugador;
-import modelo.entidad.partido.Partido;
 import modelo.entidad.partido.Resenia;
 
 public class PartidoCancelado extends AbstractEstadoPartido {
 
-    public PartidoCancelado(Partido partido) {
-        super(partido);
+    public PartidoCancelado() {
+    }
+
+    @Override
+    public String mensajeEstado() {
+        return String.format("Lamentamos informarte que el partido de %s del %s ha sido cancelado.",
+                partido.getDeporte(), partido.getHorarioEncuentro());
     }
 
     @Override
     public void cancelar() {
-        partido.cambiarEstado(new PartidoCancelado(partido));
+        partido.cambiarEstado(new PartidoCancelado());
         System.out.println("----------------¡Se ha cancelado el partido que creaste para " +partido.getDeporte() + "! :) ----------------");
     }
 
@@ -43,7 +47,7 @@ public class PartidoCancelado extends AbstractEstadoPartido {
 
     @Override
     public void agregarResenia(Resenia resenia) {
-
+        System.out.println("----------------¡No es posible agregar una reseña sobre un partido que no fue finalizado!.----------------¡");
     }
 
     @Override

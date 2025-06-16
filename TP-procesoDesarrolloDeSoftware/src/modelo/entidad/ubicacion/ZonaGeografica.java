@@ -3,6 +3,7 @@ package modelo.entidad.ubicacion;
 import modelo.dao.ZonaGeograficaDAO;
 
 public class ZonaGeografica {
+    private String id;
     private String nombre;
     private Geolocalizacion centro;
     private double radioKm;
@@ -10,6 +11,7 @@ public class ZonaGeografica {
     public ZonaGeografica(){}
 
     public ZonaGeografica(String nombre, Geolocalizacion geolocalizacion, double radioKm){
+        this.id = nombre;
         this.nombre = nombre;
         this.centro = geolocalizacion;
         this.radioKm = radioKm;

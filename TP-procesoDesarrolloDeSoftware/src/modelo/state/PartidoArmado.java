@@ -1,18 +1,22 @@
 package modelo.state;
 
 import modelo.entidad.jugador.Jugador;
-import modelo.entidad.partido.Partido;
 import modelo.entidad.partido.Resenia;
 
 public class PartidoArmado extends AbstractEstadoPartido {
 
-    public PartidoArmado(Partido partido) {
-        super(partido);
+    public PartidoArmado() {
+    }
+
+    @Override
+    public String mensajeEstado() {
+        return String.format("El partido de %s está completo y listo para ser confirmado. Horario: %s",
+                partido.getDeporte(), partido.getHorarioEncuentro());
     }
 
     @Override
     public void cancelar() {
-        partido.cambiarEstado(new PartidoCancelado(partido));
+        partido.cambiarEstado(new PartidoCancelado());
         System.out.println("----------------¡Se ha cancelado el partido que creaste para " +partido.getDeporte() + "! :) ----------------");
     }
 
@@ -24,13 +28,13 @@ public class PartidoArmado extends AbstractEstadoPartido {
     @Override
     public void eliminar(Jugador jugador) {
         partido.removeJugador(jugador);
-        partido.cambiarEstado(new PartidoNecesitamosJugadores(partido));
+        partido.cambiarEstado(new PartidoNecesitamosJugadores());
         System.out.println("----------------¡Se te eliminó del partido para " +partido.getDeporte() + "! :) ----------------");
     }
 
     @Override
     public void confirmar() {
-        partido.cambiarEstado(new PartidoConfirmado(partido));
+        partido.cambiarEstado(new PartidoConfirmado());
         System.out.println("----------------¡Se ha confirmado el partido que creaste para " +partido.getDeporte() + "! :) ----------------");
     }
 
@@ -46,7 +50,7 @@ public class PartidoArmado extends AbstractEstadoPartido {
 
     @Override
     public void agregarResenia(Resenia resenia) {
-
+        System.out.println("----------------¡No es posible agregar una reseña sobre un partido que no fue finalizado!.----------------¡");
     }
 
     @Override

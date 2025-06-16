@@ -8,8 +8,13 @@ import java.time.LocalDateTime;
 
 public class PartidoEnJuego extends AbstractEstadoPartido {
 
-    public PartidoEnJuego(Partido partido) {
-        super(partido);
+    public PartidoEnJuego() {
+    }
+
+    @Override
+    public String mensajeEstado() {
+        return String.format("El partido de %s está por comenzar. ¡Que lo disfrutes!",
+                partido.getDeporte());
     }
 
     @Override
@@ -41,7 +46,7 @@ public class PartidoEnJuego extends AbstractEstadoPartido {
     public void finalizar() {
         LocalDateTime finalizacionPartido = partido.getHorarioEncuentro().minusMinutes(((long) partido.getDuracionMin()));
         if(LocalDateTime.now().isAfter(finalizacionPartido)){
-            partido.cambiarEstado(new PartidoFinalizado(partido));
+            partido.cambiarEstado(new PartidoFinalizado());
             // imprime un mensaje del tipo: "Se finalizó el partido de tenis en Palermo programado para el dia 2025-06-15 15:30"
             System.out.println("Se finalizó el partido de "+ partido.getDeporte() + " en " + partido.getZonaGeografica() + " programado para el dia " + partido.getHorarioEncuentro());
             return;
@@ -52,7 +57,7 @@ public class PartidoEnJuego extends AbstractEstadoPartido {
 
     @Override
     public void agregarResenia(Resenia resenia) {
-
+        System.out.println("----------------¡No es posible agregar una reseña sobre un partido que no fue finalizado!.----------------¡");
     }
 
     @Override
