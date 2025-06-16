@@ -12,7 +12,7 @@ public class PartidoConfirmado extends AbstractEstadoPartido {
 
     @Override
     public String mensajeEstado() {
-        return String.format("El partido de %s ha sido confirmado. ¡Nos vemos el %s!",
+        return String.format(" El partido de %s ha sido confirmado. ¡Nos vemos el %s!",
                 partido.getDeporte().getNombre(), partido.getHorarioEncuentro());
     }
 

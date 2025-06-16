@@ -10,7 +10,7 @@ public class PartidoCancelado extends AbstractEstadoPartido {
 
     @Override
     public String mensajeEstado() {
-        return String.format("Lamentamos informarte que el partido de %s del %s ha sido cancelado.",
+        return String.format(" Lamentamos informarte que el partido de %s del %s ha sido cancelado.",
                 partido.getDeporte().getNombre(), partido.getHorarioEncuentro());
     }
 

@@ -10,7 +10,7 @@ public class PartidoArmado extends AbstractEstadoPartido {
 
     @Override
     public String mensajeEstado() {
-        return String.format("El partido de %s está completo y listo para ser confirmado. Horario: %s",
+        return String.format(" El partido de %s está completo y listo para ser confirmado. Horario: %s",
                 partido.getDeporte().getNombre(), partido.getHorarioEncuentro());
     }
 

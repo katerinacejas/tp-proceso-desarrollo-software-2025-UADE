@@ -10,9 +10,7 @@ public class PartidoNecesitamosJugadores extends AbstractEstadoPartido {
 
     @Override
     public String mensajeEstado() {
-        return String.format("¡Hola %s! Se ha unido un nuevo jugador al partido de %s. Faltan %d jugadores más.",
-                partido.getDeporte().getNombre(),
-                partido.cantidadJugadoresQueFaltan());
+        return null;
     }
 
     public void cancelar() {

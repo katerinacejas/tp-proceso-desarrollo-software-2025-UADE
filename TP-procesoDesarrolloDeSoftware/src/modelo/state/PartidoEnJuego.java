@@ -13,7 +13,7 @@ public class PartidoEnJuego extends AbstractEstadoPartido {
 
     @Override
     public String mensajeEstado() {
-        return String.format("El partido de %s está por comenzar. ¡Que lo disfrutes!",
+        return String.format(" El partido de %s está por comenzar. ¡Que lo disfrutes!",
                 partido.getDeporte().getNombre());
     }
 

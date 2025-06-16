@@ -39,7 +39,7 @@ public class PartidoController {
         partidoDTO.setId(nuevoPartido.getId());
 
         //crear notificador edl partido
-        Notificador notificador = new Notificador(partido);
+        Notificador notificador = new Notificador(nuevoPartido);
         nuevoPartido.addObservador(notificador);
     }
 

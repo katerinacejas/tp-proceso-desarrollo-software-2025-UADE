@@ -10,7 +10,7 @@ public class PartidoFinalizado extends AbstractEstadoPartido {
 
     @Override
     public String mensajeEstado() {
-        return String.format("El partido de %s ha finalizado. ¡Gracias por participar!",
+        return String.format(" El partido de %s ha finalizado. ¡Gracias por participar!",
                 partido.getDeporte().getNombre());
     }
 
