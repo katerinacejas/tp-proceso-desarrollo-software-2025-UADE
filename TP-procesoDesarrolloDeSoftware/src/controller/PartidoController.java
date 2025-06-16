@@ -7,7 +7,8 @@ import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
 import modelo.enumerador.EstadoPartido;
 import modelo.enumerador.EstrategiaPartido;
-import modelo.state.PartidoConfirmado;
+import modelo.entidad.notificacion.Notificador;
+import modelo.entidad.ubicacion.ZonaGeografica;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,11 +19,13 @@ public class PartidoController {
     private Partido partido;
     private Deporte deporte;
     private Jugador jugador;
+    private ZonaGeografica zonaGeografica;
 
     public PartidoController(){
         partido = new Partido();
         deporte = new Deporte();
         jugador = new Jugador();
+        zonaGeografica = new ZonaGeografica();
     }
 
     public void createPartido(PartidoDTO partidoDTO) {
@@ -55,7 +58,7 @@ public class PartidoController {
         Partido partido = new Partido();
         partido.setDeporte(deporte.getDeporteById(partidoDTO.getDeporte()));
         partido.setDuracionMin(partidoDTO.getDuracionMin());
-        // TODO partido.setZonaGeografica(partidoDTO.getZonaGeografica()); //ver después cómo se persiste la zona geográfica
+        partido.setZonaGeografica(zonaGeografica.getZonaGeograficaByName(partidoDTO.getZonaGeografica()));
         partido.setHorarioEncuentro(partidoDTO.getHorarioEncuentro());
 
         //el organizador como el primer participante del partido por default
@@ -73,7 +76,7 @@ public class PartidoController {
         partidoDTO.setId(partido.getId());
         partidoDTO.setDeporte(partido.getDeporte().getId());
         partidoDTO.setDuracionMin(partido.getDuracionMin());
-       // TODO partidoDTO.setZonaGeografica(partido.getZonaGeografica());
+        partidoDTO.setZonaGeografica(partido.getZonaGeografica().getNombre());
         partidoDTO.setHorarioEncuentro(partido.getHorarioEncuentro());
         partidoDTO.setParticipantes(partido.getParticipantes()
                                     .stream().map(jugador -> jugador.getId())

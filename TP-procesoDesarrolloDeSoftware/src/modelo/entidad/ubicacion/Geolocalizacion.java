@@ -4,6 +4,13 @@ public class Geolocalizacion {
     private double latitud;
     private double longitud;
 
+    public Geolocalizacion(){}
+
+    public Geolocalizacion(double latitud, double longitud){
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+
     public void setLatitud(double latitud) {
         this.latitud = latitud;
     }

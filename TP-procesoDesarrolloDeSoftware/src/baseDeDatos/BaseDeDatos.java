@@ -4,6 +4,8 @@ import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
 import modelo.entidad.partido.Resenia;
+import modelo.entidad.ubicacion.Geolocalizacion;
+import modelo.entidad.ubicacion.ZonaGeografica;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ public class BaseDeDatos {
     private List<Partido> partidos;
     private List<Deporte> deportes;
     private List<Resenia> resenias;
+    private List<ZonaGeografica> zonasGeograficas;
 
     private static BaseDeDatos instancia; //para singleton
 
@@ -22,6 +25,8 @@ public class BaseDeDatos {
         partidos = new ArrayList<>();
         deportes = new ArrayList<>();
         resenias = new ArrayList<>();
+        zonasGeograficas = new ArrayList<>();
+        cargarZonasGeograficas();
     }
 
     //singleton
@@ -207,6 +212,29 @@ public class BaseDeDatos {
 
     public List<Partido> getAllPartidos(){
         return partidos;
+    }
+
+    public ZonaGeografica getZonaGeograficaByName(String zonaGeografica) {
+        for (ZonaGeografica zona : zonasGeograficas){
+            if (zona.getNombre().equals(zonaGeografica)){
+                return zona;
+            }
+        }
+        System.out.println("No existe una zona con ese nombre: " + zonaGeografica);
+        return null;
+    }
+
+    private void cargarZonasGeograficas() {
+        zonasGeograficas.add(new ZonaGeografica("Palermo", new Geolocalizacion(-34.578, -58.426), 5));
+        zonasGeograficas.add(new ZonaGeografica("Recoleta", new Geolocalizacion(-34.588, -58.393), 3));
+        zonasGeograficas.add(new ZonaGeografica("Belgrano", new Geolocalizacion(-34.563, -58.460), 4));
+        zonasGeograficas.add(new ZonaGeografica("Caballito", new Geolocalizacion(-34.618, -58.441), 4));
+        zonasGeograficas.add(new ZonaGeografica("Villa Urquiza", new Geolocalizacion(-34.580, -58.491), 4));
+        zonasGeograficas.add(new ZonaGeografica("Almagro", new Geolocalizacion(-34.609, -58.419), 3));
+        zonasGeograficas.add(new ZonaGeografica("San Telmo", new Geolocalizacion(-34.621, -58.373), 2));
+        zonasGeograficas.add(new ZonaGeografica("Flores", new Geolocalizacion(-34.634, -58.468), 5));
+        zonasGeograficas.add(new ZonaGeografica("Barracas", new Geolocalizacion(-34.642, -58.381), 4));
+        zonasGeograficas.add(new ZonaGeografica("Puerto Madero", new Geolocalizacion(-34.608, -58.362), 3));
     }
 
 }
