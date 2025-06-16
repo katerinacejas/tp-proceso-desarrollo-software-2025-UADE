@@ -12,6 +12,7 @@ public class Deporte {
     }
 
     public Deporte(String nombre, int cantJugadores) {
+        this.id = nombre;
         this.nombre = nombre;
         this.cantJugadores = cantJugadores;
     }

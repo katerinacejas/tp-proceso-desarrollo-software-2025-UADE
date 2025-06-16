@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 public class Partido {
     private String id;
@@ -55,8 +56,8 @@ public class Partido {
     */
 
     public void setearEstadoInicial (AbstractEstadoPartido estadoInicial){
-        this.estado.setContexto(this);
         this.estado = estadoInicial;
+        this.estado.setContexto(this);
     }
 
     public void cambiarEstado(AbstractEstadoPartido estado) {
@@ -242,9 +243,12 @@ public class Partido {
     public List<Partido> getPartidosDondeParticipa(Jugador jugador, Class<? extends AbstractEstadoPartido> estadoClase) {
         PartidoDAO partidoDAO = new PartidoDAO();
         List<Partido> partidos = partidoDAO.getAllPartidos();
+        /*
         if(partidos.isEmpty()){
             return null;
         }
+        */
+
         List<Partido> partidosParticipa = new ArrayList<>();
         for(Partido p : partidos) {
             if(p.getParticipantes().contains(jugador) && estadoClase.isInstance(p.getEstado())){
@@ -269,10 +273,14 @@ public class Partido {
         List<Partido> lista1 = getPartidosDondeParticipa(jugador, PartidoNecesitamosJugadores.class);
         List<Partido> lista2 = getPartidosDondeParticipa(jugador, PartidoArmado.class);
         List<Partido> partidos = new ArrayList<>(lista1);
-        partidos.addAll(lista2);
+        for (Partido partido : lista1){
+            partidos.add(partido);
+        }
+        for (Partido partido : lista2){
+            partidos.add(partido);
+        }
         // saco los partidos q el jugador creó porque no se puede dar de baja de esos
-        partidos.stream().filter(partido -> !partido.getOrganizador().equals(jugador));
-        return partidos;
+        return partidos.stream().filter(partido -> !partido.getOrganizador().equals(jugador)).collect(Collectors.toList());
     }
 
     public List<Partido> getPartidosDondeDejarResenia(Jugador jugador) {

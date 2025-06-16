@@ -7,7 +7,7 @@ import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
 import modelo.entidad.partido.Resenia;
-import modelo.enumerador.EstadoPartido;
+//import modelo.enumerador.EstadoPartido;
 import modelo.enumerador.EstrategiaPartido;
 import modelo.entidad.notificacion.Notificador;
 import modelo.entidad.ubicacion.ZonaGeografica;
@@ -37,12 +37,6 @@ public class PartidoController {
         Partido nuevoPartido = convertToEntity(partidoDTO);
         partido.createPartido(nuevoPartido);
         partidoDTO.setId(nuevoPartido.getId());
-        //para setearle el estado al DTO
-        EstadoPartido estadoEnum = Arrays.stream(EstadoPartido.values())
-                .filter(e -> e.coincideConEnum(partido.getEstado()))
-                .findFirst()
-                .orElseThrow();
-        partidoDTO.setEstado(estadoEnum);
 
         //crear notificador edl partido
         Notificador notificador = new Notificador(partido);
@@ -76,7 +70,6 @@ public class PartidoController {
         partido.setOrganizador(jugador.getJugadorById(partidoDTO.getOrganizador()));
         partido.cambiarEstrategiaEmparejamiento(partidoDTO.getEstrategiaPartido().crearToEntity());
         partido.setNivelJuego(partidoDTO.getNivelJuego());
-        partido.cambiarEstado(partidoDTO.getEstado().crearToEntity(partido));
         return partido;
     }
 
@@ -102,11 +95,14 @@ public class PartidoController {
         partidoDTO.setEstrategiaPartido(estrategiaEnum);
         partidoDTO.setNivelJuego(partido.getNivelJuego());
         //para setearle el estado al DTO
+        /*
         EstadoPartido estadoEnum = Arrays.stream(EstadoPartido.values())
+
                 .filter(e -> e.coincideConEnum(partido.getEstado()))
                 .findFirst()
                 .orElseThrow();
         partidoDTO.setEstado(estadoEnum);
+         */
         return partidoDTO;
     }
 

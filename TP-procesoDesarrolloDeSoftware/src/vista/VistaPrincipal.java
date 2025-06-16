@@ -230,7 +230,7 @@ public class VistaPrincipal {
                     "\n 6: Iniciar partido" +
                     "\n 7: Finalizar partido" +
                     "\n 8: Darme de baja de un partido" +
-                    "\n : Cerrar sesion");
+                    "\n 9: Cerrar sesion");
             opcionMenu = input.nextInt();
             input.nextLine(); // limpia el salto de línea
         }
@@ -264,6 +264,11 @@ public class VistaPrincipal {
 
         partidoDTO.agregarParticipantePorDefault(jugadorDTO.getId());
         partidoDTO.setOrganizador(jugadorDTO.getId());
+
+        System.out.println("Ingrese la zona en la que se va a jugar:" +
+                "\n Opciones validas: Palermo, Recoleta, Belgrano, Caballito, Villa Urquiza, Almagro, San Telmo, Flores, Barracas, Puerto Madero");
+        String zona = input.nextLine();
+        partidoDTO.setZonaGeografica(zona);
 
         System.out.println("Ingrese la estrategia elegida para emparejar a los participantes: " +
                 "\nOpciones validas: NIVEL, UBICACION, HISTORIAL: ");

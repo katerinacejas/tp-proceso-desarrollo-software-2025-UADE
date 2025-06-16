@@ -1,13 +1,9 @@
-package modelo.enumerador;
+/*package modelo.enumerador;
 
 import modelo.entidad.partido.Partido;
 import modelo.state.*;
 
 public enum EstadoPartido {
-    /*
-        le meti un factory method asi como el de estrategia partido, asi evitamos
-        los choclos de codigo al pedo en convert to entity del controller
-     */
     PARTIDO_CANCELADO {
         @Override
         public AbstractEstadoPartido crearToEntity(Partido partido) {
@@ -79,3 +75,4 @@ public enum EstadoPartido {
     public abstract boolean coincideConEnum(AbstractEstadoPartido estado);
 
 }
+*/
