@@ -1,14 +1,20 @@
 package controller;
 
+import modelo.dto.JugadorDTO;
 import modelo.dto.ReseniaDTO;
+import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Resenia;
+
+import java.util.List;
 
 public class ReseniaController {
 
     private Resenia resenia;
+    private Jugador jugador;
 
     public ReseniaController() {
         resenia = new Resenia();
+        jugador = new Jugador();
     }
 
     public void createResenia(ReseniaDTO reseniaDTO) {
@@ -46,4 +52,5 @@ public class ReseniaController {
         reseniaDTO.setId(resenia.getId());
         return reseniaDTO;
     }
+
 }
