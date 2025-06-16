@@ -9,9 +9,6 @@ import modelo.enumerador.NivelJuego;
 import modelo.observer.IObservers;
 import modelo.state.*;
 import modelo.strategy.emparejamiento.IEmparejador;
-import modelo.entidad.notificacion.Notificador;
-import modelo.strategy.notificacion.NotificacionEmail;
-import modelo.strategy.notificacion.IServicioNotificacion;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,17 +39,29 @@ public class Partido {
         this.observadores = new ArrayList<>();
         this.emparejador = new Emparejador();
         this.organizador = new Jugador();
-        this.estado = new PartidoNecesitamosJugadores(this);
-        IServicioNotificacion estrategiaNotificacion = new NotificacionEmail();
-        Notificador notificador = new Notificador(this, estrategiaNotificacion);
-        this.addObservador(notificador);
+    }
+
+    public Partido(AbstractEstadoPartido estadoInicial) {
+        this.participantes = new HashSet<>();
+        this.resenias = new ArrayList<>();
+        this.observadores = new ArrayList<>();
+        this.emparejador = new Emparejador();
+        this.organizador = new Jugador();
+        setearEstadoInicial(estadoInicial);
     }
 
     /*
         METODOS PARA EL ESTADO DEL PARTIDO
     */
+
+    public void setearEstadoInicial (AbstractEstadoPartido estadoInicial){
+        this.estado.setContexto(this);
+        this.estado = estadoInicial;
+    }
+
     public void cambiarEstado(AbstractEstadoPartido estado) {
         AbstractEstadoPartido estadoAnterior = this.estado;
+        this.estado.setContexto(this);
         this.estado = estado;
 
         // Solo notifica si cambió el estado
@@ -98,7 +107,9 @@ public class Partido {
     }
 
     public void agregarResenia(Resenia resenia) {
-
+        this.estado.agregarResenia(resenia);
+        // esto es para actualizar en la base el nuevo jugador en partido
+        this.updatePartido(this);
     }
 
     /*
@@ -264,10 +275,21 @@ public class Partido {
         return partidos;
     }
 
+    public List<Partido> getPartidosDondeDejarResenia(Jugador jugador) {
+        return getPartidosDondeParticipa(jugador, PartidoFinalizado.class);
+    }
+
     public void removeJugador(Jugador jugador) {
         this.participantes.remove(jugador);
     }
 
+    public String mensajeEstado(){
+        return this.estado.mensajeEstado();
+    }
+
+    public int cantidadJugadoresQueFaltan() {
+        return deporte.getCantJugadores() - getCantidadParticipantes();
+    }
 
     /*
         GETTERS Y SETTERS
@@ -351,6 +373,10 @@ public class Partido {
 
     public AbstractEstadoPartido getEstado() {
         return estado;
+    }
+
+    public void addResenia(Resenia resenia) {
+        this.resenias.add(resenia);
     }
 
 }

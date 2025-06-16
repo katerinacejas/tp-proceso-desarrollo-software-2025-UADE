@@ -27,6 +27,7 @@ public class BaseDeDatos {
         resenias = new ArrayList<>();
         zonasGeograficas = new ArrayList<>();
         cargarZonasGeograficas();
+        cargarDeportes();
     }
 
     //singleton
@@ -235,6 +236,15 @@ public class BaseDeDatos {
         zonasGeograficas.add(new ZonaGeografica("Flores", new Geolocalizacion(-34.634, -58.468), 5));
         zonasGeograficas.add(new ZonaGeografica("Barracas", new Geolocalizacion(-34.642, -58.381), 4));
         zonasGeograficas.add(new ZonaGeografica("Puerto Madero", new Geolocalizacion(-34.608, -58.362), 3));
+    }
+
+    private void cargarDeportes() {
+        deportes.add(new Deporte("futbol", 22));
+        deportes.add(new Deporte("handball", 14));
+        deportes.add(new Deporte("tenis", 2));
+        deportes.add(new Deporte("hockey", 22));
+        deportes.add(new Deporte("voley", 12));
+        deportes.add(new Deporte("rugby", 30));
     }
 
 }

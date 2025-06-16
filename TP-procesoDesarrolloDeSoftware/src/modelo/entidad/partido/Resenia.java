@@ -14,18 +14,18 @@ public class Resenia {
     }
 
     public Resenia getReseniaById(String id){
-        ReseniaDAO deporteDAO = new ReseniaDAO();
-        return deporteDAO.getReseniaById(id);
+        ReseniaDAO reseniaDAO = new ReseniaDAO();
+        return reseniaDAO.getReseniaById(id);
     }
 
     public void updateResenia(Resenia deporte) {
-        ReseniaDAO deporteDAO = new ReseniaDAO();
-        deporteDAO.updateResenia(deporte);
+        ReseniaDAO reseniaDAO = new ReseniaDAO();
+        reseniaDAO.updateResenia(deporte);
     }
 
     public void deleteResenia(String id) {
-        ReseniaDAO deporteDAO = new ReseniaDAO();
-        deporteDAO.deleteResenia(id);
+        ReseniaDAO reseniaDAO = new ReseniaDAO();
+        reseniaDAO.deleteResenia(id);
     }
 
 

@@ -1,13 +1,17 @@
 package modelo.state;
 
 import modelo.entidad.jugador.Jugador;
-import modelo.entidad.partido.Partido;
 import modelo.entidad.partido.Resenia;
 
 public class PartidoFinalizado extends AbstractEstadoPartido {
 
-    public PartidoFinalizado(Partido partido) {
-        super(partido);
+    public PartidoFinalizado() {
+    }
+
+    @Override
+    public String mensajeEstado() {
+        return String.format("El partido de %s ha finalizado. ¡Gracias por participar!",
+                partido.getDeporte());
     }
 
     @Override
@@ -42,7 +46,8 @@ public class PartidoFinalizado extends AbstractEstadoPartido {
 
     @Override
     public void agregarResenia(Resenia resenia) {
-
+        partido.addResenia(resenia);
+        System.out.println("----------------¡Se ha publicado tu reseña sobre el partido de " + partido.getDeporte() + "! :) ----------------");
     }
 
     @Override
