@@ -61,14 +61,9 @@ public class Partido {
     }
 
     public void cambiarEstado(AbstractEstadoPartido estado) {
-        AbstractEstadoPartido estadoAnterior = this.estado;
-        this.estado.setContexto(this);
+        estado.setContexto(this);
         this.estado = estado;
-
-        // Solo notifica si cambió el estado
-        if (estadoAnterior.getClass() != estado.getClass()) {
-            notificarObservadores();
-        }
+        notificarObservadores();
     }
 
     public void cancelar() {

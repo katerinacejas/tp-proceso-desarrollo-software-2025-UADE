@@ -14,7 +14,7 @@ public class PartidoEnJuego extends AbstractEstadoPartido {
     @Override
     public String mensajeEstado() {
         return String.format("El partido de %s está por comenzar. ¡Que lo disfrutes!",
-                partido.getDeporte());
+                partido.getDeporte().getNombre());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class PartidoEnJuego extends AbstractEstadoPartido {
         if(LocalDateTime.now().isAfter(finalizacionPartido)){
             partido.cambiarEstado(new PartidoFinalizado());
             // imprime un mensaje del tipo: "Se finalizó el partido de tenis en Palermo programado para el dia 2025-06-15 15:30"
-            System.out.println("Se finalizó el partido de "+ partido.getDeporte() + " en " + partido.getZonaGeografica() + " programado para el dia " + partido.getHorarioEncuentro());
+            System.out.println("Se finalizó el partido de "+ partido.getDeporte().getNombre() + " en " + partido.getZonaGeografica().getNombre() + " programado para el dia " + partido.getHorarioEncuentro());
             return;
         }
 
