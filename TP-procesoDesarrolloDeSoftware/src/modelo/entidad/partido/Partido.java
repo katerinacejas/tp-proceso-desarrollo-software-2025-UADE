@@ -61,23 +61,9 @@ public class Partido {
     }
 
     public void eliminar(Jugador jugador) {
-        if (jugador == null) {
-            System.out.println("El jugador no puede ser null");
-        }
-
-        // Validar que no sea el organizador
-        if (jugador.equals(this.organizador)) {
-            System.out.println("No se puede eliminar al organizador del partido");
-        }
-
-        boolean eliminado = this.participantes.remove(jugador);
-        if (eliminado) {
-            // Si después de remover necesitamos más jugadores, cambiar estado
-            if (!tieneTodosLosJugadores()) {
-                // pasar a estado necesitamos jugadores
-            }
-            //notificarObservadores();
-        }
+        this.estado.eliminar(jugador);
+        // esto es para actualizar en la base el nuevo jugador en partido
+        this.updatePartido(this);
     }
 
     public void confirmar() {
@@ -87,11 +73,15 @@ public class Partido {
     }
 
     public void jugar() {
-
+        this.estado.jugar();
+        // esto es para actualizar en la base el nuevo jugador en partido
+        this.updatePartido(this);
     }
 
     public void finalizar() {
-
+        this.estado.finalizar();
+        // esto es para actualizar en la base el nuevo jugador en partido
+        this.updatePartido(this);
     }
 
     public void agregarResenia(Resenia resenia) {
@@ -247,6 +237,22 @@ public class Partido {
         }
         return partidosAFinalizar;
     }
+
+    public List<Partido> getPartidosDondeDarmeDeBaja(Jugador jugador) {
+        // solo se podría dar de baja de partidos q aun necesitan jugadores o que estan armados pero no confirmados
+        List<Partido> lista1 = getPartidosDondeParticipa(jugador, PartidoNecesitamosJugadores.class);
+        List<Partido> lista2 = getPartidosDondeParticipa(jugador, PartidoArmado.class);
+        List<Partido> partidos = new ArrayList<>(lista1);
+        partidos.addAll(lista2);
+        // saco los partidos q el jugador creó porque no se puede dar de baja de esos
+        partidos.stream().filter(partido -> !partido.getOrganizador().equals(jugador));
+        return partidos;
+    }
+
+    public void removeJugador(Jugador jugador) {
+        this.participantes.remove(jugador);
+    }
+
 
     /*
         GETTERS Y SETTERS

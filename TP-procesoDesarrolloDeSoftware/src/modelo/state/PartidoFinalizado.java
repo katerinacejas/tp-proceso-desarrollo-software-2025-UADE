@@ -22,7 +22,7 @@ public class PartidoFinalizado extends AbstractEstadoPartido {
 
     @Override
     public void eliminar(Jugador jugador) {
-
+        System.out.println("----------------¡No es posible eliminarte de un partido finalizado!.----------------¡");
     }
 
     @Override

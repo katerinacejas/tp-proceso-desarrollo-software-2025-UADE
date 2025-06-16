@@ -23,7 +23,7 @@ public class PartidoCancelado extends AbstractEstadoPartido {
 
     @Override
     public void eliminar(Jugador jugador) {
-
+        System.out.println("----------------¡No es posible eliminarte de un partido cancelado!.----------------¡");
     }
 
     @Override
