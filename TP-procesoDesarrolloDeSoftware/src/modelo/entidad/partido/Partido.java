@@ -238,11 +238,6 @@ public class Partido {
     public List<Partido> getPartidosDondeParticipa(Jugador jugador, Class<? extends AbstractEstadoPartido> estadoClase) {
         PartidoDAO partidoDAO = new PartidoDAO();
         List<Partido> partidos = partidoDAO.getAllPartidos();
-        /*
-        if(partidos.isEmpty()){
-            return null;
-        }
-        */
 
         List<Partido> partidosParticipa = new ArrayList<>();
         for(Partido p : partidos) {

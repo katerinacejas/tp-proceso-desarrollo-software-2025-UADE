@@ -327,9 +327,6 @@ public class VistaPrincipal {
         input.nextLine(); // limpia el salto de línea
         partidoDTO.setDuracionMin(duracionMin);
 
-        //TODO: ESTO HAY QUE PONER LA ZONA GEOGRAFICA PERO NO ESTA HECHA EN EL CONTROLLER
-        //System.out.println("Ingrese la zona geografica :");
-
         System.out.println("Ingrese el dia y hora del partido (yyyy-MM-dd hh:mm) :");
         String horarioEncuentroStr = input.nextLine();
         LocalDateTime horarioEncuentro = LocalDateTime.parse(horarioEncuentroStr, formatoDateTime);

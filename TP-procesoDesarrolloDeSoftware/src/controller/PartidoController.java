@@ -7,7 +7,6 @@ import modelo.entidad.deporte.Deporte;
 import modelo.entidad.jugador.Jugador;
 import modelo.entidad.partido.Partido;
 import modelo.entidad.partido.Resenia;
-//import modelo.enumerador.EstadoPartido;
 import modelo.enumerador.EstrategiaPartido;
 import modelo.entidad.notificacion.Notificador;
 import modelo.entidad.ubicacion.ZonaGeografica;
@@ -94,15 +93,6 @@ public class PartidoController {
                                                  .orElseThrow();
         partidoDTO.setEstrategiaPartido(estrategiaEnum);
         partidoDTO.setNivelJuego(partido.getNivelJuego());
-        //para setearle el estado al DTO
-        /*
-        EstadoPartido estadoEnum = Arrays.stream(EstadoPartido.values())
-
-                .filter(e -> e.coincideConEnum(partido.getEstado()))
-                .findFirst()
-                .orElseThrow();
-        partidoDTO.setEstado(estadoEnum);
-         */
         return partidoDTO;
     }
 
@@ -119,13 +109,10 @@ public class PartidoController {
          este metodo no evalua si el jugador PUEDE unirse, porque si la vista le pidio ejecutar este metodo
          al controller, es porque antes le ejecutó el getPartidosAptosParaJugador, y el jugador selecciono uno
          al que ya sabe que puede unirse.
-         Ademas de unirlo, debería llamar al partido para evaluar el estado para ver si con esa union ya puede pasar avisarle
-         al organizador que ya esta el partido armado para que lo confirme y pase a estado confirmado
          */
         Partido partidoEntity = partido.getPartidoById(partidoDTO.getId());
         Jugador jugadorEntity = jugador.getJugadorById(jugadorDTO.getId());
         partidoEntity.emparejar(jugadorEntity);
-        // solo falta los observadores y notificaciones en Partido. pero este metodo estaría ok
     }
 
     public void confirmarPartido(PartidoDTO partidoDTO) {

@@ -14279,32 +14279,12 @@
 									"model": {
 										"$ref": "AAAAAAGXe1fCwNU2UcE="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe7+2LRRXofc=",
-											"_parent": {
-												"$ref": "AAAAAAGXe7+2LRRWV8o="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe1iNKOnZqG8="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 3778,
-											"top": 2112,
-											"width": 238.38330078125,
-											"height": 13,
-											"text": "+partido: Partido",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
 									"top": 2107,
 									"width": 248.38330078125,
-									"height": 23
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -14328,7 +14308,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2135,
+											"top": 2122,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+PartidoCancelado()",
@@ -14346,7 +14326,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2150,
+											"top": 2137,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+mensajeEstado(): String",
@@ -14364,7 +14344,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2165,
+											"top": 2152,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+cancelar(): void",
@@ -14382,7 +14362,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2180,
+											"top": 2167,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+emparejar(jugador: Jugador): void",
@@ -14400,7 +14380,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2195,
+											"top": 2182,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+eliminar(jugador: Jugador): void",
@@ -14418,7 +14398,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2210,
+											"top": 2197,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+confirmar(): void",
@@ -14436,7 +14416,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2225,
+											"top": 2212,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+jugar(): void",
@@ -14454,7 +14434,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2240,
+											"top": 2227,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+finalizar(): void",
@@ -14472,7 +14452,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2255,
+											"top": 2242,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+agregarResenia(resenia: Resenia): void",
@@ -14490,7 +14470,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2270,
+											"top": 2257,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+puedeSerCancelado(): boolean",
@@ -14500,7 +14480,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
-									"top": 2130,
+									"top": 2117,
 									"width": 248.38330078125,
 									"height": 158
 								},
@@ -16669,32 +16649,12 @@
 									"model": {
 										"$ref": "AAAAAAGXe1aq969iwe4="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe7+2LhTASRM=",
-											"_parent": {
-												"$ref": "AAAAAAGXe7+2LhS/KfQ="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe1bo1bNYVu8="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 3778,
-											"top": 2592,
-											"width": 238.38330078125,
-											"height": 13,
-											"text": "-partido: Partido",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
 									"top": 2587,
 									"width": 248.38330078125,
-									"height": 23
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -16718,7 +16678,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2615,
+											"top": 2602,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+PartidoArmado()",
@@ -16736,7 +16696,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2630,
+											"top": 2617,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+mensajeEstado(): String",
@@ -16754,7 +16714,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2645,
+											"top": 2632,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+cancelar(): void",
@@ -16772,7 +16732,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2660,
+											"top": 2647,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+emparejar(jugador: Jugador): void",
@@ -16790,7 +16750,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2675,
+											"top": 2662,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+eliminar(jugador: Jugador): void",
@@ -16808,7 +16768,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2690,
+											"top": 2677,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+confirmar(): void",
@@ -16826,7 +16786,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2705,
+											"top": 2692,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+jugar(): void",
@@ -16844,7 +16804,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2720,
+											"top": 2707,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+finalizar(): void",
@@ -16862,7 +16822,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2735,
+											"top": 2722,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+agregarResenia(resenia: Resenia): void",
@@ -16880,7 +16840,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2750,
+											"top": 2737,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+puedeSerCancelado(): boolean",
@@ -16890,7 +16850,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
-									"top": 2610,
+									"top": 2597,
 									"width": 248.38330078125,
 									"height": 158
 								},
@@ -17079,24 +17039,6 @@
 											"height": 13,
 											"text": "+Attribute1",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe7+2LhTWqCc=",
-											"_parent": {
-												"$ref": "AAAAAAGXe7+2LhTUxK4="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe2dQ4jhbQhA="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 3778,
-											"top": 2842,
-											"width": 238.38330078125,
-											"height": 13,
-											"text": "+partido: Partido",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
@@ -17104,7 +17046,7 @@
 									"left": 3773,
 									"top": 2835,
 									"width": 248.38330078125,
-									"height": 25
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -17128,7 +17070,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2865,
+											"top": 2850,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+PartidoConfirmado()",
@@ -17146,7 +17088,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2880,
+											"top": 2865,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+mensajeEstado(): String",
@@ -17164,7 +17106,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2895,
+											"top": 2880,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+cancelar(): void",
@@ -17182,7 +17124,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2910,
+											"top": 2895,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+emparejar(jugador: Jugador): void",
@@ -17200,7 +17142,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2925,
+											"top": 2910,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+eliminar(jugador: Jugador): void",
@@ -17218,7 +17160,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2940,
+											"top": 2925,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+confirmar(): void",
@@ -17236,7 +17178,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2955,
+											"top": 2940,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+jugar(): void",
@@ -17254,7 +17196,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2970,
+											"top": 2955,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+finalizar(): void",
@@ -17272,7 +17214,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2985,
+											"top": 2970,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+agregarResenia(resenia: Resenia): void",
@@ -17290,7 +17232,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3000,
+											"top": 2985,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+puedeSerCancelado(): boolean",
@@ -17300,7 +17242,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
-									"top": 2860,
+									"top": 2845,
 									"width": 248.38330078125,
 									"height": 158
 								},
@@ -17470,32 +17412,12 @@
 									"model": {
 										"$ref": "AAAAAAGXe2kM/eJvdGo="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe7+2LhTrYV0=",
-											"_parent": {
-												"$ref": "AAAAAAGXe7+2LhTqe+M="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe2lV3/inFDA="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 3778,
-											"top": 3088,
-											"width": 239,
-											"height": 13,
-											"text": "+partido: Partido",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
 									"top": 3083,
 									"width": 249,
-									"height": 23
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -17519,7 +17441,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3111,
+											"top": 3098,
 											"width": 239,
 											"height": 13,
 											"text": "+PartidoEnJuego()",
@@ -17537,7 +17459,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3126,
+											"top": 3113,
 											"width": 239,
 											"height": 13,
 											"text": "+mensajeEstado(): String",
@@ -17555,7 +17477,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3141,
+											"top": 3128,
 											"width": 239,
 											"height": 13,
 											"text": "+cancelar(): void",
@@ -17573,7 +17495,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3156,
+											"top": 3143,
 											"width": 239,
 											"height": 13,
 											"text": "+emparejar(jugador: Jugador): void",
@@ -17591,7 +17513,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3171,
+											"top": 3158,
 											"width": 239,
 											"height": 13,
 											"text": "+eliminar(jugador: Jugador): void",
@@ -17609,7 +17531,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3186,
+											"top": 3173,
 											"width": 239,
 											"height": 13,
 											"text": "+confirmar(): void",
@@ -17627,7 +17549,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3201,
+											"top": 3188,
 											"width": 239,
 											"height": 13,
 											"text": "+jugar(): void",
@@ -17645,7 +17567,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3216,
+											"top": 3203,
 											"width": 239,
 											"height": 13,
 											"text": "+finalizar(): void",
@@ -17663,7 +17585,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3231,
+											"top": 3218,
 											"width": 239,
 											"height": 13,
 											"text": "+agregarResenia(resenia: Resenia): void",
@@ -17681,7 +17603,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3246,
+											"top": 3233,
 											"width": 239,
 											"height": 13,
 											"text": "+puedeSerCancelado(): boolean",
@@ -17691,7 +17613,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
-									"top": 3106,
+									"top": 3093,
 									"width": 249,
 									"height": 158
 								},
@@ -17861,32 +17783,12 @@
 									"model": {
 										"$ref": "AAAAAAGXe2tnOLnBdhs="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe7+2LhUAe3Y=",
-											"_parent": {
-												"$ref": "AAAAAAGXe7+2LhT/9VE="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe2uWpbxevMs="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 3778,
-											"top": 2344,
-											"width": 238.38330078125,
-											"height": 13,
-											"text": "+partido: Partido",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
 									"top": 2339,
 									"width": 248.38330078125,
-									"height": 23
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -17910,7 +17812,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2367,
+											"top": 2354,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+PartidoNecesitamosJugadores()",
@@ -17928,7 +17830,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2382,
+											"top": 2369,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+mensajeEstado(): String",
@@ -17946,7 +17848,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2397,
+											"top": 2384,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+cancelar(): void",
@@ -17964,7 +17866,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2412,
+											"top": 2399,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+emparejar(jugador: Jugador): void",
@@ -17982,7 +17884,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2427,
+											"top": 2414,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+eliminar(jugador: Jugador): void",
@@ -18000,7 +17902,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2442,
+											"top": 2429,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+confirmar(): void",
@@ -18018,7 +17920,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2457,
+											"top": 2444,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+jugar(): void",
@@ -18036,7 +17938,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2472,
+											"top": 2459,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+finalizar(): void",
@@ -18054,7 +17956,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2487,
+											"top": 2474,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+agregarResenia(resenia: Resenia): void",
@@ -18072,7 +17974,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 2502,
+											"top": 2489,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+puedeSerCancelado(): boolean",
@@ -18082,7 +17984,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
-									"top": 2362,
+									"top": 2349,
 									"width": 248.38330078125,
 									"height": 158
 								},
@@ -18919,32 +18821,12 @@
 									"model": {
 										"$ref": "AAAAAAGXe2pIoFDFEME="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe7+2LhUxfNk=",
-											"_parent": {
-												"$ref": "AAAAAAGXe7+2LhUwOdo="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe2psHFNi/TI="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 3778,
-											"top": 3336,
-											"width": 238.38330078125,
-											"height": 13,
-											"text": "+partido: Partido",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
 									"top": 3331,
 									"width": 248.38330078125,
-									"height": 23
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -18968,7 +18850,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3359,
+											"top": 3346,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+PartidoFinalizado()",
@@ -18986,7 +18868,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3374,
+											"top": 3361,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+mensajeEstado(): String",
@@ -19004,7 +18886,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3389,
+											"top": 3376,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+cancelar(): void",
@@ -19022,7 +18904,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3404,
+											"top": 3391,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+emparejar(jugador: Jugador): void",
@@ -19040,7 +18922,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3419,
+											"top": 3406,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+eliminar(jugador: Jugador): void",
@@ -19058,7 +18940,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3434,
+											"top": 3421,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+confirmar(): void",
@@ -19076,7 +18958,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3449,
+											"top": 3436,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+jugar(): void",
@@ -19094,7 +18976,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3464,
+											"top": 3451,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+finalizar(): void",
@@ -19112,7 +18994,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3479,
+											"top": 3466,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+agregarResenia(resenia: Resenia): void",
@@ -19130,7 +19012,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 3778,
-											"top": 3494,
+											"top": 3481,
 											"width": 238.38330078125,
 											"height": 13,
 											"text": "+puedeSerCancelado(): boolean",
@@ -19140,7 +19022,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 3773,
-									"top": 3354,
+									"top": 3341,
 									"width": 248.38330078125,
 									"height": 158
 								},
@@ -55837,26 +55719,6 @@
 									"model": {
 										"$ref": "AAAAAAGXe1fCwNU2UcE="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe1iNR+oAUQA=",
-											"_parent": {
-												"$ref": "AAAAAAGXe1fCwNU+EuQ="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe1iNKOnZqG8="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 4461,
-											"top": 1934,
-											"width": 238.38330078125,
-											"height": 13,
-											"text": "+partido: Partido",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4456,
@@ -58199,26 +58061,6 @@
 									"model": {
 										"$ref": "AAAAAAGXe1aq969iwe4="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe1bo+bN/RN4=",
-											"_parent": {
-												"$ref": "AAAAAAGXe1aq969qF48="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe1bo1bNYVu8="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 4461,
-											"top": 2414,
-											"width": 238.38330078125,
-											"height": 13,
-											"text": "-partido: Partido",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4456,
@@ -58609,24 +58451,6 @@
 											"height": 13,
 											"text": "+Attribute1",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe2dQ+ziXjyE=",
-											"_parent": {
-												"$ref": "AAAAAAGXe2cQwi6fOuQ="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe2dQ4jhbQhA="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 4461,
-											"top": 2664,
-											"width": 238.38330078125,
-											"height": 13,
-											"text": "+partido: Partido",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
@@ -59000,26 +58824,6 @@
 									"model": {
 										"$ref": "AAAAAAGXe2kM/eJvdGo="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe2lV9/jjid0=",
-											"_parent": {
-												"$ref": "AAAAAAGXe2kM/eJ3PL8="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe2lV3/inFDA="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 4461,
-											"top": 2910,
-											"width": 239,
-											"height": 13,
-											"text": "+partido: Partido",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4456,
@@ -59391,26 +59195,6 @@
 									"model": {
 										"$ref": "AAAAAAGXe2tnOLnBdhs="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe2uWubyap1s=",
-											"_parent": {
-												"$ref": "AAAAAAGXe2tnOLnJieU="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe2uWpbxevMs="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 4461,
-											"top": 2166,
-											"width": 238.38330078125,
-											"height": 13,
-											"text": "+partido: Partido",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4456,
@@ -60445,26 +60229,6 @@
 									"model": {
 										"$ref": "AAAAAAGXe2pIoFDFEME="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGXe2psMFOePbk=",
-											"_parent": {
-												"$ref": "AAAAAAGXe2pIoFDNYaA="
-											},
-											"model": {
-												"$ref": "AAAAAAGXe2psHFNi/TI="
-											},
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 4461,
-											"top": 3158,
-											"width": 238.38330078125,
-											"height": 13,
-											"text": "+partido: Partido",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 4456,
@@ -74146,19 +73910,6 @@
 								"$ref": "AAAAAAGXeuf1Y/iJx9w="
 							},
 							"name": "PartidoCancelado",
-							"attributes": [
-								{
-									"_type": "UMLAttribute",
-									"_id": "AAAAAAGXe1iNKOnZqG8=",
-									"_parent": {
-										"$ref": "AAAAAAGXe1fCwNU2UcE="
-									},
-									"name": "partido",
-									"type": {
-										"$ref": "AAAAAAGWkWzaqC3STZw="
-									}
-								}
-							],
 							"operations": [
 								{
 									"_type": "UMLOperation",
@@ -74419,20 +74170,6 @@
 									},
 									"target": {
 										"$ref": "AAAAAAGXe1fCwNU2UcE="
-									}
-								}
-							],
-							"attributes": [
-								{
-									"_type": "UMLAttribute",
-									"_id": "AAAAAAGXe1bo1bNYVu8=",
-									"_parent": {
-										"$ref": "AAAAAAGXe1aq969iwe4="
-									},
-									"name": "partido",
-									"visibility": "private",
-									"type": {
-										"$ref": "AAAAAAGWkWzaqC3STZw="
 									}
 								}
 							],
@@ -74708,17 +74445,6 @@
 									},
 									"name": "Attribute1",
 									"type": ""
-								},
-								{
-									"_type": "UMLAttribute",
-									"_id": "AAAAAAGXe2dQ4jhbQhA=",
-									"_parent": {
-										"$ref": "AAAAAAGXe2cQwS6XrT8="
-									},
-									"name": "partido",
-									"type": {
-										"$ref": "AAAAAAGWkWzaqC3STZw="
-									}
 								}
 							],
 							"operations": [
@@ -74968,19 +74694,6 @@
 									},
 									"target": {
 										"$ref": "AAAAAAGXe1fCwNU2UcE="
-									}
-								}
-							],
-							"attributes": [
-								{
-									"_type": "UMLAttribute",
-									"_id": "AAAAAAGXe2lV3/inFDA=",
-									"_parent": {
-										"$ref": "AAAAAAGXe2kM/eJvdGo="
-									},
-									"name": "partido",
-									"type": {
-										"$ref": "AAAAAAGXev031v+tSpQ="
 									}
 								}
 							],
@@ -75234,19 +74947,6 @@
 									}
 								}
 							],
-							"attributes": [
-								{
-									"_type": "UMLAttribute",
-									"_id": "AAAAAAGXe2uWpbxevMs=",
-									"_parent": {
-										"$ref": "AAAAAAGXe2tnOLnBdhs="
-									},
-									"name": "partido",
-									"type": {
-										"$ref": "AAAAAAGWkWzaqC3STZw="
-									}
-								}
-							],
 							"operations": [
 								{
 									"_type": "UMLOperation",
@@ -75494,19 +75194,6 @@
 									},
 									"target": {
 										"$ref": "AAAAAAGXe1fCwNU2UcE="
-									}
-								}
-							],
-							"attributes": [
-								{
-									"_type": "UMLAttribute",
-									"_id": "AAAAAAGXe2psHFNi/TI=",
-									"_parent": {
-										"$ref": "AAAAAAGXe2pIoFDFEME="
-									},
-									"name": "partido",
-									"type": {
-										"$ref": "AAAAAAGWkWzaqC3STZw="
 									}
 								}
 							],

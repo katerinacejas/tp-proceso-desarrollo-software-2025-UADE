@@ -10,7 +10,6 @@ public class AdapterEmailJavaMail implements IAdapterEmail {
     private String password;
 
     public AdapterEmailJavaMail() {
-        // Configuración dummy
         this.servidorSMTP = "smtp.gmail.com";
         this.puerto = 587;
         this.usuario = "info@deportesapp.com";

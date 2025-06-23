@@ -26,13 +26,11 @@ public class Geolocalizacion {
     public double getLongitud() {
         return longitud;
     }
- 
-    // Distancia euclideana aproximada ==> intentar entender este tipo de lógica
+
     public double distanciaAproximada(Geolocalizacion geolocalizacion) {
         double deltaLatitud = geolocalizacion.latitud - this.latitud;
         double deltaLongitud = geolocalizacion.longitud - this.longitud;
         double latitudProm = Math.toRadians((this.latitud + geolocalizacion.latitud) / 2.0);
-        // 1 grado ≈ 111 km
         return Math.sqrt(Math.pow(deltaLatitud, 2) + Math.pow(deltaLongitud * Math.cos(latitudProm), 2)) * 111;
     }
 }
